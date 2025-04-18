@@ -110,11 +110,11 @@ const SITEMAP = [
 
 const Footer = () => {
   return (
-    <footer className="">
+    <footer className="mt-10">
       <Separator />
       <MainLayout className="flex flex-wrap gap-10 py-10">
         <div className="w-full space-y-4 md:max-w-2xl">
-          <Link href="/">
+          <Link href="/" className="block w-fit">
             <Logo className="h-40 w-fit" />
           </Link>
           <p>
@@ -175,7 +175,7 @@ const Footer = () => {
                   <li key={index}>
                     <Link
                       href={child.href}
-                      className="text-muted-foreground text-sm hover:underline">
+                      className="text-sm text-muted-foreground hover:underline">
                       {child.title}
                     </Link>
                   </li>
@@ -186,7 +186,7 @@ const Footer = () => {
         </div>
       </MainLayout>
       <Separator />
-      <p className="bg-primary text-primary-foreground py-4 text-center text-sm font-medium">
+      <p className="bg-primary py-4 text-center text-sm font-medium text-primary-foreground">
         © Bản quyền thuộc về DrD 2025. Tất cả quyền được bảo lưu.
       </p>
     </footer>

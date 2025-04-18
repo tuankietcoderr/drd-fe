@@ -1,7 +1,7 @@
 export const ROLE = {
   ADMIN: 'ADMIN',
-  RECRUITER: 'RECRUITER',
   USER: 'USER',
+  RECRUITER: 'RECRUITER',
 };
 
 export const ROLE_LABEL = {

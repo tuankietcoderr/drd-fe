@@ -42,7 +42,7 @@ const SignupForm = () => {
   return (
     <>
       <div className="space-y-2">
-        <h3 className="text-primary text-xl font-semibold">
+        <h3 className="text-xl font-semibold text-primary">
           Chào mừng bạn đến với DrD
         </h3>
         <p className="text-sm opacity-50">
@@ -179,7 +179,7 @@ const SignupForm = () => {
         Bạn đã có tài khoản?{' '}
         <Link
           href="/dang-nhap"
-          className="text-primary font-medium hover:underline">
+          className="font-medium text-primary hover:underline">
           Đăng nhập ngay
         </Link>
       </p>

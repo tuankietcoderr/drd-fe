@@ -1,9 +1,30 @@
+'use client';
+
 import MainLayout from '@/layout/MainLayout';
+import {cn} from '@/lib/utils';
 import Link from 'next/link';
+import {usePathname} from 'next/navigation';
 import {Button} from '../../ui/button';
 import Logo from '../Logo';
 
+const ROUTES = [
+  {
+    name: 'Trang chủ',
+    href: '/',
+  },
+  {
+    name: 'Trợ lý ảo',
+    href: '/tro-ly-ao',
+  },
+  {
+    name: 'Hỗ trợ',
+    href: '/ho-tro',
+  },
+];
+
 const NavigationBar = () => {
+  const pathname = usePathname();
+
   return (
     <MainLayout className="py-4" Elem="header">
       <nav className="flex items-center justify-between">
@@ -13,21 +34,24 @@ const NavigationBar = () => {
               <Logo className="h-10 w-full" />
             </Link>
           </li>
-          <li>
-            <Button variant="ghost" asChild>
-              <Link href="/">Trang chủ</Link>
-            </Button>
-          </li>
-          <li>
-            <Button variant="ghost" asChild>
-              <Link href="/tro-ly-ao">Trợ lý ảo</Link>
-            </Button>
-          </li>
-          <li>
-            <Button variant="ghost" asChild>
-              <Link href="/ho-tro">Hỗ trợ</Link>
-            </Button>
-          </li>
+
+          {ROUTES.map(route => {
+            const isActive = pathname === route.href;
+
+            return (
+              <li key={route.href}>
+                <Button asChild variant="ghost">
+                  <Link
+                    href={route.href}
+                    className={cn({
+                      '!text-primary': isActive,
+                    })}>
+                    {route.name}
+                  </Link>
+                </Button>
+              </li>
+            );
+          })}
         </ul>
         <ul className="flex items-center gap-2">
           <li>
