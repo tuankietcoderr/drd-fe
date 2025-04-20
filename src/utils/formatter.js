@@ -3,10 +3,6 @@ import dayjs from 'dayjs';
 dayjs.locale('vi');
 
 class Formatter {
-  static get currency() {
-    return Intl.NumberFormat;
-  }
-
   /**
    * @param {number | bigint} value
    * @param {Intl.NumberFormatOptions} opts
