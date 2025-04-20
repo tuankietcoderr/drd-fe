@@ -1,19 +1,7 @@
-import {parsePhoneNumberFromString} from 'libphonenumber-js';
 import {z} from 'zod';
 
 export const loginValidator = z.object({
-  phone: z
-    .string()
-    .min(1, 'Số điện thoại không được để trống')
-    .refine(
-      val => {
-        const phone = parsePhoneNumberFromString(val);
-        return phone?.isValid() ?? false;
-      },
-      {
-        message: 'Số điện thoại không hợp lệ',
-      },
-    ),
+  phone: z.string().min(1, 'Số điện thoại không được để trống'),
   password: z
     .string()
     .min(1, 'Mật khẩu không được để trống')

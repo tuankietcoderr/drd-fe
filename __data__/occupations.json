@@ -1,0 +1,590 @@
+[
+  {
+    "id": 1,
+    "parent_id": 0,
+    "name": "Công nghệ thông tin",
+    "count": 9
+  },
+  {
+    "id": 2,
+    "parent_id": 0,
+    "name": "Kế toán - Tài chính",
+    "count": 6
+  },
+  {
+    "id": 3,
+    "parent_id": 0,
+    "name": "Marketing",
+    "count": 100
+  },
+  {
+    "id": 4,
+    "parent_id": 0,
+    "name": "Sản xuất - Vận hành",
+    "count": 38
+  },
+  {
+    "id": 5,
+    "parent_id": 0,
+    "name": "Xây dựng",
+    "count": 100
+  },
+  {
+    "id": 6,
+    "parent_id": 0,
+    "name": "Y tế - Sức khỏe",
+    "count": 64
+  },
+  {
+    "id": 7,
+    "parent_id": 0,
+    "name": "Giáo dục - Đào tạo",
+    "count": 27
+  },
+  {
+    "id": 8,
+    "parent_id": 0,
+    "name": "Du lịch - Nhà hàng - Khách sạn",
+    "count": 70
+  },
+  {
+    "id": 9,
+    "parent_id": 0,
+    "name": "Bán hàng - Kinh doanh",
+    "count": 45
+  },
+  {
+    "id": 10,
+    "parent_id": 0,
+    "name": "Hành chính - Văn phòng",
+    "count": 78
+  },
+  {
+    "id": 11,
+    "parent_id": 0,
+    "name": "Nhân sự",
+    "count": 95
+  },
+  {
+    "id": 12,
+    "parent_id": 0,
+    "name": "Logistics - Vận tải",
+    "count": 13
+  },
+  {
+    "id": 13,
+    "parent_id": 0,
+    "name": "Nghệ thuật - Thiết kế",
+    "count": 41
+  },
+  {
+    "id": 14,
+    "parent_id": 0,
+    "name": "Bất động sản",
+    "count": 65
+  },
+  {
+    "id": 15,
+    "parent_id": 0,
+    "name": "Ngân hàng - Chứng khoán",
+    "count": 16
+  },
+  {
+    "id": 16,
+    "parent_id": 0,
+    "name": "Pháp lý - Luật",
+    "count": 80
+  },
+  {
+    "id": 17,
+    "parent_id": 0,
+    "name": "Dịch vụ khách hàng",
+    "count": 15
+  },
+  {
+    "id": 18,
+    "parent_id": 0,
+    "name": "Kỹ thuật - Công nghệ",
+    "count": 36
+  },
+  {
+    "id": 19,
+    "parent_id": 0,
+    "name": "Nông nghiệp - Thủy sản",
+    "count": 26
+  },
+  {
+    "id": 20,
+    "parent_id": 0,
+    "name": "Thương mại điện tử",
+    "count": 9
+  },
+  {
+    "id": 21,
+    "parent_id": 0,
+    "name": "Truyền thông - Quảng cáo",
+    "count": 88
+  },
+  {
+    "id": 22,
+    "parent_id": 0,
+    "name": "Thời trang - Làm đẹp",
+    "count": 62
+  },
+  {
+    "id": 23,
+    "parent_id": 0,
+    "name": "Thể thao - Giải trí",
+    "count": 53
+  },
+  {
+    "id": 24,
+    "parent_id": 0,
+    "name": "Ngành nghề khác",
+    "count": 67
+  },
+  {
+    "id": 25,
+    "parent_id": 1,
+    "name": "Applications",
+    "count": 2
+  },
+  {
+    "id": 26,
+    "parent_id": 1,
+    "name": "Applications",
+    "count": 9
+  },
+  {
+    "id": 27,
+    "parent_id": 1,
+    "name": "Configuration",
+    "count": 2
+  },
+  {
+    "id": 28,
+    "parent_id": 1,
+    "name": "Operations",
+    "count": 6
+  },
+  {
+    "id": 29,
+    "parent_id": 2,
+    "name": "Intranet",
+    "count": 26
+  },
+  {
+    "id": 30,
+    "parent_id": 2,
+    "name": "Mobility",
+    "count": 12
+  },
+  {
+    "id": 31,
+    "parent_id": 3,
+    "name": "Usability",
+    "count": 36
+  },
+  {
+    "id": 32,
+    "parent_id": 3,
+    "name": "Configuration",
+    "count": 6
+  },
+  {
+    "id": 33,
+    "parent_id": 3,
+    "name": "Infrastructure",
+    "count": 30
+  },
+  {
+    "id": 34,
+    "parent_id": 4,
+    "name": "Research",
+    "count": 20
+  },
+  {
+    "id": 35,
+    "parent_id": 4,
+    "name": "Markets",
+    "count": 15
+  },
+  {
+    "id": 36,
+    "parent_id": 5,
+    "name": "Markets",
+    "count": 40
+  },
+  {
+    "id": 37,
+    "parent_id": 5,
+    "name": "Security",
+    "count": 10
+  },
+  {
+    "id": 38,
+    "parent_id": 5,
+    "name": "Web",
+    "count": 21
+  },
+  {
+    "id": 39,
+    "parent_id": 5,
+    "name": "Identity",
+    "count": 33
+  },
+  {
+    "id": 40,
+    "parent_id": 6,
+    "name": "Data",
+    "count": 41
+  },
+  {
+    "id": 41,
+    "parent_id": 6,
+    "name": "Division",
+    "count": 24
+  },
+  {
+    "id": 42,
+    "parent_id": 6,
+    "name": "Research",
+    "count": 16
+  },
+  {
+    "id": 43,
+    "parent_id": 7,
+    "name": "Marketing",
+    "count": 28
+  },
+  {
+    "id": 44,
+    "parent_id": 7,
+    "name": "Implementation",
+    "count": 28
+  },
+  {
+    "id": 45,
+    "parent_id": 7,
+    "name": "Metrics",
+    "count": 19
+  },
+  {
+    "id": 46,
+    "parent_id": 7,
+    "name": "Group",
+    "count": 34
+  },
+  {
+    "id": 47,
+    "parent_id": 8,
+    "name": "Implementation",
+    "count": 33
+  },
+  {
+    "id": 48,
+    "parent_id": 8,
+    "name": "Applications",
+    "count": 8
+  },
+  {
+    "id": 49,
+    "parent_id": 9,
+    "name": "Applications",
+    "count": 11
+  },
+  {
+    "id": 50,
+    "parent_id": 9,
+    "name": "Implementation",
+    "count": 9
+  },
+  {
+    "id": 51,
+    "parent_id": 9,
+    "name": "Usability",
+    "count": 37
+  },
+  {
+    "id": 52,
+    "parent_id": 9,
+    "name": "Factors",
+    "count": 17
+  },
+  {
+    "id": 53,
+    "parent_id": 10,
+    "name": "Integration",
+    "count": 37
+  },
+  {
+    "id": 54,
+    "parent_id": 10,
+    "name": "Optimization",
+    "count": 9
+  },
+  {
+    "id": 55,
+    "parent_id": 11,
+    "name": "Group",
+    "count": 27
+  },
+  {
+    "id": 56,
+    "parent_id": 11,
+    "name": "Accountability",
+    "count": 32
+  },
+  {
+    "id": 57,
+    "parent_id": 11,
+    "name": "Identity",
+    "count": 6
+  },
+  {
+    "id": 58,
+    "parent_id": 11,
+    "name": "Applications",
+    "count": 3
+  },
+  {
+    "id": 59,
+    "parent_id": 12,
+    "name": "Markets",
+    "count": 16
+  },
+  {
+    "id": 60,
+    "parent_id": 12,
+    "name": "Directives",
+    "count": 46
+  },
+  {
+    "id": 61,
+    "parent_id": 13,
+    "name": "Interactions",
+    "count": 35
+  },
+  {
+    "id": 62,
+    "parent_id": 13,
+    "name": "Implementation",
+    "count": 5
+  },
+  {
+    "id": 63,
+    "parent_id": 13,
+    "name": "Intranet",
+    "count": 6
+  },
+  {
+    "id": 64,
+    "parent_id": 14,
+    "name": "Applications",
+    "count": 26
+  },
+  {
+    "id": 65,
+    "parent_id": 14,
+    "name": "Accountability",
+    "count": 43
+  },
+  {
+    "id": 66,
+    "parent_id": 14,
+    "name": "Mobility",
+    "count": 16
+  },
+  {
+    "id": 67,
+    "parent_id": 15,
+    "name": "Mobility",
+    "count": 39
+  },
+  {
+    "id": 68,
+    "parent_id": 15,
+    "name": "Integration",
+    "count": 11
+  },
+  {
+    "id": 69,
+    "parent_id": 16,
+    "name": "Program",
+    "count": 16
+  },
+  {
+    "id": 70,
+    "parent_id": 16,
+    "name": "Usability",
+    "count": 4
+  },
+  {
+    "id": 71,
+    "parent_id": 16,
+    "name": "Infrastructure",
+    "count": 47
+  },
+  {
+    "id": 72,
+    "parent_id": 16,
+    "name": "Markets",
+    "count": 18
+  },
+  {
+    "id": 73,
+    "parent_id": 17,
+    "name": "Security",
+    "count": 33
+  },
+  {
+    "id": 74,
+    "parent_id": 17,
+    "name": "Metrics",
+    "count": 40
+  },
+  {
+    "id": 75,
+    "parent_id": 17,
+    "name": "Usability",
+    "count": 44
+  },
+  {
+    "id": 76,
+    "parent_id": 18,
+    "name": "Markets",
+    "count": 10
+  },
+  {
+    "id": 77,
+    "parent_id": 18,
+    "name": "Quality",
+    "count": 10
+  },
+  {
+    "id": 78,
+    "parent_id": 18,
+    "name": "Assurance",
+    "count": 36
+  },
+  {
+    "id": 79,
+    "parent_id": 18,
+    "name": "Branding",
+    "count": 42
+  },
+  {
+    "id": 80,
+    "parent_id": 19,
+    "name": "Configuration",
+    "count": 38
+  },
+  {
+    "id": 81,
+    "parent_id": 19,
+    "name": "Metrics",
+    "count": 40
+  },
+  {
+    "id": 82,
+    "parent_id": 19,
+    "name": "Factors",
+    "count": 22
+  },
+  {
+    "id": 83,
+    "parent_id": 19,
+    "name": "Optimization",
+    "count": 3
+  },
+  {
+    "id": 84,
+    "parent_id": 20,
+    "name": "Metrics",
+    "count": 4
+  },
+  {
+    "id": 85,
+    "parent_id": 20,
+    "name": "Directives",
+    "count": 11
+  },
+  {
+    "id": 86,
+    "parent_id": 21,
+    "name": "Operations",
+    "count": 2
+  },
+  {
+    "id": 87,
+    "parent_id": 21,
+    "name": "Identity",
+    "count": 38
+  },
+  {
+    "id": 88,
+    "parent_id": 21,
+    "name": "Factors",
+    "count": 28
+  },
+  {
+    "id": 89,
+    "parent_id": 21,
+    "name": "Solutions",
+    "count": 19
+  },
+  {
+    "id": 90,
+    "parent_id": 22,
+    "name": "Research",
+    "count": 19
+  },
+  {
+    "id": 91,
+    "parent_id": 22,
+    "name": "Applications",
+    "count": 13
+  },
+  {
+    "id": 92,
+    "parent_id": 22,
+    "name": "Creative",
+    "count": 22
+  },
+  {
+    "id": 93,
+    "parent_id": 23,
+    "name": "Infrastructure",
+    "count": 42
+  },
+  {
+    "id": 94,
+    "parent_id": 23,
+    "name": "Accounts",
+    "count": 22
+  },
+  {
+    "id": 95,
+    "parent_id": 24,
+    "name": "Brand",
+    "count": 41
+  },
+  {
+    "id": 96,
+    "parent_id": 24,
+    "name": "Group",
+    "count": 50
+  },
+  {
+    "id": 97,
+    "parent_id": 24,
+    "name": "Branding",
+    "count": 20
+  },
+  {
+    "id": 98,
+    "parent_id": 24,
+    "name": "Web",
+    "count": 49
+  }
+]

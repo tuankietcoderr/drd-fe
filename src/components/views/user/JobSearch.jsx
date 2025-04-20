@@ -5,7 +5,7 @@ import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group';
 import {Separator} from '@/components/ui/separator';
 import {getVietnamCities} from '@/lib/address';
 import {cn} from '@/lib/utils';
-import {Check, ChevronDown, MapPin, Search} from 'lucide-react';
+import {Banknote, Check, ChevronDown, MapPin, Search} from 'lucide-react';
 import {useCallback, useEffect, useMemo, useRef, useState} from 'react';
 import {useOnClickOutside} from 'usehooks-ts';
 
@@ -161,6 +161,7 @@ const SearchSalary = () => {
         variant="ghost"
         className="h-auto min-w-60 rounded-full py-3 text-left"
         onClick={() => setShowSalary(prev => !prev)}>
+        <Banknote />
         <span className="flex-1">
           Mức lương{renderSalary ? `: ${renderSalary.label}` : ''}
         </span>

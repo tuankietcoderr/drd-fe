@@ -106,7 +106,11 @@ const SignupForm = () => {
               <FormItem className="w-full">
                 <FormLabel>Mật khẩu</FormLabel>
                 <FormControl>
-                  <Input placeholder="Nhập mật khẩu" {...field} />
+                  <Input
+                    placeholder="Nhập mật khẩu"
+                    {...field}
+                    type="password"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -120,7 +124,11 @@ const SignupForm = () => {
               <FormItem className="w-full">
                 <FormLabel>Xác nhận mật khẩu</FormLabel>
                 <FormControl>
-                  <Input placeholder="Nhập mật khẩu" {...field} />
+                  <Input
+                    placeholder="Nhập mật khẩu"
+                    {...field}
+                    type="password"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

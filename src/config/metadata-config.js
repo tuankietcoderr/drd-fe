@@ -47,6 +47,8 @@ export const commonMetadata = {
     'tim-viec-lam-online-mien-phi',
     'tim-viec-lam-tai-nha-mien-phi',
     'tim-viec-lam-online-mien-phi',
+    title,
+    title.toLowerCase(),
   ],
   twitter: {
     title,

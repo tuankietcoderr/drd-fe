@@ -9,9 +9,12 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import {Input} from '@/components/ui/input';
+import {authActions} from '@/redux/features/auth/authSlice';
+import {useAppDispatch} from '@/redux/hooks';
 import {loginValidator} from '@/validator/auth';
 import {zodResolver} from '@hookform/resolvers/zod';
 import Link from 'next/link';
+import {useRouter} from 'next/navigation';
 import {useForm} from 'react-hook-form';
 
 const LoginForm = () => {
@@ -23,14 +26,25 @@ const LoginForm = () => {
     },
   });
 
+  const dispatch = useAppDispatch();
+  const router = useRouter();
+
   const onSubmit = async data => {
-    console.log(data);
+    dispatch(authActions.setUser(data));
+    dispatch(
+      authActions.setTokens({
+        accessToken: 'accessToken',
+        refreshToken: 'refreshToken',
+      }),
+    );
+
+    router.push('/');
   };
 
   return (
     <>
       <div className="space-y-2">
-        <h3 className="text-primary text-xl font-semibold">
+        <h3 className="text-xl font-semibold text-primary">
           Chào mừng bạn đã quay trở lại
         </h3>
         <p className="text-sm opacity-50">
@@ -63,7 +77,11 @@ const LoginForm = () => {
               <FormItem className="w-full">
                 <FormLabel>Mật khẩu</FormLabel>
                 <FormControl>
-                  <Input placeholder="Nhập mật khẩu" {...field} />
+                  <Input
+                    placeholder="Nhập mật khẩu"
+                    {...field}
+                    type="password"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -72,7 +90,7 @@ const LoginForm = () => {
 
           <Link
             href="/quen-mat-khau"
-            className="text-primary text-sm font-medium hover:underline">
+            className="text-sm font-medium text-primary hover:underline">
             Quên mật khẩu?
           </Link>
 
@@ -83,7 +101,7 @@ const LoginForm = () => {
         Bạn chưa có tài khoản?{' '}
         <Link
           href="/dang-ky"
-          className="text-primary font-medium hover:underline">
+          className="font-medium text-primary hover:underline">
           Đăng ký ngay
         </Link>
       </p>

@@ -6,8 +6,8 @@ export const ROLE = {
 
 export const ROLE_LABEL = {
   [ROLE.ADMIN]: 'Quản trị viên',
-  [ROLE.RECRUITER]: 'Nhà tuyển dụng',
   [ROLE.USER]: 'Ứng viên',
+  [ROLE.RECRUITER]: 'Nhà tuyển dụng',
 };
 
 export const ROLE_ARRAY = Object.values(ROLE)
