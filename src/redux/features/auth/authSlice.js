@@ -1,4 +1,4 @@
-import {ROLE} from '@/constants/enum';
+import {HEALTH_STATUS, ROLE} from '@/constants/enum';
 import {AccessTokenUtils, RefreshTokenUtils} from '@/utils/token-utils';
 import {createSlice} from '@reduxjs/toolkit';
 
@@ -9,6 +9,7 @@ const initialState = {
     email: 'test@gmail.com',
     phone: '0123456789',
     role: ROLE.USER,
+    health_status: HEALTH_STATUS.NORMAL,
   },
   isAuthenticated: true,
 };

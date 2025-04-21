@@ -115,12 +115,36 @@ const NavigationBar = () => {
                 align="end" // Aligns to the end (right) of the trigger
                 alignOffset={-5} // Shifts the menu left by 5px
                 sideOffset={5}>
-                <DropdownMenuLabel>{user.name}</DropdownMenuLabel>
+                <DropdownMenuLabel className="flex items-center gap-2">
+                  <Avatar>
+                    <AvatarFallback>{user.name.at(0)}</AvatarFallback>
+                  </Avatar>
+                  <div className="flex flex-col gap-1">
+                    <p className="text-sm font-semibold">{user.name}</p>
+                    <p className="text-xs font-normal text-muted-foreground">
+                      {user.email}
+                    </p>
+                  </div>
+                </DropdownMenuLabel>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem asChild>
-                  <Link href="/tai-khoan">Tài khoản</Link>
+                  <Link href="/tai-khoan/cv">CV của tôi</Link>
                 </DropdownMenuItem>
-                <DropdownMenuItem onClick={handleLogout}>
+                <DropdownMenuItem asChild>
+                  <Link href="/tai-khoan/lich-su-ung-tuyen">
+                    Việc làm đã ứng tuyển
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem asChild>
+                  <Link href="/tai-khoan/cai-dat-thong-tin-ca-nhan">
+                    Cài đặt thông tin cá nhân
+                  </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={handleLogout}
+                  className="text-destructive">
                   Đăng xuất
                 </DropdownMenuItem>
               </DropdownMenuContent>

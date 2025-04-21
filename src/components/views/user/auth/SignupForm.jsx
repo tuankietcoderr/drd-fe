@@ -87,12 +87,30 @@ const SignupForm = () => {
 
           <FormField
             control={form.control}
+            name="email"
+            render={({field}) => (
+              <FormItem className="w-full">
+                <FormLabel>Email</FormLabel>
+                <FormControl>
+                  <Input placeholder="Nhập email" {...field} type="email" />
+                </FormControl>
+                <FormMessage />
+              </FormItem>
+            )}
+          />
+
+          <FormField
+            control={form.control}
             name="phone"
             render={({field}) => (
               <FormItem className="w-full">
                 <FormLabel>Số điện thoại</FormLabel>
                 <FormControl>
-                  <Input placeholder="Nhập số điện thoại" {...field} />
+                  <Input
+                    placeholder="Nhập số điện thoại"
+                    {...field}
+                    type="tel"
+                  />
                 </FormControl>
                 <FormMessage />
               </FormItem>

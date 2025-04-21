@@ -9,7 +9,7 @@ const page = async ({params}) => {
 
   if (!job) {
     return (
-      <MainLayout>
+      <MainLayout className="mt-10">
         <div className="flex h-screen items-center justify-center">
           <h1 className="text-2xl font-bold">Không tìm thấy công việc</h1>
         </div>
@@ -18,7 +18,7 @@ const page = async ({params}) => {
   }
 
   return (
-    <MainLayout>
+    <MainLayout className="mt-10">
       <JobDetail job={job} />
     </MainLayout>
   );

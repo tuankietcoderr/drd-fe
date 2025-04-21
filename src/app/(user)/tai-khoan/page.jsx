@@ -1,5 +1,7 @@
+import {redirect} from 'next/navigation';
+
 const page = () => {
-  return <div>page</div>;
+  redirect('/tai-khoan/cai-dat-thong-tin-ca-nhan');
 };
 
 export default page;

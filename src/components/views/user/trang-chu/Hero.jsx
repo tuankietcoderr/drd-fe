@@ -40,7 +40,7 @@ const Hero = () => {
         ))}
       </Swiper>
       <div className="absolute inset-0 z-10 flex items-end bg-gradient-to-t from-black/90 to-black/20 pb-8">
-        <MainLayout className="space-y-6">
+        <MainLayout className="w-full space-y-6">
           <h2 className="text-4xl font-bold text-white">
             Chào mừng bạn đến với <span className="text-primary">DrD</span>
             <br />
