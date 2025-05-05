@@ -1,14 +1,7 @@
 import {Separator} from '@/components/ui/separator';
 import MainLayout from '@/layout/MainLayout';
-import {redirect} from 'next/navigation';
 
 const layout = ({children}) => {
-  const isAuth = false; // Replace with actual authentication check
-
-  if (isAuth) {
-    redirect('/');
-  }
-
   return (
     <div className="flex items-center justify-center">
       <MainLayout className="mt-[5%] max-w-md space-y-4">
