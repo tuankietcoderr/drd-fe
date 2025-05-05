@@ -14,9 +14,11 @@ import {cn} from '@/lib/utils';
 import authSelector from '@/redux/features/auth/authSelector';
 import {authActions} from '@/redux/features/auth/authSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {jwtDecode} from '@/utils/decoder';
+import {AccessTokenUtils} from '@/utils/token-utils';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
-import {useCallback} from 'react';
+import {useCallback, useEffect} from 'react';
 import {Button} from '../../ui/button';
 import Logo from '../Logo';
 
@@ -45,6 +47,10 @@ const NavigationBar = () => {
   const user = useAppSelector(authSelector.selectUser);
   const dispatch = useAppDispatch();
 
+  useEffect(() => {
+    const decodedToken = jwtDecode(AccessTokenUtils.getToken());
+    dispatch(authActions.setUser(decodedToken));
+  }, [dispatch]);
   const url = useCallback(
     href => {
       if (pathname === href) {

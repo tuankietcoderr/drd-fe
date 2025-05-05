@@ -50,7 +50,7 @@ const ApplyJobModal = ({job, visible, onClose}) => {
 
   return (
     <Dialog open={visible} onOpenChange={onClose}>
-      <DialogContent>
+      <DialogContent className="max-h-[80vh] overflow-auto border-none scrollbar-thin">
         <DialogHeader>
           <DialogTitle>
             Ứng tuyển <span className="text-primary">{job.title}</span>

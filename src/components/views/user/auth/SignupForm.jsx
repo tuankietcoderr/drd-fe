@@ -10,12 +10,8 @@ import {
 } from '@/components/ui/form';
 import {Input} from '@/components/ui/input';
 import {RadioGroup, RadioGroupItem} from '@/components/ui/radio-group';
-import {
-  HEALTH_STATUS,
-  HEALTH_STATUS_ARRAY,
-  ROLE,
-  ROLE_ARRAY,
-} from '@/constants/enum';
+import {ROLE, ROLE_ARRAY} from '@/constants/enum';
+import authApi from '@/redux/features/auth/authQuery';
 import {signupValidator} from '@/validator/auth';
 import {zodResolver} from '@hookform/resolvers/zod';
 import Link from 'next/link';
@@ -31,12 +27,26 @@ const SignupForm = () => {
       role: ROLE.USER,
       name: '',
       email: '',
-      health_status: HEALTH_STATUS.DISABLED,
     },
   });
+  const [signUpMutation, {isLoading}] = authApi.useSignUpMutation();
 
   const onSubmit = async data => {
     console.log(data);
+    delete data.confirmPassword;
+    const payload = {
+      ...data,
+      roles: data.role === ROLE.USER ? [] : [data.role],
+    };
+    delete payload.role;
+    signUpMutation(payload)
+      .unwrap()
+      .then(res => {
+        console.log(res);
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
@@ -153,7 +163,7 @@ const SignupForm = () => {
             )}
           />
 
-          <FormField
+          {/* <FormField
             control={form.control}
             name="health_status"
             render={({field}) => (
@@ -182,7 +192,7 @@ const SignupForm = () => {
                 <FormMessage />
               </FormItem>
             )}
-          />
+          /> */}
 
           <FormField
             control={form.control}
@@ -198,7 +208,9 @@ const SignupForm = () => {
             )}
           />
 
-          <Button className="w-full">Đăng ký</Button>
+          <Button className="w-full" disabled={isLoading}>
+            {isLoading ? 'Đang tạo tài khoản...' : 'Đăng ký'}
+          </Button>
         </form>
       </Form>
       <p className="text-center text-sm">

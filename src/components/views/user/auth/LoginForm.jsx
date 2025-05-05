@@ -9,36 +9,44 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import {Input} from '@/components/ui/input';
+import authApi from '@/redux/features/auth/authQuery';
 import {authActions} from '@/redux/features/auth/authSlice';
 import {useAppDispatch} from '@/redux/hooks';
 import {loginValidator} from '@/validator/auth';
 import {zodResolver} from '@hookform/resolvers/zod';
 import Link from 'next/link';
-import {useRouter} from 'next/navigation';
+import {useSearchParams} from 'next/navigation';
 import {useForm} from 'react-hook-form';
 
 const LoginForm = () => {
   const form = useForm({
     resolver: zodResolver(loginValidator),
     defaultValues: {
-      phone: '',
+      email: '',
       password: '',
     },
   });
 
   const dispatch = useAppDispatch();
-  const router = useRouter();
+  const searchParams = useSearchParams();
+  const [signInMutation, {isLoading}] = authApi.useSignInMutation();
 
   const onSubmit = async data => {
-    dispatch(authActions.setUser(data));
-    dispatch(
-      authActions.setTokens({
-        accessToken: 'accessToken',
-        refreshToken: 'refreshToken',
-      }),
-    );
-
-    router.push('/');
+    signInMutation(data)
+      .unwrap()
+      .then(res => {
+        console.log(res);
+        dispatch(
+          authActions.setTokens({
+            accessToken: res.accessToken,
+            refreshToken: res.refreshToken,
+          }),
+        );
+        location.href = searchParams.get('fallbackUrl') || '/';
+      })
+      .catch(err => {
+        console.log(err);
+      });
   };
 
   return (
@@ -58,12 +66,12 @@ const LoginForm = () => {
           onSubmit={form.handleSubmit(onSubmit)}>
           <FormField
             control={form.control}
-            name="phone"
+            name="email"
             render={({field}) => (
               <FormItem className="w-full">
-                <FormLabel>Số điện thoại</FormLabel>
+                <FormLabel>Email</FormLabel>
                 <FormControl>
-                  <Input placeholder="Nhập số điện thoại" {...field} />
+                  <Input placeholder="Nhập email" type="email" {...field} />
                 </FormControl>
                 <FormMessage />
               </FormItem>
@@ -94,7 +102,9 @@ const LoginForm = () => {
             Quên mật khẩu?
           </Link>
 
-          <Button className="w-full">Đăng nhập</Button>
+          <Button className="w-full" disabled={isLoading}>
+            Đăng nhập
+          </Button>
         </form>
       </Form>
       <p className="text-center text-sm">

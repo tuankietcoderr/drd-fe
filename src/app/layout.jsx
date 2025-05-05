@@ -1,4 +1,5 @@
 import {Roboto} from 'next/font/google';
+import Script from 'next/script';
 import 'swiper/css/bundle';
 import {commonMetadata} from '../config/metadata-config';
 import './globals.css';
@@ -17,6 +18,11 @@ export default function RootLayout({children}) {
     <html lang="en" suppressHydrationWarning>
       <ReactScan />
       <body className={`${roboto.className} antialiased`}>
+        <Script
+          src="https://cdn.userway.org/widget.js"
+          data-account="guYhIM3rq9"
+          strategy="lazyOnload"
+        />
         <Providers>{children}</Providers>
       </body>
     </html>
