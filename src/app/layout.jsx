@@ -16,6 +16,12 @@ export const metadata = commonMetadata;
 export default function RootLayout({children}) {
   return (
     <html lang="en" suppressHydrationWarning>
+      <head>
+        <meta
+          httpEquiv="Content-Security-Policy"
+          content="upgrade-insecure-requests"
+        />
+      </head>
       <ReactScan />
       <body className={`${roboto.className} antialiased`}>
         <Script
