@@ -1,6 +1,7 @@
 import dayjs from 'dayjs';
 
-dayjs.locale('vi');
+dayjs.locale(require('dayjs/locale/vi'));
+dayjs.extend(require('dayjs/plugin/utc'));
 
 class Formatter {
   /**

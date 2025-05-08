@@ -63,3 +63,27 @@ export class RefreshTokenUtils extends TokenUtils {
     super.removeToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN, true);
   }
 }
+
+export class JobDescriptionSessionIdUtils extends TokenUtils {
+  static getToken() {
+    return super.getToken(STORAGE_KEY.SESSION.JOB_DESCRIPTION);
+  }
+  static setToken(value) {
+    super.setToken(STORAGE_KEY.SESSION.JOB_DESCRIPTION, value);
+  }
+  static removeToken() {
+    super.removeToken(STORAGE_KEY.SESSION.JOB_DESCRIPTION);
+  }
+}
+
+export class ChatbotWidgetSessionIdUtils extends TokenUtils {
+  static getToken() {
+    return super.getToken(STORAGE_KEY.SESSION.CHATBOT_WIDGET);
+  }
+  static setToken(value) {
+    super.setToken(STORAGE_KEY.SESSION.CHATBOT_WIDGET, value);
+  }
+  static removeToken() {
+    super.removeToken(STORAGE_KEY.SESSION.CHATBOT_WIDGET);
+  }
+}
