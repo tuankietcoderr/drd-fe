@@ -67,7 +67,7 @@ const CVPreview = ({fileUrl}) => {
         onLoadSuccess={onDocumentLoadSuccess}
         onLoadError={onDocumentLoadError}
         onLoadProgress={onDocumentLoadProgress}
-        error={`Failed to load comic: ${error}`}
+        error={`Failed to load CV: ${error}`}
         loading="Loading comic...">
         <Page
           pageNumber={pageNumber}

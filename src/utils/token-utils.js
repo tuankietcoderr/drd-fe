@@ -42,25 +42,25 @@ class TokenUtils {
 
 export class AccessTokenUtils extends TokenUtils {
   static getToken() {
-    return super.getToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN, true);
+    return super.getToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN);
   }
   static setToken(value) {
-    super.setToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN, value, true);
+    super.setToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN, value);
   }
   static removeToken() {
-    super.removeToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN, true);
+    super.removeToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN);
   }
 }
 
 export class RefreshTokenUtils extends TokenUtils {
   static getToken() {
-    return super.getToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN, true);
+    return super.getToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN);
   }
   static setToken(value) {
-    super.setToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN, value, true);
+    super.setToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN, value);
   }
   static removeToken() {
-    super.removeToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN, true);
+    super.removeToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN);
   }
 }
 

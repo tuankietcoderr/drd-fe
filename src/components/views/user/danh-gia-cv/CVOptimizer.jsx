@@ -7,7 +7,7 @@ import cvReviewSelector from '@/redux/features/cv-review/cvReviewSelector';
 import {cvReviewActions} from '@/redux/features/cv-review/cvReviewSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {Download, Eye, Rocket} from 'lucide-react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 
 const CVOptimizer = ({onClose}) => {
   const dispatch = useAppDispatch();
@@ -23,7 +23,13 @@ const CVOptimizer = ({onClose}) => {
     missingCriteria = [],
     improvement_needed = [],
   } = suggestions || {};
+  console.log(suggestions);
   const [optimizeContent, setOptimizeContent] = useState('');
+  const [optimizeData, setOptimizeData] = useState({});
+
+  useEffect(() => {
+    improvement_needed.forEach(item => {});
+  }, []);
 
   const handleOptimizeCV = () => {
     if (!optimizeContent) {
