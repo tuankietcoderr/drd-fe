@@ -196,9 +196,9 @@ const ApplyJobModal = ({job, visible, onClose}) => {
               liên lạc đáng ngờ của nhà tuyển dụng, hãy báo cáo ngay cho TopCV
               qua email{' '}
               <a
-                href="mailto:hotro@vieclamnkt.vn"
+                href="mailto:info@drdvietnam.org"
                 className="font-medium text-primary hover:underline">
-                hotro@vieclamnkt.vn
+                info@drdvietnam.org
               </a>{' '}
               để được hỗ trợ kịp thời.
             </p>

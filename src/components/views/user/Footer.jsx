@@ -118,10 +118,8 @@ const Footer = () => {
             <Logo className="h-40 w-fit" />
           </Link>
           <p>
-            Sở Lao Động - Thương Binh và Xã Hội TP.HCM
-            <br />
-            Trung tâm bảo trợ - dạy nghề và tạo việc làm cho người tàn tật Thành
-            phố Hồ Chí Minh
+            DRD Việt Nam - Trung tâm Nghiên cứu và Phát triển Năng lực Người
+            khuyết tật
           </p>
 
           <div className="space-y-1">
@@ -130,25 +128,17 @@ const Footer = () => {
               <li>
                 Điện thoại:{' '}
                 <a
-                  href="tel:0839320483"
+                  href="tel:0399988336"
                   className="font-medium hover:underline">
-                  08.3932.0483
-                </a>
-              </li>
-              <li>
-                Fax:{' '}
-                <a
-                  href="tel:0839327177"
-                  className="font-medium hover:underline">
-                  08.3932.7177
+                  (+84) 399 988 336
                 </a>
               </li>
               <li>
                 Email:{' '}
                 <a
-                  href="mailto:hotro@vieclamnkt.vn"
+                  href="mailto:info@drdvietnam.org"
                   className="font-medium hover:underline">
-                  hotro@vieclamnkt.vn
+                  info@drdvietnam.org
                 </a>
               </li>
             </ul>
@@ -161,7 +151,7 @@ const Footer = () => {
                 className="absolute left-0 top-0 size-full border-none"
                 loading="lazy"
                 allowFullScreen
-                src="https://maps.google.com/maps?q=215+V%C3%B5+Th%E1%BB%8B+S%C3%A1u%2C+Ph%C6%B0%E1%BB%9Dng+7%2C+Qu%E1%BA%ADn+3%2C+Th%C3%A0nh+Ph%E1%BB%91+H%E1%BB%93+Ch%C3%AD+Minh&output=embed"
+                src="https://maps.google.com/maps?q=311K8 KNOTĐC Thủ Thiêm, Đ. Số 7, An Phú, Thủ Đức, Hồ Chí Minh, Việt Nam&output=embed"
               />
             </div>
           </div>
