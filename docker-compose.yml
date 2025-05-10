@@ -1,0 +1,7 @@
+services:
+  drd-fe:
+    container_name: drd-fe
+    build: .
+    ports:
+      - '3000:3000'
+    restart: always
