@@ -4,6 +4,7 @@ const initialState = {
   markdownContent: '',
   file: null,
   suggestions: {},
+  isCVUploaded: false,
 };
 
 const cvReviewSlice = createSlice({
@@ -28,6 +29,13 @@ const cvReviewSlice = createSlice({
     clearSuggestions: state => {
       state.suggestions = {};
     },
+    setIsCVUploaded: (state, action) => {
+      state.isCVUploaded = action.payload;
+    },
+    clearIsCVUploaded: state => {
+      state.isCVUploaded = false;
+    },
+    reset: () => initialState,
   },
 });
 

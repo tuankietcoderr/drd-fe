@@ -49,7 +49,7 @@ const ChatbotWidgetMessageItem = ({chatMessage}) => {
                 size={16}
                 onClick={e => {
                   e.stopPropagation();
-                  startSpeech(chatMessage.answer);
+                  startSpeech(chatMessage.plain_answer || chatMessage.answer);
                 }}
                 className="cursor-pointer"
               />

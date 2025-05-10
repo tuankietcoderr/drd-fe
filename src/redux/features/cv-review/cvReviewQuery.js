@@ -40,15 +40,18 @@ const cvReviewApi = createApi({
       query: payload => ({
         body: payload,
         method: 'POST',
-        url: '/cv-review/fix',
+        url: '/cv-review/fix-with-suggest',
+        responseHandler: 'blob',
       }),
     }),
     fixCVToPdf: builder.mutation({
       query: payload => ({
         body: payload,
         method: 'POST',
-        url: '/cv-review/fix-to-pdf',
-        responseHandler: 'blob',
+        url: '/cv-review/fix-with-suggest',
+        responseHandler: async response => {
+          return await response.blob();
+        },
       }),
     }),
   }),

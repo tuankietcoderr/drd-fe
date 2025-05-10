@@ -25,16 +25,26 @@ const CVReview = () => {
   const [showOptimizeCV, setShowOptimizeCV] = useState(false);
 
   const handleReviewCV = () => {
+    const previewToastId = toast.loading('Đang phân tích CV...', {
+      duration: 0,
+    });
     preReviewCVMutation({file})
       .unwrap()
       .then(res => {
+        toast.dismiss(previewToastId);
         dispatch(cvReviewActions.setMarkdownContent(res.markdown_content));
+        const reviewToastId = toast.loading('Đang đánh giá CV...', {
+          duration: 0,
+        });
         reviewCVMutation({file})
           .unwrap()
           .then(response => {
+            toast.dismiss(reviewToastId);
             dispatch(cvReviewActions.setSuggestions(response.suggestions));
+            toast.success('Đánh giá CV thành công');
           })
           .catch(error => {
+            toast.dismiss(reviewToastId);
             console.log('CV review error:', error);
             toast.error('Có lỗi xảy ra trong quá trình đánh giá CV');
           });

@@ -67,8 +67,8 @@ const NavigationBar = () => {
   }, [dispatch]);
 
   return (
-    <MainLayout className="py-4" Elem="header">
-      <nav className="flex items-center justify-between">
+    <MainLayout Elem="header">
+      <nav className="flex h-[80px] items-center justify-between">
         <ul className="flex items-center gap-2">
           <li>
             <Link href="/">
