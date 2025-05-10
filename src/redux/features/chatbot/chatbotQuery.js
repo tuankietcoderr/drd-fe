@@ -12,6 +12,14 @@ const chatbotApi = createApi({
         url: '/chatbot/chat',
       }),
     }),
+    chatStream: builder.mutation({
+      query: payload => ({
+        body: payload,
+        method: 'POST',
+        url: '/chatbot/chat-stream',
+        responseHandler: res => res,
+      }),
+    }),
   }),
 });
 

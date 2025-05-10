@@ -1,5 +1,6 @@
 'use client';
 
+import jobDescriptionApi from '@/redux/features/job-description/jobDescriptionQuery';
 import jobDescriptionSelector from '@/redux/features/job-description/jobDescriptionSelector';
 import {jobDescriptionActions} from '@/redux/features/job-description/jobDescriptionSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
@@ -28,6 +29,7 @@ export const ChatbotWidgetProvider = ({children}) => {
   const chatSessionId = useAppSelector(
     jobDescriptionSelector.selectChatSessionId,
   );
+  const [deleteSessionMutation] = jobDescriptionApi.useDeleteSessionMutation();
 
   useEffect(() => {
     if (!chatSessionId) {
@@ -41,8 +43,16 @@ export const ChatbotWidgetProvider = ({children}) => {
     const prevChatSessionId = ChatbotWidgetSessionIdUtils.getToken();
     if (prevChatSessionId) {
       //TODO: delete the previous session
+      deleteSessionMutation({sessionId: prevChatSessionId})
+        .unwrap()
+        .then(res => {
+          console.log('Delete session success:', res);
+        })
+        .catch(err => {
+          console.log('Error deleting session:', err);
+        });
     }
-  }, []);
+  }, [deleteSessionMutation]);
 
   const focusInput = () => {
     if (inputRef.current) {

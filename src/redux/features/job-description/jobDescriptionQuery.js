@@ -12,6 +12,12 @@ const jobDescriptionApi = createApi({
         url: '/job-description/chat',
       }),
     }),
+    deleteSession: builder.mutation({
+      query: payload => ({
+        method: 'POST',
+        url: `/job-description/delete-session/${payload.sessionId}`,
+      }),
+    }),
   }),
 });
 

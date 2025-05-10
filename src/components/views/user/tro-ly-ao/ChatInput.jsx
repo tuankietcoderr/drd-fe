@@ -22,6 +22,7 @@ const ChatInput = () => {
   const dispatch = useAppDispatch();
   const chatSessionId = useAppSelector(chatbotSelector.selectChatSessionId);
   const [chatMutation, {isLoading}] = chatbotApi.useChatMutation();
+  const [chatStreamMutation] = chatbotApi.useChatStreamMutation();
 
   useEffect(() => {
     dispatch(chatbotActions.setChatLoading(isLoading));
@@ -42,6 +43,35 @@ const ChatInput = () => {
       }),
     );
 
+    // chatStreamMutation({
+    //   session_id: chatSessionId,
+    //   message,
+    // })
+    //   .unwrap()
+    //   .then(async res => {
+    //     const reader = res.body
+    //       .pipeThrough(new TextDecoderStream())
+    //       .getReader();
+
+    //     while (true) {
+    //       const {done, value} = await reader.read();
+    //       console.log({value});
+    //       if (done) {
+    //         dispatch(chatbotActions.clearMessage());
+    //         if (inputRef.current) {
+    //           inputRef.current.focus();
+    //         }
+    //         break;
+    //       }
+    //       if (value) {
+    //         dispatch(chatbotActions.replaceLastChatStreamingMessage(value));
+    //       }
+    //     }
+    //   })
+    //   .catch(err => {
+    //     console.log('Error sending message:', err);
+    //   });
+
     chatMutation({
       session_id: chatSessionId,
       message,
@@ -57,6 +87,13 @@ const ChatInput = () => {
       })
       .catch(err => {
         console.log('Error sending message:', err);
+        dispatch(
+          chatbotActions.replaceLastChatMessage({
+            answer:
+              'Có lỗi xảy ra trong quá trình gửi tin nhắn. Vui lòng thử lại sau.',
+          }),
+        );
+        dispatch(chatbotActions.clearMessage());
         toast.error('Có lỗi xảy ra trong quá trình gửi tin nhắn');
       })
       .finally(() => {

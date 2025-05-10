@@ -41,6 +41,15 @@ const chatbotSlice = createSlice({
         };
       }
     },
+    replaceLastChatStreamingMessage: (state, action) => {
+      const lastIndex = state.chatMessages.length - 1;
+      if (lastIndex >= 0) {
+        state.chatMessages[lastIndex] = {
+          ...state.chatMessages[lastIndex],
+          answer: (state.chatMessages[lastIndex].answer ?? '') + action.payload,
+        };
+      }
+    },
     clearChatMessages: state => {
       state.chatMessages = [];
     },
