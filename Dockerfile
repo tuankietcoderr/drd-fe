@@ -25,9 +25,7 @@ WORKDIR /app
 COPY --from=deps /app/node_modules ./node_modules
 COPY . .
 
-ARG NEXT_PUBLIC_PRODUCTION_URL
-ARG NEXT_PUBLIC_API_URL
-ARG NEXT_PUBLIC_AI_URL
+COPY .env /app/.env
 
 RUN npm run build
 
