@@ -1,7 +1,7 @@
 'use client';
 
 import jobDescriptionSelector from '@/redux/features/chatbot/chatbotSelector';
-import {chatbotActions} from '@/redux/features/chatbot/chatbotSlice';
+import {jobDescriptionActions} from '@/redux/features/job-description/jobDescriptionSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {ChatbotWidgetSessionIdUtils} from '@/utils/token-utils';
 import {Trash2} from 'lucide-react';
@@ -17,12 +17,12 @@ const ChatbotWidgetHeader = () => {
     const res = confirm('Xóa tất cả tin nhắn trong phòng chat?');
     if (res) {
       ChatbotWidgetSessionIdUtils.removeToken();
-      dispatch(chatbotActions.reset());
+      dispatch(jobDescriptionActions.reset());
     }
   };
 
   return (
-    <div className="flex items-center justify-between gap-4 border-b p-2">
+    <div className="flex items-center justify-between gap-4 border-b p-4">
       <h1 className="font-semibold">Trợ lý ảo</h1>
       {hasMessage && (
         <button onClick={handleDeleteChat}>

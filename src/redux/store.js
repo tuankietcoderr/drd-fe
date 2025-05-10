@@ -13,7 +13,9 @@ export const makeStore = () => {
   return configureStore({
     reducer: reducers,
     middleware: getDefaultMiddleware =>
-      getDefaultMiddleware().concat(allApis.map(api => api.middleware)),
+      getDefaultMiddleware({
+        serializableCheck: false,
+      }).concat(allApis.map(api => api.middleware)),
     devTools: process.env.NODE_ENV !== 'production',
   });
 };

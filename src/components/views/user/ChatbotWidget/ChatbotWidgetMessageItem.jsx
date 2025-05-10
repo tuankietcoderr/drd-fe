@@ -9,15 +9,17 @@ const ChatbotWidgetMessageItem = ({chatMessage}) => {
   });
   return (
     <div className="flex flex-col gap-2">
-      <div className="flex gap-2">
-        <div className="flex size-6 items-center justify-center rounded-full border bg-white p-1 dark:border-gray-700">
-          <User size={16} />
-        </div>
+      {chatMessage.chat_message && (
+        <div className="flex gap-2">
+          <div className="flex size-6 items-center justify-center rounded-full border bg-white p-1 dark:border-gray-700">
+            <User size={16} />
+          </div>
 
-        <div className="max-w-xl space-y-1 self-start rounded-lg bg-primary/80 px-3 py-2">
-          <p className="text-sm text-white">{chatMessage.chat_message}</p>
+          <div className="max-w-xl space-y-1 self-start rounded-lg bg-primary/80 px-3 py-2">
+            <p className="text-sm text-white">{chatMessage.chat_message}</p>
+          </div>
         </div>
-      </div>
+      )}
       {chatMessage.answer && (
         <div className="flex gap-2">
           <div className="size-6 rounded-full border bg-white p-1 dark:border-gray-700">

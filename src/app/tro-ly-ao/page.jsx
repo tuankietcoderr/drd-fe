@@ -7,7 +7,7 @@ import MainLayout from '@/layout/MainLayout';
 const page = () => {
   return (
     <JobDescriptionChatProvider>
-      <MainLayout className="mt-10 flex h-[80vh] max-h-[80vh] flex-col overflow-hidden rounded-lg border">
+      <MainLayout className="flex max-h-screen min-h-screen flex-col overflow-hidden border-x">
         <ChatHeader />
         <ChatMessages />
         <ChatInput />

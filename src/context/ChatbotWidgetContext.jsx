@@ -1,10 +1,11 @@
 'use client';
 
-import chatbotSelector from '@/redux/features/chatbot/chatbotSelector';
-import {chatbotActions} from '@/redux/features/chatbot/chatbotSlice';
+import jobDescriptionSelector from '@/redux/features/job-description/jobDescriptionSelector';
+import {jobDescriptionActions} from '@/redux/features/job-description/jobDescriptionSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {ChatbotWidgetSessionIdUtils} from '@/utils/token-utils';
 import {createContext, useContext, useEffect, useRef} from 'react';
+import {v4} from 'uuid';
 
 const ChatbotWidgetContext = createContext({
   inputRef: null,
@@ -24,12 +25,14 @@ export const useChatbotWidgetContext = () => {
 export const ChatbotWidgetProvider = ({children}) => {
   const inputRef = useRef(null);
   const dispatch = useAppDispatch();
-  const chatSessionId = useAppSelector(chatbotSelector.selectChatSessionId);
+  const chatSessionId = useAppSelector(
+    jobDescriptionSelector.selectChatSessionId,
+  );
 
   useEffect(() => {
     if (!chatSessionId) {
-      const newSessionId = crypto.randomUUID();
-      dispatch(chatbotActions.setChatSessionId(newSessionId));
+      const newSessionId = v4();
+      dispatch(jobDescriptionActions.setChatSessionId(newSessionId));
       ChatbotWidgetSessionIdUtils.setToken(newSessionId);
     }
   }, [chatSessionId, dispatch]);

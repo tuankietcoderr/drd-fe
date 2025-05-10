@@ -16,6 +16,7 @@ const useUploadCV = () => {
   const [file, setFile] = useState(null);
 
   const onChangeFile = useCallback(event => {
+    event.preventDefault();
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       const fileType = selectedFile.type;
@@ -52,6 +53,7 @@ const useUploadCV = () => {
      * @type {File | null}
      */
     file,
+    setFile,
     onChangeFile,
     onRemoveFile,
   };

@@ -1,7 +1,7 @@
 'use client';
 import {useJobDescriptionChatContext} from '@/context/JobDescriptionChatContext';
 import useTextToSpeech from '@/hooks/useTextToSpeech';
-import {jobDescriptionActions} from '@/redux/features/job-description/jobDescriptionSlice';
+import {chatbotActions} from '@/redux/features/chatbot/chatbotSlice';
 import {useAppDispatch} from '@/redux/hooks';
 import {Volume2} from 'lucide-react';
 
@@ -55,7 +55,7 @@ const EmptyRoomMessage = ({question}) => {
   });
 
   const handleClick = () => {
-    dispatch(jobDescriptionActions.setMessage(question));
+    dispatch(chatbotActions.setMessage(question));
     focusInput();
   };
   return (

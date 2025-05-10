@@ -1,10 +1,11 @@
 'use client';
-import jobDescriptionSelector from '@/redux/features/job-description/jobDescriptionSelector';
-import {jobDescriptionActions} from '@/redux/features/job-description/jobDescriptionSlice';
+import chatbotSelector from '@/redux/features/chatbot/chatbotSelector';
+import {chatbotActions} from '@/redux/features/chatbot/chatbotSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {JobDescriptionSessionIdUtils} from '@/utils/token-utils';
 import {createContext, useContext, useEffect, useRef} from 'react';
 import {useBeforeunload} from 'react-beforeunload';
+import {v4} from 'uuid';
 
 const JobDescriptionChatContext = createContext({
   inputRef: null,
@@ -24,9 +25,7 @@ export const useJobDescriptionChatContext = () => {
 export const JobDescriptionChatProvider = ({children}) => {
   const inputRef = useRef(null);
   const dispatch = useAppDispatch();
-  const chatSessionId = useAppSelector(
-    jobDescriptionSelector.selectChatSessionId,
-  );
+  const chatSessionId = useAppSelector(chatbotSelector.selectChatSessionId);
 
   useBeforeunload(event => {
     // event.preventDefault();
@@ -34,8 +33,8 @@ export const JobDescriptionChatProvider = ({children}) => {
 
   useEffect(() => {
     if (!chatSessionId) {
-      const newSessionId = crypto.randomUUID();
-      dispatch(jobDescriptionActions.setChatSessionId(newSessionId));
+      const newSessionId = v4();
+      dispatch(chatbotActions.setChatSessionId(newSessionId));
       JobDescriptionSessionIdUtils.setToken(newSessionId);
     }
   }, [chatSessionId, dispatch]);

@@ -1,31 +1,37 @@
 'use client';
 
-import jobDescriptionSelector from '@/redux/features/job-description/jobDescriptionSelector';
-import {jobDescriptionActions} from '@/redux/features/job-description/jobDescriptionSlice';
+import {Button} from '@/components/ui/button';
+import chatbotSelector from '@/redux/features/chatbot/chatbotSelector';
+import {chatbotActions} from '@/redux/features/chatbot/chatbotSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {JobDescriptionSessionIdUtils} from '@/utils/token-utils';
 import {Trash2} from 'lucide-react';
+import Link from 'next/link';
+import Logo from '../../Logo';
 
 const ChatHeader = () => {
   const dispatch = useAppDispatch();
-  const chatMessages = useAppSelector(
-    jobDescriptionSelector.selectChatMessages,
-  );
+  const chatMessages = useAppSelector(chatbotSelector.selectChatMessages);
   const hasMessage = chatMessages.length > 0;
 
   const handleDeleteChat = () => {
     const res = confirm('Xóa tất cả tin nhắn trong phòng chat?');
     if (res) {
       JobDescriptionSessionIdUtils.removeToken();
-      dispatch(jobDescriptionActions.reset());
+      dispatch(chatbotActions.reset());
     }
   };
 
   return (
     <div className="flex items-center justify-between gap-4 border-b p-4">
-      <div>
+      <div className="flex items-center gap-4">
+        <Button asChild variant="link">
+          <Link href="/">
+            <Logo className="h-10 w-full" />
+          </Link>
+        </Button>
         <h1 className="font-semibold">
-          Trợ lý ảo - Hỗ trợ tìm việc làm cho người khuyết tật
+          Trợ lý ảo - Hỏi đáp sổ tay người khuyết tật
         </h1>
       </div>
       {hasMessage && (

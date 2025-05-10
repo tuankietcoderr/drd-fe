@@ -1,6 +1,6 @@
 'use client';
 
-import jobDescriptionSelector from '@/redux/features/job-description/jobDescriptionSelector';
+import chatbotSelector from '@/redux/features/chatbot/chatbotSelector';
 import {useAppSelector} from '@/redux/hooks';
 import {useRef} from 'react';
 import ChatMessageItem from './ChatMessageItem';
@@ -8,12 +8,8 @@ import EmptyRoomMessages from './EmptyRoomMessages';
 import Generating from './Generating';
 
 const ChatMessages = () => {
-  const chatMessages = useAppSelector(
-    jobDescriptionSelector.selectChatMessages,
-  );
-  const isChatLoading = useAppSelector(
-    jobDescriptionSelector.selectIsChatLoading,
-  );
+  const chatMessages = useAppSelector(chatbotSelector.selectChatMessages);
+  const isChatLoading = useAppSelector(chatbotSelector.selectIsChatLoading);
 
   const bottomRef = useRef(null);
   return (

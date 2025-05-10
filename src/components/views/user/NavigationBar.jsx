@@ -36,8 +36,8 @@ const ROUTES = [
     href: '/tro-ly-ao',
   },
   {
-    name: 'Hỗ trợ',
-    href: '/ho-tro',
+    name: 'Đánh giá CV',
+    href: '/danh-gia-cv',
   },
 ];
 
