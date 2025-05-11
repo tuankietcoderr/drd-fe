@@ -16,6 +16,7 @@ import {authActions} from '@/redux/features/auth/authSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {jwtDecode} from '@/utils/decoder';
 import {AccessTokenUtils} from '@/utils/token-utils';
+import {useTheme} from 'next-themes';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
 import {useCallback, useEffect} from 'react';
@@ -46,6 +47,7 @@ const NavigationBar = () => {
   const isAuthenticated = useAppSelector(authSelector.selectIsAuthenticated);
   const user = useAppSelector(authSelector.selectUser);
   const dispatch = useAppDispatch();
+  const {setTheme, theme} = useTheme();
 
   useEffect(() => {
     const decodedToken = jwtDecode(AccessTokenUtils.getToken());
@@ -146,6 +148,13 @@ const NavigationBar = () => {
                   <Link href="/tai-khoan/cai-dat-thong-tin-ca-nhan">
                     Cài đặt thông tin cá nhân
                   </Link>
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <DropdownMenuItem
+                  onClick={() => {
+                    setTheme(theme === 'dark' ? 'light' : 'dark');
+                  }}>
+                  Giao diện: {theme === 'dark' ? 'Tối' : 'Sáng'}
                 </DropdownMenuItem>
                 <DropdownMenuSeparator />
                 <DropdownMenuItem

@@ -12,17 +12,19 @@ const ChatbotWidgetMessageItem = ({chatMessage}) => {
       {chatMessage.chat_message && (
         <div className="flex gap-2">
           <div className="flex size-6 items-center justify-center rounded-full border bg-white p-1 dark:border-gray-700">
-            <User size={16} />
+            <User size={16} className="text-black" />
           </div>
 
-          <div className="max-w-xl space-y-1 self-start rounded-lg bg-primary/80 px-3 py-2">
-            <p className="text-sm text-white">{chatMessage.chat_message}</p>
+          <div className="max-w-xl space-y-1 self-start rounded-lg bg-primary/80 px-3 py-2 dark:bg-primary-foreground/80">
+            <p className="text-sm text-primary-foreground dark:text-white/90">
+              {chatMessage.chat_message}
+            </p>
           </div>
         </div>
       )}
       {chatMessage.answer && (
         <div className="flex gap-2">
-          <div className="size-6 rounded-full border bg-white p-1 dark:border-gray-700">
+          <div className="size-6 overflow-hidden rounded-full border bg-white p-1 dark:border-gray-700">
             <Image
               src={'/assets/logo/chatbot.png'}
               width={40}
@@ -31,8 +33,8 @@ const ChatbotWidgetMessageItem = ({chatMessage}) => {
               className="object-contain"
             />
           </div>
-          <div className="max-w-xl space-y-1 self-start rounded-lg border bg-primary-foreground/10 px-3 py-2">
-            <MarkdownRender className="text-sm text-black">
+          <div className="max-w-xl space-y-1 self-start rounded-lg border bg-card px-3 py-2">
+            <MarkdownRender className="text-sm text-card-foreground">
               {chatMessage.answer}
             </MarkdownRender>
             {isSpeaking ? (

@@ -9,8 +9,9 @@ import Markdown from 'react-markdown';
 const MarkdownRender = ({className, ...props}) => {
   return (
     <div
+      id="markdown-renderer"
       className={cn(
-        'prose prose-ol:!list-decimal prose-ul:!list-disc prose-a:text-primary prose-ol:font-bold',
+        'prose prose-a:text-primary prose-ol:!list-decimal prose-ol:font-bold prose-ul:!list-disc',
         className,
       )}>
       <Markdown

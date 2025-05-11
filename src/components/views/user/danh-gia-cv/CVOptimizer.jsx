@@ -4,11 +4,12 @@ import {Button} from '@/components/ui/button';
 import {Input} from '@/components/ui/input';
 import {Label} from '@/components/ui/label';
 import {Textarea} from '@/components/ui/textarea';
+import useTextToSpeech from '@/hooks/useTextToSpeech';
 import cvReviewApi from '@/redux/features/cv-review/cvReviewQuery';
 import cvReviewSelector from '@/redux/features/cv-review/cvReviewSelector';
 import {cvReviewActions} from '@/redux/features/cv-review/cvReviewSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
-import {Download, Eye, Rocket, Sparkles} from 'lucide-react';
+import {Download, Eye, Rocket, Sparkles, Volume2} from 'lucide-react';
 import {useEffect, useState} from 'react';
 import {toast} from 'sonner';
 
@@ -35,12 +36,23 @@ const CVOptimizer = ({onClose}) => {
     setOptimizeData(
       [...improvement_needed, ...missing_criteria].map(item => ({
         key: item,
-        label: de_xuat[item],
-        rcm: recommendations[item],
+        label: de_xuat[item] ?? '',
+        rcm: recommendations[item] ?? '',
         value: '',
       })),
     );
   }, [de_xuat, improvement_needed, missing_criteria, recommendations]);
+
+  const onChangeInput = (key, value) => {
+    setOptimizeData(prev => {
+      const newData = [...prev];
+      const index = newData.findIndex(data => data.key === key);
+      if (index !== -1) {
+        newData[index].value = value;
+      }
+      return newData;
+    });
+  };
 
   const handleOptimizeCV = () => {
     const filledCriteria = [...optimizeData].reduce((acc, item) => {
@@ -90,31 +102,11 @@ const CVOptimizer = ({onClose}) => {
         {optimizeData.length > 0 && !isSuccess && (
           <div className="space-y-4">
             {optimizeData.map(item => (
-              <div key={item.key} className="space-y-2">
-                <Label htmlFor={`CV_SUGGEST_${item.key}`}>{item.label}</Label>
-                <Input
-                  id={`CV_SUGGEST_${item.key}`}
-                  value={item.value}
-                  placeholder={`Nhập ${item.label.toLowerCase()} của bạn`}
-                  onChange={e => {
-                    setOptimizeData(prev => {
-                      const newData = [...prev];
-                      const index = newData.findIndex(
-                        data => data.key === item.key,
-                      );
-                      if (index !== -1) {
-                        newData[index].value = e.target.value;
-                      }
-
-                      return newData;
-                    });
-                  }}
-                />
-                <p className="inline-flex gap-2 text-sm font-medium text-primary">
-                  <Sparkles size={16} className="text-primary" />
-                  {item.rcm}
-                </p>
-              </div>
+              <OptimizerInput
+                key={item.key}
+                item={item}
+                onChange={onChangeInput}
+              />
             ))}
           </div>
         )}
@@ -175,6 +167,33 @@ const CVOptimizer = ({onClose}) => {
           )}
         </div>
       </div>
+    </div>
+  );
+};
+
+const OptimizerInput = ({onChange, item}) => {
+  const {startSpeech} = useTextToSpeech({
+    lang: 'vi-VN',
+  });
+
+  return (
+    <div className="space-y-2">
+      <Label htmlFor={`CV_SUGGEST_${item.key}`}>{item.label}</Label>
+      <Input
+        id={`CV_SUGGEST_${item.key}`}
+        value={item.value}
+        placeholder={`Nhập ${item.label.toLowerCase()} của bạn`}
+        onChange={() => onChange(item.key, item.value)}
+      />
+      <p className="inline-flex gap-2 text-sm font-medium text-primary">
+        <Sparkles size={16} className="text-primary" />
+        <span className="inline-block">
+          {item.rcm}
+          <button onClick={() => startSpeech(item.rcm)} className="ml-2">
+            <Volume2 size={16} />
+          </button>
+        </span>
+      </p>
     </div>
   );
 };

@@ -4,7 +4,7 @@ import {TypeAnimation} from 'react-type-animation';
 const Generating = () => {
   return (
     <div className="flex items-center gap-2">
-      <div className="size-6 rounded-full border bg-white p-1 dark:border-gray-700">
+      <div className="size-6 overflow-hidden rounded-full border bg-white p-1 dark:border-gray-700">
         <Image
           src={'/assets/logo/chatbot.png'}
           width={40}

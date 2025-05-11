@@ -4,7 +4,7 @@ import useSpeechRecognition from '@/hooks/useSpeechRecognition';
 import {Mic, MicOff} from 'lucide-react';
 import {useEffect} from 'react';
 
-const Dictaphone = ({onSpeech, onListeningChange}) => {
+const Dictaphone = ({onSpeech, onListeningChange = () => {}}) => {
   const {transcript, error, isListening, startListening, stopListening} =
     useSpeechRecognition({
       continuous: true,

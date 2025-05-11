@@ -2,12 +2,13 @@
 
 import MarkdownRender from '@/components/MarkdownRender';
 import {Button} from '@/components/ui/button';
+import useTextToSpeech from '@/hooks/useTextToSpeech';
 import cvReviewApi from '@/redux/features/cv-review/cvReviewQuery';
 import cvReviewSelector from '@/redux/features/cv-review/cvReviewSelector';
 import {cvReviewActions} from '@/redux/features/cv-review/cvReviewSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {Rocket, WandSparkles} from 'lucide-react';
-import {useState} from 'react';
+import {useEffect, useState} from 'react';
 import {toast} from 'sonner';
 import CVOptimizer from './CVOptimizer';
 
@@ -31,7 +32,6 @@ const CVReview = () => {
     preReviewCVMutation({file})
       .unwrap()
       .then(res => {
-        toast.dismiss(previewToastId);
         dispatch(cvReviewActions.setMarkdownContent(res.markdown_content));
         const reviewToastId = toast.loading('Đang đánh giá CV...', {
           duration: 0,
@@ -52,8 +52,39 @@ const CVReview = () => {
       .catch(err => {
         console.log('Error uploading CV:', err);
         toast.error('Có lỗi xảy ra trong quá trình đánh giá CV');
+      })
+      .finally(() => {
+        toast.dismiss(previewToastId);
       });
   };
+
+  const {startSpeech} = useTextToSpeech({
+    lang: 'vi-VN',
+  });
+
+  useEffect(() => {
+    if (data) {
+      const markdownRenderer = document.getElementById('markdown-renderer');
+      if (!markdownRenderer) return;
+
+      const pElems = markdownRenderer.querySelectorAll('p');
+      pElems.forEach(p => {
+        const firstChild = p.firstChild;
+        if (firstChild && firstChild.nodeName === 'STRONG') {
+          const innerText = firstChild.innerText;
+          const text = p.innerText.replace(innerText?.concat(':'), '');
+          const button = document.createElement('button');
+          button.innerHTML = `<svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-volume2 lucide-volume-2 cursor-pointer"><path d="M11 4.702a.705.705 0 0 0-1.203-.498L6.413 7.587A1.4 1.4 0 0 1 5.416 8H3a1 1 0 0 0-1 1v6a1 1 0 0 0 1 1h2.416a1.4 1.4 0 0 1 .997.413l3.383 3.384A.705.705 0 0 0 11 19.298z"></path><path d="M16 9a5 5 0 0 1 0 6"></path><path d="M19.364 18.364a9 9 0 0 0 0-12.728"></path></svg>`;
+          firstChild.className = 'inline-flex items-center gap-2';
+          button.onclick = () => {
+            startSpeech(text);
+          };
+          firstChild.appendChild(button);
+          return;
+        }
+      });
+    }
+  }, [data]);
 
   return (
     file && (
@@ -82,8 +113,8 @@ const CVReview = () => {
                         {data.review.disability_type}
                       </span>
                     </p>
-                    <MarkdownRender className="max-w-none text-sm">
-                      {data.review.review_result}
+                    <MarkdownRender className="max-w-none text-sm text-card-foreground *:text-card-foreground prose-strong:text-card-foreground">
+                      {data.review.review_result?.replace('```markdown\n', '')}
                     </MarkdownRender>
                   </>
                 )}
