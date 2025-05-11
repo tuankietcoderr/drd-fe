@@ -21,6 +21,9 @@ const CVOptimizer = ({onClose}) => {
   );
   const [fixCVMutation, {isLoading: isFixing, data: fixedCV, isSuccess}] =
     cvReviewApi.useFixCVToPdfMutation();
+  const {startSpeech} = useTextToSpeech({
+    lang: 'vi-VN',
+  });
 
   const {
     recommendations = {},
@@ -114,13 +117,24 @@ const CVOptimizer = ({onClose}) => {
           <div className="space-y-2">
             <Label htmlFor={`CV_SUGGEST_OTHER`}>Khác</Label>
             <Textarea
-              placeholder="Nhập nội dung CV của bạn tại đây..."
+              id={`CV_SUGGEST_OTHER`}
+              placeholder="Nhập nội dung bổ sung của bạn"
               onChange={e => setOptimizeContent(e.target.value)}
               value={optimizeContent}
             />
             <p className="inline-flex items-center gap-2 text-sm font-medium text-primary">
               <Sparkles size={16} className="text-primary" />
-              Bổ sung thêm nội dung để tối ưu CV của bạn.
+              <span className="inline-block">
+                <span>Bổ sung thêm nội dung để tối ưu CV của bạn.</span>
+
+                <button
+                  onClick={() =>
+                    startSpeech('Bổ sung thêm nội dung để tối ưu CV của bạn.')
+                  }
+                  className="ml-2">
+                  <Volume2 size={16} />
+                </button>
+              </span>
             </p>
           </div>
         )}
