@@ -43,11 +43,6 @@ const CVOptimizer = ({onClose}) => {
   }, [de_xuat, improvement_needed, missing_criteria, recommendations]);
 
   const handleOptimizeCV = () => {
-    if (!optimizeContent) {
-      alert('Vui lòng nhập nội dung CV của bạn');
-      return;
-    }
-
     const filledCriteria = [...optimizeData].reduce((acc, item) => {
       acc[item.key] = item.value;
       return acc;
