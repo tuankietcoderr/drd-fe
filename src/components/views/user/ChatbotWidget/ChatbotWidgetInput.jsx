@@ -56,6 +56,12 @@ const ChatbotWidgetInput = () => {
       .catch(err => {
         console.log('Error sending message:', err);
         toast.error('Có lỗi xảy ra trong quá trình gửi tin nhắn');
+        dispatch(
+          jobDescriptionActions.replaceLastChatMessage({
+            answer: 'Có lỗi xảy ra trong quá trình gửi tin nhắn',
+          }),
+        );
+        dispatch(jobDescriptionActions.clearMessage());
       })
       .finally(() => {
         if (inputRef.current) {

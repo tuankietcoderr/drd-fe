@@ -22,7 +22,7 @@ const ChatHeader = () => {
   return (
     <div className="flex items-center justify-between gap-4 border-b p-4">
       <h1 className="font-semibold">
-        Trợ lý ảo - Hỏi đáp sổ tay người khuyết tật
+        CareerAssistant - Trợ lý ảo tư vấn hướng nghiệp
       </h1>
       {hasMessage && (
         <button onClick={handleDeleteChat}>

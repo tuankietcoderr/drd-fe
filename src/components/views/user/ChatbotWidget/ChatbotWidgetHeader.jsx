@@ -45,7 +45,7 @@ const ChatbotWidgetHeader = () => {
 
   return (
     <div className="flex items-center justify-between gap-4 border-b p-4">
-      <h1 className="font-semibold">Trợ lý ảo</h1>
+      <h1 className="font-semibold">JobGenie - Trợ lý ảo tìm kiếm công việc</h1>
       {hasMessage && isLoading ? (
         <Spinner />
       ) : (
