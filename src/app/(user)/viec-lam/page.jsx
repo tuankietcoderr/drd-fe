@@ -1,5 +1,5 @@
-import Jobs from '@/components/views/user/Jobs';
 import JobFilter from '@/components/views/user/viec-lam/JobFilter';
+import Jobs from '@/components/views/user/viec-lam/Jobs';
 import MainLayout from '@/layout/MainLayout';
 
 const page = () => {

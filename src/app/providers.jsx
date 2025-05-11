@@ -2,6 +2,7 @@
 
 import {ThemeProvider as NextThemesProvider} from 'next-themes';
 import {Toaster} from 'sonner';
+import FetchDataProviders from './fetch-data-providers';
 import StoreProvider from './store-provider';
 
 const Providers = ({children}) => {
@@ -22,6 +23,7 @@ const Providers = ({children}) => {
             },
           }}
         />
+        <FetchDataProviders />
       </NextThemesProvider>
     </StoreProvider>
   );

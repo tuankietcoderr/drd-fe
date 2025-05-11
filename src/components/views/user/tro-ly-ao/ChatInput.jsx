@@ -22,11 +22,12 @@ const ChatInput = () => {
   const dispatch = useAppDispatch();
   const chatSessionId = useAppSelector(chatbotSelector.selectChatSessionId);
   const [chatMutation, {isLoading}] = chatbotApi.useChatMutation();
-  const [chatStreamMutation] = chatbotApi.useChatStreamMutation();
+  const [chatStreamMutation, {isLoading: isStreaming}] =
+    chatbotApi.useChatStreamMutation();
 
   useEffect(() => {
-    dispatch(chatbotActions.setChatLoading(isLoading));
-  }, [isLoading, dispatch]);
+    dispatch(chatbotActions.setChatLoading(isLoading || isStreaming));
+  }, [isLoading, dispatch, isStreaming]);
 
   const handleSendMessage = e => {
     e.preventDefault();
@@ -43,47 +44,30 @@ const ChatInput = () => {
       }),
     );
 
-    // chatStreamMutation({
-    //   session_id: chatSessionId,
-    //   message,
-    // })
-    //   .unwrap()
-    //   .then(async res => {
-    //     const reader = res.body
-    //       .pipeThrough(new TextDecoderStream())
-    //       .getReader();
-
-    //     while (true) {
-    //       const {done, value} = await reader.read();
-    //       console.log({value});
-    //       if (done) {
-    //         dispatch(chatbotActions.clearMessage());
-    //         if (inputRef.current) {
-    //           inputRef.current.focus();
-    //         }
-    //         break;
-    //       }
-    //       if (value) {
-    //         dispatch(chatbotActions.replaceLastChatStreamingMessage(value));
-    //       }
-    //     }
-    //   })
-    //   .catch(err => {
-    //     console.log('Error sending message:', err);
-    //   });
-
-    chatMutation({
+    chatStreamMutation({
       session_id: chatSessionId,
       message,
     })
       .unwrap()
-      .then(res => {
-        dispatch(
-          chatbotActions.replaceLastChatMessage({
-            answer: res,
-          }),
-        );
-        dispatch(chatbotActions.clearMessage());
+      .then(async res => {
+        const reader = res.body
+          .pipeThrough(new TextDecoderStream())
+          .getReader();
+
+        while (true) {
+          const {done, value} = await reader.read();
+          console.log({value});
+          if (done) {
+            dispatch(chatbotActions.clearMessage());
+            if (inputRef.current) {
+              inputRef.current.focus();
+            }
+            break;
+          }
+          if (value) {
+            dispatch(chatbotActions.replaceLastChatStreamingMessage(value));
+          }
+        }
       })
       .catch(err => {
         console.log('Error sending message:', err);
@@ -93,14 +77,37 @@ const ChatInput = () => {
               'Có lỗi xảy ra trong quá trình gửi tin nhắn. Vui lòng thử lại sau.',
           }),
         );
-        dispatch(chatbotActions.clearMessage());
-        toast.error('Có lỗi xảy ra trong quá trình gửi tin nhắn');
-      })
-      .finally(() => {
-        if (inputRef.current) {
-          inputRef.current.focus();
-        }
       });
+
+    // chatMutation({
+    //   session_id: chatSessionId,
+    //   message,
+    // })
+    //   .unwrap()
+    //   .then(res => {
+    //     dispatch(
+    //       chatbotActions.replaceLastChatMessage({
+    //         answer: res,
+    //       }),
+    //     );
+    //     dispatch(chatbotActions.clearMessage());
+    //   })
+    //   .catch(err => {
+    //     console.log('Error sending message:', err);
+    //     dispatch(
+    //       chatbotActions.replaceLastChatMessage({
+    //         answer:
+    //           'Có lỗi xảy ra trong quá trình gửi tin nhắn. Vui lòng thử lại sau.',
+    //       }),
+    //     );
+    //     dispatch(chatbotActions.clearMessage());
+    //     toast.error('Có lỗi xảy ra trong quá trình gửi tin nhắn');
+    //   })
+    //   .finally(() => {
+    //     if (inputRef.current) {
+    //       inputRef.current.focus();
+    //     }
+    //   });
   };
 
   const handleSpeech = useCallback(
@@ -123,12 +130,12 @@ const ChatInput = () => {
           onChange={e => dispatch(chatbotActions.setMessage(e.target.value))}
           placeholder="Nhập câu hỏi của bạn"
           className="w-full"
-          disabled={isLoading || isListening}
+          disabled={isLoading || isListening || isStreaming}
         />
         <Button
           type="submit"
           variant="outline"
-          disabled={isLoading || isListening || !canSendMessage}
+          disabled={isLoading || isListening || !canSendMessage || isStreaming}
           title="Gửi câu hỏi">
           <SendHorizonal />
         </Button>

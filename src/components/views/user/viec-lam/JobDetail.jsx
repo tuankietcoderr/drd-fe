@@ -1,20 +1,24 @@
 'use client';
 import {Button} from '@/components/ui/button';
+import {
+  PROFESSIONAL_LEVEL_LABEL,
+  QUALIFICATION_REQUIREMENT_LABEL,
+} from '@/constants/enum';
+import postApi from '@/redux/features/post/postQuery';
 import Formatter from '@/utils/formatter';
 import dynamic from 'next/dynamic';
 import {useState} from 'react';
 import ScreenLoader from '../../ScreenLoader';
-import SimilarJobs from './SimilarJobs';
 
 const ApplyJobModal = dynamic(() => import('@views/user/modal/ApplyJobModal'), {
   ssr: false,
   loading: () => <ScreenLoader />,
 });
 
-/**
- * @param {{job: JobPosting}}
- */
-const JobDetail = ({job}) => {
+const JobDetail = ({jobId}) => {
+  const {data: job = {}} = postApi.useGetPostDetailQuery({
+    postId: jobId,
+  });
   const [showApplyJobModal, setShowApplyJobModal] = useState(false);
 
   const onClickApplyJob = () => {
@@ -29,25 +33,37 @@ const JobDetail = ({job}) => {
           <div className="flex flex-1 flex-wrap items-start gap-2 text-sm">
             <p className="w-fit rounded-full bg-muted px-4 py-2">
               Mức lương:{' '}
-              {Formatter.currency(job.min_salary, {
+              {Formatter.currency(job.minSalary, {
                 notation: 'compact',
                 compactDisplay: 'long',
               })}{' '}
               -{' '}
-              {Formatter.currency(job.max_salary, {
+              {Formatter.currency(job.maxSalary, {
                 notation: 'compact',
                 compactDisplay: 'long',
               })}
             </p>
             <p className="w-fit rounded-full bg-muted px-4 py-2">
-              Trình độ chuyên môn: {job.professional_level}
+              Trình độ học vấn:{' '}
+              {PROFESSIONAL_LEVEL_LABEL[job.professionalLevel]}
+            </p>
+            <p className="w-fit rounded-full bg-muted px-4 py-2">
+              Trình độ chuyên môn:{' '}
+              {QUALIFICATION_REQUIREMENT_LABEL[job.qualificationRequirement]}
             </p>
             <p className="w-fit rounded-full bg-muted px-4 py-2">
               Hình thức làm việc: {job.type}
             </p>
             <p className="w-fit rounded-full bg-muted px-4 py-2">
-              Thời gian làm việc: {job.working_time}
+              Thời gian làm việc: {job.workingTime}
             </p>
+            {job.locations.map(location => (
+              <p
+                key={location.id}
+                className="w-fit rounded-full bg-muted px-4 py-2">
+                {location.name}
+              </p>
+            ))}
           </div>
           <Button onClick={onClickApplyJob}>Ứng tuyển ngay</Button>
         </div>
@@ -63,7 +79,7 @@ const JobDetail = ({job}) => {
             </div>
             <div className="space-y-2">
               <h4 className="font-medium">Yêu cầu ứng viên</h4>
-              <p className="text-sm">{job.disability_requirement}</p>
+              <p className="text-sm">{job.disabilityRequirement.join(', ')}</p>
             </div>
             <div className="space-y-2">
               <h4 className="font-medium">Quyền lợi</h4>
@@ -72,7 +88,7 @@ const JobDetail = ({job}) => {
           </div>
           <Button onClick={onClickApplyJob}>Ứng tuyển ngay</Button>
         </div>
-        <SimilarJobs jobId={job.id} />
+        {/* <SimilarJobs jobId={job.id} /> */}
       </div>
       {showApplyJobModal && (
         <ApplyJobModal

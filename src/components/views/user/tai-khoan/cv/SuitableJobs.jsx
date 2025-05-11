@@ -1,8 +1,7 @@
-import jobs from '~/__data__/posts.json';
 import JobItem from '../../JobItem';
 
 const SuitableJobs = ({jobId}) => {
-  const suitableJobs = jobs.filter(job => job.id !== jobId).slice(0, 12);
+  const suitableJobs = [];
   return (
     <div className="space-y-4 overflow-hidden rounded-lg border bg-background p-4">
       <h3 className="w-fit rounded-br-lg border-l-[6px] border-primary pl-2 text-xl font-semibold">

@@ -1,15 +1,45 @@
 'use client';
 import postApi from '@/redux/features/post/postQuery';
+import {useSearchParams} from 'next/navigation';
 import {useCallback, useEffect, useMemo, useState} from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
-import JobItem, {JobItemSkeleton} from './JobItem';
+import JobItem, {JobItemSkeleton} from '../JobItem';
 
 const Jobs = () => {
   const [page, setPage] = useState(0);
   const [items, setItems] = useState([]);
-  const {data, isSuccess, isError, isLoading} = postApi.useGetPostsQuery({
-    page,
-  });
+  const searchParams = useSearchParams();
+  const locationId = searchParams.get('location');
+  const minSalary = searchParams.get('minSalary');
+  const maxSalary = searchParams.get('maxSalary');
+  const occupationId = searchParams.get('occupation');
+  const keyword = searchParams.get('keyword');
+
+  const queryObject = useMemo(() => {
+    const query = {
+      page,
+    };
+
+    if (locationId) {
+      query.locationId = locationId;
+    }
+    if (occupationId) {
+      query.occupationId = occupationId;
+    }
+    if (minSalary) {
+      query.minSalary = minSalary;
+    }
+    if (maxSalary) {
+      query.maxSalary = maxSalary;
+    }
+    if (keyword) {
+      query.title = keyword;
+    }
+    return query;
+  }, [keyword, locationId, maxSalary, minSalary, occupationId, page]);
+
+  const {data, isSuccess, isError, isLoading} =
+    postApi.useGetPostsQuery(queryObject);
 
   const pagination = useMemo(
     () => ({
@@ -32,8 +62,6 @@ const Jobs = () => {
     };
   }, []);
 
-  console.log('items', items);
-
   const hasMore = useMemo(() => {
     return pagination.page < pagination.totalPages;
   }, [pagination]);
@@ -51,11 +79,10 @@ const Jobs = () => {
     disabled: isError,
   });
 
-  console.log('data', data);
   return (
     <div className="flex-1 space-y-4">
       <h2 className="text-2xl font-bold">Tất cả việc làm</h2>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4">
         {isLoading ? (
           [...Array(10)].map((_, index) => <JobItemSkeleton key={index} />)
         ) : isError ? (
