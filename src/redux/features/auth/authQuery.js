@@ -11,6 +11,7 @@ const authApi = createApi({
         method: 'POST',
         url: '/v1/auth/signup',
       }),
+      transformResponse: res => res.data,
     }),
     signIn: builder.mutation({
       query: payload => ({
@@ -18,6 +19,7 @@ const authApi = createApi({
         method: 'POST',
         url: '/v1/auth/signin',
       }),
+      transformResponse: res => res.data,
     }),
   }),
 });
