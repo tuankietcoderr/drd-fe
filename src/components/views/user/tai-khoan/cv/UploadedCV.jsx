@@ -1,10 +1,10 @@
 'use client';
+import CVPreview from '@/components/CVPreview';
 import {Button} from '@/components/ui/button';
 import candidateSelector from '@/redux/features/candidate/candidateSelector';
 import {useAppSelector} from '@/redux/hooks';
 import {Upload} from 'lucide-react';
 import Link from 'next/link';
-import UploadedCVPreview from './UploadedCVPreview';
 
 const UploadedCV = () => {
   const cv = useAppSelector(candidateSelector.selectCv);
@@ -22,7 +22,7 @@ const UploadedCV = () => {
       </div>
       <div>
         {cv ? (
-          <UploadedCVPreview />
+          <CVPreview fileUrl={cv} />
         ) : (
           <p className="text-center text-sm text-muted-foreground">
             Bạn chưa tải CV lên. Tải CV lên để ứng tuyển vào các công việc phù

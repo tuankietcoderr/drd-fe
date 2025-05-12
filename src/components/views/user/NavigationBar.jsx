@@ -57,7 +57,6 @@ const NavigationBar = () => {
     const decodedToken = jwtDecode(AccessTokenUtils.getToken());
     const currentTime = Math.floor(Date.now() / 1000);
     const isTokenExpired = decodedToken.exp < currentTime;
-    console.log('decodedToken', decodedToken.exp, currentTime);
     dispatch(authActions.setUser(decodedToken));
   }, [dispatch]);
   const url = useCallback(
