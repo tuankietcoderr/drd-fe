@@ -1,4 +1,6 @@
+import {AccessTokenUtils} from '@/utils/token-utils';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
+import {serialize} from 'object-to-formdata';
 
 const uploadApi = createApi({
   reducerPath: 'uploadApi',
@@ -6,11 +8,17 @@ const uploadApi = createApi({
   tagTypes: ['Upload'],
   endpoints: builder => ({
     uploadFile: builder.mutation({
-      query: payload => ({
-        body: payload,
-        method: 'POST',
-        url: '/v1/upload-image/upload',
-      }),
+      query: payload => {
+        const formData = serialize(payload);
+        return {
+          body: formData,
+          method: 'POST',
+          url: '/v1/upload-image/upload',
+          headers: {
+            Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
+          },
+        };
+      },
       transformResponse: res => res.data,
     }),
   }),

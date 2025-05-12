@@ -15,7 +15,7 @@ pdfjs.GlobalWorkerOptions.workerSrc = new URL(
 
 const ProgressBar = memo(({percent}) => {
   return (
-    <div className="mx-auto h-2.5 w-full max-w-2xl border border-black bg-gray-200">
+    <div className="mx-auto h-2.5 w-full max-w-2xl bg-gray-200">
       <div className="h-2.5 bg-primary" style={{width: `${percent}%`}} />
     </div>
   );
@@ -67,8 +67,8 @@ const CVPreview = ({fileUrl}) => {
         onLoadSuccess={onDocumentLoadSuccess}
         onLoadError={onDocumentLoadError}
         onLoadProgress={onDocumentLoadProgress}
-        error={`Failed to load CV: ${error}`}
-        loading="Loading comic...">
+        error={`Gặp lỗi khi tải CV: ${error}`}
+        loading="Đang tải...">
         <Page
           pageNumber={pageNumber}
           loading={<LoadingPageSkeleton />}

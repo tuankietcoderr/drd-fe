@@ -4,10 +4,11 @@ import candidateSelector from '@/redux/features/candidate/candidateSelector';
 import {useAppSelector} from '@/redux/hooks';
 import {Upload} from 'lucide-react';
 import Link from 'next/link';
+import UploadedCVPreview from './UploadedCVPreview';
 
 const UploadedCV = () => {
   const cv = useAppSelector(candidateSelector.selectCv);
-  console.log('cv', cv);
+
   return (
     <div className="space-y-4 rounded-lg border bg-background p-4 shadow-sm">
       <div className="flex items-center justify-between gap-2">
@@ -15,13 +16,13 @@ const UploadedCV = () => {
         <Link href="/tai-khoan/cv/tai-len">
           <Button>
             <Upload />
-            Tải CV lên
+            {cv ? 'Cập nhật CV' : 'Tải CV lên'}
           </Button>
         </Link>
       </div>
       <div>
         {cv ? (
-          <></>
+          <UploadedCVPreview />
         ) : (
           <p className="text-center text-sm text-muted-foreground">
             Bạn chưa tải CV lên. Tải CV lên để ứng tuyển vào các công việc phù

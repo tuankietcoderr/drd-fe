@@ -15,6 +15,17 @@ const candidateApi = createApi({
       }),
       transformResponse: res => res.data,
     }),
+    updateCv: builder.mutation({
+      query: payload => ({
+        url: '/v1/candidate/cv',
+        method: 'PUT',
+        body: payload,
+        headers: {
+          Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
+        },
+      }),
+      transformResponse: res => res.data,
+    }),
   }),
 });
 
