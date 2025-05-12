@@ -35,7 +35,6 @@ const LoginForm = () => {
     signInMutation(data)
       .unwrap()
       .then(res => {
-        console.log(res);
         dispatch(
           authActions.setTokens({
             accessToken: res.accessToken,

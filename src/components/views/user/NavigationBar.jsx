@@ -32,10 +32,10 @@ const ROUTES = [
     name: 'Việc làm',
     href: '/viec-lam',
   },
-  // {
-  //   name: 'Tìm việc nhanh',
-  //   href: '/tim-viec-nhanh',
-  // },
+  {
+    name: 'Tìm việc nhanh',
+    href: '/tim-viec-nhanh',
+  },
   {
     name: 'Trợ lý ảo',
     href: '/tro-ly-ao',

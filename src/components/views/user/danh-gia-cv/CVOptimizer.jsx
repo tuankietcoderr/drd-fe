@@ -197,7 +197,7 @@ const OptimizerInput = ({onChange, item}) => {
         id={`CV_SUGGEST_${item.key}`}
         value={item.value}
         placeholder={`Nhập ${item.label.toLowerCase()} của bạn`}
-        onChange={() => onChange(item.key, item.value)}
+        onChange={e => onChange(item.key, e.target.value)}
       />
       <p className="inline-flex gap-2 text-sm font-medium text-primary">
         <Sparkles size={16} className="text-primary" />

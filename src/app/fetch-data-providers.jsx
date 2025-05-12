@@ -1,5 +1,7 @@
 'use client';
 
+import candidateApi from '@/redux/features/candidate/candidateQuery';
+import {candidateActions} from '@/redux/features/candidate/candidateSlice';
 import locationApi from '@/redux/features/location/locationQuery';
 import {locationActions} from '@/redux/features/location/locationSlice';
 import occupationApi from '@/redux/features/occupation/occupationQuery';
@@ -13,6 +15,8 @@ const FetchDataProviders = () => {
     locationApi.useGetLocationsQuery();
   const {data: occupationData, isSuccess: isSuccessOccupation} =
     occupationApi.useGetOccupationsQuery();
+  const {data: candidateCvData, isSuccess: isSuccessCandidateCv} =
+    candidateApi.useGetCandidateCvQuery();
 
   useEffect(() => {
     if (isSusccessLocation) {
@@ -25,6 +29,12 @@ const FetchDataProviders = () => {
       dispatch(occupationActions.setOccupations(occupationData));
     }
   }, [dispatch, isSuccessOccupation, occupationData]);
+
+  useEffect(() => {
+    if (isSuccessCandidateCv) {
+      dispatch(candidateActions.setCV(candidateCvData.cv));
+    }
+  }, [dispatch, isSuccessCandidateCv, candidateCvData]);
 
   return null;
 };

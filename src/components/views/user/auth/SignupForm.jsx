@@ -32,7 +32,6 @@ const SignupForm = () => {
   const [signUpMutation, {isLoading}] = authApi.useSignUpMutation();
 
   const onSubmit = async data => {
-    console.log(data);
     delete data.confirmPassword;
     const payload = {
       ...data,

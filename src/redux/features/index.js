@@ -1,5 +1,7 @@
 import authApi from './auth/authQuery';
 import authSlice from './auth/authSlice';
+import candidateApi from './candidate/candidateQuery';
+import candidateSlice from './candidate/candidateSlice';
 import chatbotApi from './chatbot/chatbotQuery';
 import chatbotSlice from './chatbot/chatbotSlice';
 import cvReviewApi from './cv-review/cvReviewQuery';
@@ -11,6 +13,8 @@ import locationSlice from './location/locationSlice';
 import occupationApi from './occupation/occupationQuery';
 import occupationSlice from './occupation/occupationSlice';
 import postApi from './post/postQuery';
+import uploadApi from './upload/uploadQuery';
+import uploadSlice from './upload/uploadSlice';
 
 export const allApis = [
   authApi,
@@ -20,6 +24,8 @@ export const allApis = [
   postApi,
   locationApi,
   occupationApi,
+  candidateApi,
+  uploadApi,
 ];
 
 export const allSlices = [
@@ -29,4 +35,6 @@ export const allSlices = [
   cvReviewSlice,
   locationSlice,
   occupationSlice,
+  candidateSlice,
+  uploadSlice,
 ];
