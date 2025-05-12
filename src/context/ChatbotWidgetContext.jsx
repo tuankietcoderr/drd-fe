@@ -45,9 +45,6 @@ export const ChatbotWidgetProvider = ({children}) => {
       //TODO: delete the previous session
       deleteSessionMutation({sessionId: prevChatSessionId})
         .unwrap()
-        .then(res => {
-          console.log('Delete session success:', res);
-        })
         .catch(err => {
           console.log('Error deleting session:', err);
         });

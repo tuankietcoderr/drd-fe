@@ -32,8 +32,6 @@ const Jobs = () => {
     };
   }, []);
 
-  console.log('items', items);
-
   const hasMore = useMemo(() => {
     return pagination.page < pagination.totalPages;
   }, [pagination]);
@@ -51,7 +49,6 @@ const Jobs = () => {
     disabled: isError,
   });
 
-  console.log('data', data);
   return (
     <div className="flex-1 space-y-4">
       <h2 className="text-2xl font-bold">Tất cả việc làm</h2>

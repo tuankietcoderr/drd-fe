@@ -53,12 +53,6 @@ const NavigationBar = () => {
   const dispatch = useAppDispatch();
   const {setTheme, theme} = useTheme();
 
-  useEffect(() => {
-    const decodedToken = jwtDecode(AccessTokenUtils.getToken());
-    const currentTime = Math.floor(Date.now() / 1000);
-    const isTokenExpired = decodedToken.exp < currentTime;
-    dispatch(authActions.setUser(decodedToken));
-  }, [dispatch]);
   const url = useCallback(
     href => {
       if (pathname === href) {
@@ -73,6 +67,21 @@ const NavigationBar = () => {
     dispatch(authActions.logout());
     location.href = '/';
   }, [dispatch]);
+
+  useEffect(() => {
+    const decodedToken = jwtDecode(AccessTokenUtils.getToken());
+    if (!decodedToken) {
+      dispatch(authActions.logout());
+      return;
+    }
+    const currentTime = Math.floor(Date.now() / 1000);
+    const isTokenExpired = decodedToken.exp < currentTime;
+    if (isTokenExpired) {
+      handleLogout();
+      return;
+    }
+    dispatch(authActions.setUser(decodedToken));
+  }, [dispatch, handleLogout]);
 
   return (
     <MainLayout Elem="header">

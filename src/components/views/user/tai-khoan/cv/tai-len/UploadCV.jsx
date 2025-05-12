@@ -27,7 +27,6 @@ const UploadUserCV = () => {
         updateCvMutation({cv: res.url})
           .unwrap()
           .then(res => {
-            console.log(res);
             setFile(file);
             toast.success('Tải lên CV thành công');
             dispatch(candidateActions.setCV(res.cv));

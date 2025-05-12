@@ -69,8 +69,7 @@ const CVOptimizer = ({onClose}) => {
       filled_criteria: filledCriteria,
     })
       .unwrap()
-      .then(response => {
-        console.log('CV optimization response:', response);
+      .then(() => {
         setOptimizeContent('');
       })
       .catch(error => {

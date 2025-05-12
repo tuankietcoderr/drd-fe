@@ -56,7 +56,6 @@ const ChatInput = () => {
 
         while (true) {
           const {done, value} = await reader.read();
-          console.log({value});
           if (done) {
             dispatch(chatbotActions.clearMessage());
             if (inputRef.current) {
