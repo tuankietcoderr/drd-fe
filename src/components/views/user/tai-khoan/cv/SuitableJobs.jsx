@@ -16,6 +16,9 @@ const SuitableJobs = () => {
         skip: !cv,
       },
     );
+  const posts = data?.posts || [];
+
+  console.log(isError, data);
 
   return (
     <div
@@ -40,12 +43,12 @@ const SuitableJobs = () => {
             Không thể tải thông tin việc làm. Vui lòng thử lại sau.
           </p>
         ) : isSuccess ? (
-          data.length === 0 ? (
+          posts.length === 0 ? (
             <p className="col-span-full text-sm text-muted-foreground">
               Không có việc làm nào
             </p>
           ) : (
-            data.map(job => <JobItem key={job.id} job={job} />)
+            posts.map(job => <JobItem key={job.id} job={job} />)
           )
         ) : null}
       </div>
