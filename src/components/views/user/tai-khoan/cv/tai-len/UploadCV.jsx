@@ -2,10 +2,10 @@
 import {Button} from '@/components/ui/button';
 import UploadCV from '@/components/UploadCV';
 import candidateApi from '@/redux/features/candidate/candidateQuery';
-import {candidateActions} from '@/redux/features/candidate/candidateSlice';
 import {cvReviewActions} from '@/redux/features/cv-review/cvReviewSlice';
 import uploadApi from '@/redux/features/upload/uploadQuery';
 import {useAppDispatch} from '@/redux/hooks';
+import Link from 'next/link';
 import {useRouter} from 'next/navigation';
 import {useState} from 'react';
 import {toast} from 'sonner';
@@ -23,13 +23,11 @@ const UploadUserCV = () => {
     uploadMutation({file})
       .unwrap()
       .then(res => {
-        dispatch(cvReviewActions.setFile(res));
         updateCvMutation({cv: res.url})
           .unwrap()
           .then(res => {
             setFile(file);
             toast.success('Tải lên CV thành công');
-            dispatch(candidateActions.setCV(res.cv));
           })
           .catch(err => {
             console.log(err);
@@ -54,11 +52,22 @@ const UploadUserCV = () => {
         onRemove={() => setFile(null)}
       />
       {isUploaded && isUpdated && (
-        <div className="flex justify-center">
+        <div className="flex flex-col items-center justify-center">
           <p className="text-sm">
             Bạn muốn đánh giá CV này?{' '}
             <Button variant="link" onClick={onReview}>
               Nhấn vào đây
+            </Button>
+          </p>
+          <div className="flex items-center gap-1">
+            <hr className="w-20" />
+            <p className="text-sm">hoặc</p>
+            <hr className="w-20" />
+          </div>
+          <p className="text-sm">
+            Xem các công việc phù hợp với CV bạn đã tải lên?{' '}
+            <Button variant="link" asChild>
+              <Link href="/tai-khoan/cv#viec-lam-phu-hop">Nhấn vào đây</Link>
             </Button>
           </p>
         </div>

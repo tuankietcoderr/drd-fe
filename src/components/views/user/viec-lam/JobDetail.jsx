@@ -8,8 +8,10 @@ import postApi from '@/redux/features/post/postQuery';
 import Formatter from '@/utils/formatter';
 import dynamic from 'next/dynamic';
 import {useState} from 'react';
+import {toast} from 'sonner';
 import ScreenLoader from '../../ScreenLoader';
 import Spinner from '../../Spinner';
+import SimilarJobs from './SimilarJobs';
 
 const ApplyJobModal = dynamic(() => import('@views/user/modal/ApplyJobModal'), {
   ssr: false,
@@ -25,10 +27,31 @@ const JobDetail = ({jobId}) => {
   } = postApi.useGetPostDetailQuery({
     postId: jobId,
   });
+
+  const [unApplyJobMutation, {isLoading: isUnApplying}] =
+    postApi.useUnApplyMutation();
   const [showApplyJobModal, setShowApplyJobModal] = useState(false);
 
   const onClickApplyJob = () => {
     setShowApplyJobModal(true);
+  };
+
+  const onClickUnApplyJob = () => {
+    const yes = confirm(
+      'Bạn có chắc chắn muốn thu hồi đơn ứng tuyển này không?',
+    );
+    if (yes) {
+      unApplyJobMutation({postId: jobId})
+        .unwrap()
+        .then(res => {
+          console.log('Thu hồi đơn ứng tuyển thành công', res);
+          toast.success('Thu hồi đơn ứng tuyển thành công');
+        })
+        .catch(err => {
+          console.log('Thu hồi đơn ứng tuyển thất bại', err);
+          toast.error('Thu hồi đơn ứng tuyển thất bại');
+        });
+    }
   };
 
   return isLoading ? (
@@ -42,7 +65,15 @@ const JobDetail = ({jobId}) => {
       <>
         <div className="space-y-8">
           <div className="space-y-4 rounded-lg border bg-background p-4">
-            <h2 className="text-xl font-bold">{job.title}</h2>
+            <div className="space-y-2">
+              <h2 className="text-sm font-semibold text-muted-foreground">
+                {job.recruiterName}
+              </h2>
+              <h3 className="text-lg font-semibold transition-colors group-hover:text-primary">
+                {job.title}
+              </h3>
+              <p className="line-clamp-2 text-sm">{job.description}</p>
+            </div>
             <div className="flex flex-1 flex-wrap items-start gap-2 text-sm">
               <p className="w-fit rounded-full bg-muted px-4 py-2">
                 Mức lương:{' '}
@@ -78,7 +109,21 @@ const JobDetail = ({jobId}) => {
                 </p>
               ))}
             </div>
-            <Button onClick={onClickApplyJob}>Ứng tuyển ngay</Button>
+            <p className="text-sm text-muted-foreground">
+              {job.applicants === 0
+                ? 'Chưa có ai ứng tuyển. Hãy trở thành người đầu tiên ứng tuyển để nhận được cơ hội tốt hơn.'
+                : `Đã có ${job.applicants} người ứng tuyển`}
+            </p>
+            <div className="space-x-2">
+              <Button onClick={onClickApplyJob} disabled={job.applied}>
+                {job.applied ? 'Đã ứng tuyển' : 'Ứng tuyển ngay'}
+              </Button>
+              {job.applied && (
+                <Button onClick={onClickUnApplyJob} variant="outline">
+                  {isUnApplying ? 'Đang thu hồi...' : 'Thu hồi đơn ứng tuyển'}
+                </Button>
+              )}
+            </div>
           </div>
 
           <div className="space-y-4 overflow-hidden rounded-lg border bg-background p-4">
@@ -101,9 +146,8 @@ const JobDetail = ({jobId}) => {
                 <p className="text-sm">{job.benefit}</p>
               </div>
             </div>
-            <Button onClick={onClickApplyJob}>Ứng tuyển ngay</Button>
           </div>
-          {/* <SimilarJobs jobId={job.id} /> */}
+          <SimilarJobs jobId={job.id} />
         </div>
         {showApplyJobModal && (
           <ApplyJobModal

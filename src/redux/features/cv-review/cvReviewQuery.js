@@ -12,7 +12,7 @@ const cvReviewApi = createApi({
         return {
           body: formData,
           method: 'POST',
-          url: '/cv-review/pre-review',
+          url: '/cv-review/pre-review/',
         };
       },
     }),
@@ -22,7 +22,7 @@ const cvReviewApi = createApi({
         return {
           body: formData,
           method: 'POST',
-          url: '/cv-review/review',
+          url: '/cv-review/review/',
         };
       },
     }),
@@ -32,7 +32,7 @@ const cvReviewApi = createApi({
         return {
           body: formData,
           method: 'POST',
-          url: '/cv-review/review-suggest',
+          url: '/cv-review/review-suggest/',
         };
       },
     }),
@@ -40,7 +40,7 @@ const cvReviewApi = createApi({
       query: payload => ({
         body: payload,
         method: 'POST',
-        url: '/cv-review/fix-with-suggest',
+        url: '/cv-review/fix-with-suggest/',
         responseHandler: 'blob',
       }),
     }),
@@ -48,7 +48,7 @@ const cvReviewApi = createApi({
       query: payload => ({
         body: payload,
         method: 'POST',
-        url: '/cv-review/fix-with-suggest',
+        url: '/cv-review/fix-with-suggest/',
         responseHandler: async response => {
           return await response.blob();
         },

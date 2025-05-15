@@ -16,7 +16,7 @@ const useUploadCV = () => {
   const [file, setFile] = useState(null);
 
   const onChangeFile = useCallback(event => {
-    event.preventDefault();
+    event?.preventDefault?.();
     const selectedFile = event.target.files[0];
     if (selectedFile) {
       const fileType = selectedFile.type;

@@ -27,43 +27,45 @@ const JobItem = ({job}) => {
           }}
         />
       </div>
-      <div className="flex-1 space-y-3">
-        <div className="space-y-2">
-          <h2 className="text-sm font-semibold text-muted-foreground">
-            {job.recruiterName}
-          </h2>
-          <h3 className="text-lg font-semibold transition-colors group-hover:text-primary">
-            {job.title}
-          </h3>
-          <p className="line-clamp-2 text-sm">{job.description}</p>
-        </div>
+      <div className="flex flex-1 flex-col gap-3">
+        <div className="flex-1 space-y-3">
+          <div className="space-y-2">
+            <h2 className="text-sm font-semibold text-muted-foreground">
+              {job.recruiterName}
+            </h2>
+            <h3 className="text-lg font-semibold transition-colors group-hover:text-primary">
+              {job.title}
+            </h3>
+            <p className="line-clamp-2 text-sm">{job.description}</p>
+          </div>
 
-        <div className="flex flex-1 flex-wrap items-start gap-2 text-xs">
-          <p className="w-fit rounded-full bg-muted px-2 py-1">
-            {Formatter.currency(job.minSalary, {
-              notation: 'compact',
-              compactDisplay: 'long',
-            })}{' '}
-            -{' '}
-            {Formatter.currency(job.maxSalary, {
-              notation: 'compact',
-              compactDisplay: 'long',
-            })}
-          </p>
-          <p className="w-fit rounded-full bg-muted px-2 py-1">
-            {PROFESSIONAL_LEVEL_LABEL[job.professionalLevel]}
-          </p>
-          <p className="w-fit rounded-full bg-muted px-2 py-1">{job.type}</p>
-          <p className="w-fit rounded-full bg-muted px-2 py-1">
-            {job.disabilityRequirement.join(', ')}
-          </p>
-          {job.locations.map(location => (
-            <p
-              key={location.id}
-              className="w-fit rounded-full bg-muted px-2 py-1">
-              {location.name}
+          <div className="flex flex-1 flex-wrap items-start gap-2 text-xs">
+            <p className="w-fit rounded-full bg-muted px-2 py-1">
+              {Formatter.currency(job.minSalary, {
+                notation: 'compact',
+                compactDisplay: 'long',
+              })}{' '}
+              -{' '}
+              {Formatter.currency(job.maxSalary, {
+                notation: 'compact',
+                compactDisplay: 'long',
+              })}
             </p>
-          ))}
+            <p className="w-fit rounded-full bg-muted px-2 py-1">
+              {PROFESSIONAL_LEVEL_LABEL[job.professionalLevel]}
+            </p>
+            <p className="w-fit rounded-full bg-muted px-2 py-1">{job.type}</p>
+            <p className="w-fit rounded-full bg-muted px-2 py-1">
+              {job.disabilityRequirement.join(', ')}
+            </p>
+            {job.locations.map(location => (
+              <p
+                key={location.id}
+                className="w-fit rounded-full bg-muted px-2 py-1">
+                {location.name}
+              </p>
+            ))}
+          </div>
         </div>
         <div className="flex items-center justify-between gap-2 text-xs">
           <p>

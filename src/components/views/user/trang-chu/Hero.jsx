@@ -45,7 +45,7 @@ const Hero = () => {
             Chào mừng bạn đến với <span className="text-primary">DrD</span>
             <br />
             Nền tảng tìm kiếm việc làm và tuyển dụng dành cho người khuyết tật
-            hàng đầu Việt Nam
+            Việt Nam
           </h2>
           <p className="mt-4 text-lg text-white">
             Tìm kiếm việc làm dễ dàng, nhanh chóng và hiệu quả nhất cho người

@@ -93,12 +93,12 @@ const JobFilter = () => {
 
     const queryString = urlSearch.toString();
     const url = `/viec-lam?${queryString}`;
-    router.push(url);
+    location.href = url;
   };
 
   const handleSearch = () => {
     const url = createQueryString(searchParams, 'keyword', keyword);
-    router.push(url);
+    location.href = url;
   };
 
   const onResetFilter = () => {
@@ -106,7 +106,7 @@ const JobFilter = () => {
     setSelectedSalary(null);
     setSelectedOccupation(null);
     setKeyword('');
-    router.push('/viec-lam');
+    location.href = '/viec-lam';
   };
 
   return (
@@ -118,6 +118,11 @@ const JobFilter = () => {
           placeholder="Tìm kiếm tên công ty, hoặc nhiều hơn..."
           value={keyword}
           onChange={e => setKeyword(e.target.value)}
+          onKeyDown={e => {
+            if (e.key === 'Enter') {
+              handleSearch();
+            }
+          }}
         />
         <Button onClick={handleSearch}>Tìm kiếm</Button>
       </div>

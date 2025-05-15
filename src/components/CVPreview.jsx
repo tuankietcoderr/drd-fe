@@ -60,7 +60,7 @@ const CVPreview = ({fileUrl}) => {
 
   return (
     <div className="flex w-full flex-col items-center gap-4 border pt-4">
-      {!isLoaded && <ProgressBar percent={loadPercent} />}
+      {!isLoaded && !error && <ProgressBar percent={loadPercent} />}
 
       <Document
         file={fileUrl}

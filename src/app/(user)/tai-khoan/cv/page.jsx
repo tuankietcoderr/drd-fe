@@ -1,3 +1,4 @@
+import SuitableJobs from '@/components/views/user/tai-khoan/cv/SuitableJobs';
 import UploadedCV from '@/components/views/user/tai-khoan/cv/UploadedCV';
 
 const page = () => {
@@ -5,7 +6,7 @@ const page = () => {
     <div className="space-y-4">
       <UploadedCV />
       {/* <CreatedCV /> */}
-      {/* <SuitableJobs /> */}
+      <SuitableJobs />
     </div>
   );
 };

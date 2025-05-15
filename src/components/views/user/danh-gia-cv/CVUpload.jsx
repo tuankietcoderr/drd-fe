@@ -33,6 +33,7 @@ const CVUpload = () => {
   const onUpload = file => {
     onPreviewFile(file);
   };
+  console.log(file);
 
   return (
     <div>

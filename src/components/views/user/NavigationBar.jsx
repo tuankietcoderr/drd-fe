@@ -32,10 +32,10 @@ const ROUTES = [
     name: 'Việc làm',
     href: '/viec-lam',
   },
-  // {
-  //   name: 'Tìm việc nhanh',
-  //   href: '/tim-viec-nhanh',
-  // },
+  {
+    name: 'Tìm việc nhanh',
+    href: '/tim-viec-nhanh',
+  },
   {
     name: 'Trợ lý ảo',
     href: '/tro-ly-ao',
@@ -76,6 +76,7 @@ const NavigationBar = () => {
     }
     const currentTime = Math.floor(Date.now() / 1000);
     const isTokenExpired = decodedToken.exp < currentTime;
+    console.log('isTokenExpired', isTokenExpired);
     if (isTokenExpired) {
       handleLogout();
       return;

@@ -1,19 +1,17 @@
 'use client';
-import postApi from '@/redux/features/post/postQuery';
-import JobItem, {JobItemSkeleton} from '../JobItem';
 
-const SimilarJobs = ({jobId}) => {
-  const {isLoading, data, isError, isSuccess} = postApi.useGetRelatedPostsQuery(
-    {
-      postId: jobId,
-    },
-  );
+import postApi from '@/redux/features/post/postQuery';
+import JobItem, {JobItemSkeleton} from '../../JobItem';
+
+const AppliedJobs = () => {
+  const {data, isLoading, isError, isSuccess} =
+    postApi.useGetAppliedPostsQuery();
   return (
     <div className="space-y-4 overflow-hidden rounded-lg border bg-background p-4">
       <h3 className="w-fit rounded-br-lg border-l-[6px] border-primary pl-2 text-xl font-semibold">
-        Việc làm tương tự
+        Việc làm đã ứng tuyển
       </h3>
-      <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+      <div className="grid grid-cols-1 gap-4">
         {isLoading ? (
           Array.from({length: 3}).map((_, index) => (
             <JobItemSkeleton key={index} />
@@ -32,4 +30,4 @@ const SimilarJobs = ({jobId}) => {
   );
 };
 
-export default SimilarJobs;
+export default AppliedJobs;

@@ -110,7 +110,7 @@ const SITEMAP = [
 
 const Footer = () => {
   return (
-    <footer className="mt-10">
+    <footer className="mt-20">
       <Separator />
       <MainLayout className="flex flex-wrap gap-10 py-10">
         <div className="w-full space-y-4 md:max-w-2xl">

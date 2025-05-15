@@ -18,6 +18,9 @@ const jobDescriptionApi = createApi({
         url: `/job-description/delete-session/${payload.sessionId}`,
       }),
     }),
+    getSuggestQuestions: builder.query({
+      query: () => '/job-description/chat/get-suggest-questions',
+    }),
   }),
 });
 

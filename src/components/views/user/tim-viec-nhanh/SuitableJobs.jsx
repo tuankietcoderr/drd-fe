@@ -1,11 +1,8 @@
 'use client';
-import candidateSelector from '@/redux/features/candidate/candidateSelector';
 import postApi from '@/redux/features/post/postQuery';
-import {useAppSelector} from '@/redux/hooks';
 import JobItem, {JobItemSkeleton} from '../../JobItem';
 
-const SuitableJobs = () => {
-  const cv = useAppSelector(candidateSelector.selectCv);
+const SuitableJobs = ({cv}) => {
   const {data, isLoading, isError, isSuccess, isUninitialized} =
     postApi.useGetSuitableJobsQuery(
       {

@@ -1,8 +1,9 @@
 'use client';
 import {Button} from '@/components/ui/button';
 import useUploadCV from '@/hooks/useUploadCV';
+import {cn} from '@/lib/utils';
 import {Trash2} from 'lucide-react';
-import {useEffect, useId, useRef} from 'react';
+import {useEffect, useId, useRef, useState} from 'react';
 
 const UploadCV = ({initialFile, onUpload, onRemove, isUploading}) => {
   const {
@@ -27,9 +28,34 @@ const UploadCV = ({initialFile, onUpload, onRemove, isUploading}) => {
     onUpload(file);
   };
 
+  const [isDragging, setIsDragging] = useState(false);
+
   return (
     <div className="flex flex-col items-center gap-4">
-      <div className="group w-full rounded-lg border border-dashed border-muted-foreground p-4 transition-colors hover:border-primary">
+      <div
+        className={cn(
+          'group w-full rounded-lg border border-dashed p-4 transition-colors hover:border-primary',
+          {
+            'border-muted-foreground': !isDragging,
+            'border-primary': isDragging,
+          },
+        )}
+        onDrop={e => {
+          e.preventDefault();
+          setIsDragging(false);
+          const droppedFiles = Array.from(e.dataTransfer.files);
+          if (droppedFiles.length > 0) {
+            onChangeFile({target: {files: droppedFiles}});
+          }
+        }}
+        onDragOver={e => {
+          e.preventDefault();
+          setIsDragging(true);
+        }}
+        onDragLeave={e => {
+          e.preventDefault();
+          setIsDragging(false);
+        }}>
         <input
           ref={inputRef}
           id={fileId}
@@ -53,7 +79,7 @@ const UploadCV = ({initialFile, onUpload, onRemove, isUploading}) => {
               variant="outline"
               onClick={() => {
                 onRemoveFile();
-                onRemove();
+                onRemove?.();
                 inputRef.current.value = null;
               }}>
               <p className="text-sm text-primary">

@@ -4,8 +4,8 @@ import jobDescriptionSelector from '@/redux/features/job-description/jobDescript
 import {useAppSelector} from '@/redux/hooks';
 import {useRef} from 'react';
 import ChatbotWidgetMessageItem from './ChatbotWidgetMessageItem';
-import EmptyRoomMessages from './EmptyRoomMessages';
 import Generating from './Generating';
+import SuggestQuestions from './SuggestQuestions';
 
 const ChatbotWidgetMessages = () => {
   const chatMessages = useAppSelector(
@@ -29,16 +29,13 @@ const ChatbotWidgetMessages = () => {
             </span>
           </p>
         </div>
-        {chatMessages.length === 0 ? (
-          <EmptyRoomMessages />
-        ) : (
-          chatMessages.map(chatMessage => (
-            <ChatbotWidgetMessageItem
-              chatMessage={chatMessage}
-              key={chatMessage.chat_id}
-            />
-          ))
-        )}
+        {chatMessages.map(chatMessage => (
+          <ChatbotWidgetMessageItem
+            chatMessage={chatMessage}
+            key={chatMessage.chat_id}
+          />
+        ))}
+        {chatMessages.length === 1 && <SuggestQuestions />}
         {isChatLoading && <Generating />}
         <div aria-label="Bottom ref" ref={bottomRef} />
       </div>
