@@ -17,7 +17,6 @@ export const signupValidator = loginValidator
       confirmPassword: z.string().min(8, {
         message: 'Mật khẩu xác nhận không được để trống',
       }),
-      role: z.string().optional().nullable(),
       phone: z.string().min(1, 'Số điện thoại không được để trống'),
     }),
   )

@@ -20,7 +20,7 @@ class TokenUtils {
       Cookies.set(key, value, {
         expires: 14,
         secure: process.env.NODE_ENV === 'production',
-        sameSite: 'Lax',
+        sameSite: 'Strict',
         path: '/',
       }); // Set cookie expiration to 14 days
       return;
@@ -42,25 +42,25 @@ class TokenUtils {
 
 export class AccessTokenUtils extends TokenUtils {
   static getToken() {
-    return super.getToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN);
+    return super.getToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN, true);
   }
   static setToken(value) {
-    super.setToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN, value);
+    super.setToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN, value, true);
   }
   static removeToken() {
-    super.removeToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN);
+    super.removeToken(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN, true);
   }
 }
 
 export class RefreshTokenUtils extends TokenUtils {
   static getToken() {
-    return super.getToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN);
+    return super.getToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN, true);
   }
   static setToken(value) {
-    super.setToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN, value);
+    super.setToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN, value, true);
   }
   static removeToken() {
-    super.removeToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN);
+    super.removeToken(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN, true);
   }
 }
 

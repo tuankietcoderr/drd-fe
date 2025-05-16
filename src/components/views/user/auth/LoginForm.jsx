@@ -17,6 +17,7 @@ import {zodResolver} from '@hookform/resolvers/zod';
 import Link from 'next/link';
 import {useSearchParams} from 'next/navigation';
 import {useForm} from 'react-hook-form';
+import {toast} from 'sonner';
 
 const LoginForm = () => {
   const form = useForm({
@@ -30,6 +31,7 @@ const LoginForm = () => {
   const dispatch = useAppDispatch();
   const searchParams = useSearchParams();
   const [signInMutation, {isLoading}] = authApi.useSignInMutation();
+  const fallbackUrl = searchParams.get('fallbackUrl');
 
   const onSubmit = async data => {
     signInMutation(data)
@@ -41,10 +43,11 @@ const LoginForm = () => {
             refreshToken: res.refreshToken,
           }),
         );
-        location.href = searchParams.get('fallbackUrl') || '/';
+        location.href = fallbackUrl || '/';
       })
       .catch(err => {
         console.log(err);
+        toast.error('Đã xảy ra lỗi trong quá trình đăng nhập');
       });
   };
 
@@ -109,7 +112,7 @@ const LoginForm = () => {
       <p className="text-center text-sm">
         Bạn chưa có tài khoản?{' '}
         <Link
-          href="/dang-ky"
+          href={`/dang-ky${fallbackUrl ? `?fallbackUrl=${fallbackUrl}` : ''}`}
           className="font-medium text-primary hover:underline">
           Đăng ký ngay
         </Link>

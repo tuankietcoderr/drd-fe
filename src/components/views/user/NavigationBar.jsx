@@ -12,14 +12,11 @@ import {
 import MainLayout from '@/layout/MainLayout';
 import {cn} from '@/lib/utils';
 import authSelector from '@/redux/features/auth/authSelector';
-import {authActions} from '@/redux/features/auth/authSlice';
-import {useAppDispatch, useAppSelector} from '@/redux/hooks';
-import {jwtDecode} from '@/utils/decoder';
-import {AccessTokenUtils} from '@/utils/token-utils';
+import {useAppSelector} from '@/redux/hooks';
 import {useTheme} from 'next-themes';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
-import {useCallback, useEffect} from 'react';
+import {useCallback} from 'react';
 import {Button} from '../../ui/button';
 import Logo from '../Logo';
 
@@ -31,10 +28,6 @@ const ROUTES = [
   {
     name: 'Việc làm',
     href: '/viec-lam',
-  },
-  {
-    name: 'Tìm việc nhanh',
-    href: '/tim-viec-nhanh',
   },
   {
     name: 'Trợ lý ảo',
@@ -50,7 +43,6 @@ const NavigationBar = () => {
   const pathname = usePathname();
   const isAuthenticated = useAppSelector(authSelector.selectIsAuthenticated);
   const user = useAppSelector(authSelector.selectUser);
-  const dispatch = useAppDispatch();
   const {setTheme, theme} = useTheme();
 
   const url = useCallback(
@@ -62,27 +54,6 @@ const NavigationBar = () => {
     },
     [pathname],
   );
-
-  const handleLogout = useCallback(() => {
-    dispatch(authActions.logout());
-    location.href = '/';
-  }, [dispatch]);
-
-  useEffect(() => {
-    const decodedToken = jwtDecode(AccessTokenUtils.getToken());
-    if (!decodedToken) {
-      dispatch(authActions.logout());
-      return;
-    }
-    const currentTime = Math.floor(Date.now() / 1000);
-    const isTokenExpired = decodedToken.exp < currentTime;
-    console.log('isTokenExpired', isTokenExpired);
-    if (isTokenExpired) {
-      handleLogout();
-      return;
-    }
-    dispatch(authActions.setUser(decodedToken));
-  }, [dispatch, handleLogout]);
 
   return (
     <MainLayout Elem="header">

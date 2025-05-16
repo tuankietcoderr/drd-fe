@@ -1,11 +1,13 @@
 import {Separator} from '@/components/ui/separator';
+import Spinner from '@/components/views/Spinner';
 import MainLayout from '@/layout/MainLayout';
+import {Suspense} from 'react';
 
 const layout = ({children}) => {
   return (
     <div className="flex items-center justify-center">
-      <MainLayout className="mt-[5%] max-w-md space-y-4">
-        {children}
+      <MainLayout className="mt-[5%] w-full max-w-md space-y-4">
+        <Suspense fallback={<Spinner isCentered />}>{children}</Suspense>
         <Separator />
         <div className="space-y-2 text-center text-sm">
           <p className="font-semibold">Bạn gặp khó khăn khi tạo tài khoản?</p>
