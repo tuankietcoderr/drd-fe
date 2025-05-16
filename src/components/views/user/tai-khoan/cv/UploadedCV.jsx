@@ -1,12 +1,14 @@
 'use client';
-import CVPreview from '@/components/CVPreview';
 import {Button} from '@/components/ui/button';
 import candidateApi from '@/redux/features/candidate/candidateQuery';
 import candidateSelector from '@/redux/features/candidate/candidateSelector';
 import {useAppSelector} from '@/redux/hooks';
 import {Download, Expand, Trash2, Upload} from 'lucide-react';
+import dynamic from 'next/dynamic';
 import Link from 'next/link';
 import {toast} from 'sonner';
+
+const CVPreview = dynamic(() => import('@/components/CVPreview'), {ssr: false});
 
 const UploadedCV = () => {
   const cv = useAppSelector(candidateSelector.selectCv);

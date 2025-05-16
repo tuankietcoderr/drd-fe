@@ -8,6 +8,18 @@ import 'react-pdf/dist/esm/Page/TextLayer.css';
 import {Button} from './ui/button';
 import Spinner from './views/Spinner';
 
+if (typeof Promise.withResolvers === 'undefined') {
+  if (window)
+    window.Promise.withResolvers = function () {
+      let resolve, reject;
+      const promise = new Promise((res, rej) => {
+        resolve = res;
+        reject = rej;
+      });
+      return {promise, resolve, reject};
+    };
+}
+
 pdfjs.GlobalWorkerOptions.workerSrc = new URL(
   'pdfjs-dist/build/pdf.worker.min.mjs',
   import.meta.url,
