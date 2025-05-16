@@ -12,7 +12,7 @@ import {
 import MainLayout from '@/layout/MainLayout';
 import {cn} from '@/lib/utils';
 import authSelector from '@/redux/features/auth/authSelector';
-import {useAppSelector} from '@/redux/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {useTheme} from 'next-themes';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
@@ -40,6 +40,7 @@ const ROUTES = [
 ];
 
 const NavigationBar = () => {
+  const dispatch = useAppDispatch();
   const pathname = usePathname();
   const isAuthenticated = useAppSelector(authSelector.selectIsAuthenticated);
   const user = useAppSelector(authSelector.selectUser);
@@ -54,6 +55,11 @@ const NavigationBar = () => {
     },
     [pathname],
   );
+
+  const handleLogout = useCallback(() => {
+    dispatch(authActions.logout());
+    location.href = '/';
+  }, [dispatch]);
 
   return (
     <MainLayout Elem="header">
