@@ -11,7 +11,7 @@ import occupationSelector from '@/redux/features/occupation/occupationSelector';
 import {useAppSelector} from '@/redux/hooks';
 import {createQueryString} from '@/utils/converter';
 import {Check} from 'lucide-react';
-import {useRouter, useSearchParams} from 'next/navigation';
+import {useSearchParams} from 'next/navigation';
 import {useEffect, useState} from 'react';
 
 const JobFilter = () => {
@@ -21,8 +21,12 @@ const JobFilter = () => {
   const [keyword, setKeyword] = useState('');
   const locations = useAppSelector(locationSelector.selectLocations);
   const occupations = useAppSelector(occupationSelector.selectOccupations);
-  const router = useRouter();
   const searchParams = useSearchParams();
+  const [isClient, setIsClient] = useState(false);
+
+  useEffect(() => {
+    setIsClient(true);
+  }, []);
 
   useEffect(() => {
     const locationId = searchParams.get('location');
@@ -109,7 +113,9 @@ const JobFilter = () => {
     location.href = '/viec-lam';
   };
 
-  return (
+  return !isClient ? (
+    <div className="sticky top-4 h-[80vh] w-full max-w-sm space-y-4 self-start rounded-lg border p-4" />
+  ) : (
     <div className="sticky top-4 w-full max-w-sm space-y-4 self-start rounded-lg border p-4">
       <h3 className="text-2xl font-bold">Bộ lọc và tìm kiếm</h3>
       <hr />

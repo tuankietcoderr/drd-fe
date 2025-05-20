@@ -4,10 +4,11 @@ import {
   PROFESSIONAL_LEVEL_LABEL,
   QUALIFICATION_REQUIREMENT_LABEL,
 } from '@/constants/enum';
+import useAuthorizedAction from '@/hooks/useAuthorizedAction';
 import postApi from '@/redux/features/post/postQuery';
 import Formatter from '@/utils/formatter';
 import dynamic from 'next/dynamic';
-import {useState} from 'react';
+import {useCallback, useState} from 'react';
 import {toast} from 'sonner';
 import ScreenLoader from '../../ScreenLoader';
 import Spinner from '../../Spinner';
@@ -36,7 +37,7 @@ const JobDetail = ({jobId}) => {
     setShowApplyJobModal(true);
   };
 
-  const onClickUnApplyJob = () => {
+  const onClickUnApplyJob = useCallback(() => {
     const yes = confirm(
       'Bạn có chắc chắn muốn thu hồi đơn ứng tuyển này không?',
     );
@@ -52,7 +53,11 @@ const JobDetail = ({jobId}) => {
           toast.error('Thu hồi đơn ứng tuyển thất bại');
         });
     }
-  };
+  }, [jobId, unApplyJobMutation]);
+
+  const {execute} = useAuthorizedAction({
+    handler: onClickApplyJob,
+  });
 
   return isLoading ? (
     <Spinner isCentered />
@@ -115,7 +120,7 @@ const JobDetail = ({jobId}) => {
                 : `Đã có ${job.applicants} người ứng tuyển`}
             </p>
             <div className="space-x-2">
-              <Button onClick={onClickApplyJob} disabled={job.applied}>
+              <Button onClick={execute} disabled={job.applied}>
                 {job.applied ? 'Đã ứng tuyển' : 'Ứng tuyển ngay'}
               </Button>
               {job.applied && (

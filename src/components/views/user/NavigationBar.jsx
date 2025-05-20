@@ -12,6 +12,7 @@ import {
 import MainLayout from '@/layout/MainLayout';
 import {cn} from '@/lib/utils';
 import authSelector from '@/redux/features/auth/authSelector';
+import {authActions} from '@/redux/features/auth/authSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {useTheme} from 'next-themes';
 import Link from 'next/link';

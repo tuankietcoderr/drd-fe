@@ -46,6 +46,9 @@ const CVPreview = ({fileUrl}) => {
   const [error, setError] = useState(null);
   const [loadPercent, setLoadPercent] = useState(0);
   const [pageNumber, setPageNumber] = useState(1);
+  const isPdf =
+    fileUrl?.endsWith?.('.pdf') || fileUrl?.type === 'application/pdf';
+  console.log('fileUrl', fileUrl);
 
   const nextPage = () => {
     if (numPages && pageNumber < numPages) setPageNumber(pageNumber + 1);
@@ -70,7 +73,7 @@ const CVPreview = ({fileUrl}) => {
 
   const isLoaded = loadPercent >= 100;
 
-  return (
+  return isPdf ? (
     <div className="flex w-full flex-col items-center gap-4 border pt-4">
       {!isLoaded && !error && <ProgressBar percent={loadPercent} />}
 
@@ -107,6 +110,14 @@ const CVPreview = ({fileUrl}) => {
           <ChevronRight />
         </Button>
       </div>
+    </div>
+  ) : (
+    <div className="flex w-full flex-col items-center gap-4 border p-4">
+      <p className="text-center">
+        Không thể tải bản xem trước CV này.
+        <br />
+        Vui lòng tải lên tệp PDF để xem trước.
+      </p>
     </div>
   );
 };

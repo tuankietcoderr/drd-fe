@@ -20,6 +20,9 @@ const chatbotApi = createApi({
         responseHandler: res => res,
       }),
     }),
+    getSuggestQuestions: builder.query({
+      query: () => '/chatbot/chat/get-suggest-questions',
+    }),
   }),
 });
 

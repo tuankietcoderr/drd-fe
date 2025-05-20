@@ -4,8 +4,8 @@ import chatbotSelector from '@/redux/features/chatbot/chatbotSelector';
 import {useAppSelector} from '@/redux/hooks';
 import {useRef} from 'react';
 import ChatMessageItem from './ChatMessageItem';
-import EmptyRoomMessages from './EmptyRoomMessages';
 import Generating from './Generating';
+import SuggestQuestions from './SuggestQuestions';
 
 const ChatMessages = () => {
   const chatMessages = useAppSelector(chatbotSelector.selectChatMessages);
@@ -25,16 +25,13 @@ const ChatMessages = () => {
             </span>
           </p>
         </div>
-        {chatMessages.length === 0 ? (
-          <EmptyRoomMessages />
-        ) : (
-          chatMessages.map(chatMessage => (
-            <ChatMessageItem
-              chatMessage={chatMessage}
-              key={chatMessage.chat_id}
-            />
-          ))
-        )}
+        {chatMessages.map(chatMessage => (
+          <ChatMessageItem
+            chatMessage={chatMessage}
+            key={chatMessage.chat_id}
+          />
+        ))}
+        {chatMessages.length === 1 && <SuggestQuestions />}
         {isChatLoading && <Generating />}
         <div aria-label="Bottom ref" ref={bottomRef} />
       </div>
