@@ -31,7 +31,7 @@ const ROUTES = [
     href: '/viec-lam',
   },
   {
-    name: 'Trợ lý ảo',
+    name: 'Tư vấn hướng nghiệp',
     href: '/tro-ly-ao',
   },
   {

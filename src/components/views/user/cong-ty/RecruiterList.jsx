@@ -2,7 +2,7 @@
 import {Button} from '@/components/ui/button';
 import recruiterApi from '@/redux/features/recruiter/recruiterQuery';
 import Link from 'next/link';
-import {useCallback, useEffect, useMemo, useState} from 'react';
+import {memo, useCallback, useEffect, useMemo, useState} from 'react';
 import useInfiniteScroll from 'react-infinite-scroll-hook';
 import RecruiterItem, {RecruiterItemSkeleton} from './RecruiterItem';
 
@@ -87,7 +87,7 @@ const RecruiterList = ({canSkip}) => {
             ))
           )
         ) : null}
-        {(hasMore || isLoading) && (
+        {(hasMore || isLoading) && !canSkip && (
           <div ref={elemRef} className="col-span-full" />
         )}
       </div>
@@ -95,4 +95,4 @@ const RecruiterList = ({canSkip}) => {
   );
 };
 
-export default RecruiterList;
+export default memo(RecruiterList);
