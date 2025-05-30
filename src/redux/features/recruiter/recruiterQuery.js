@@ -1,3 +1,4 @@
+import {AccessTokenUtils} from '@/utils/token-utils';
 import {createApi, fetchBaseQuery} from '@reduxjs/toolkit/query/react';
 
 const recruiterApi = createApi({
@@ -20,6 +21,27 @@ const recruiterApi = createApi({
       providesTags: (result, error, arg) => [
         {type: 'Recruiter', id: arg.recruiterId},
       ],
+    }),
+    getRecruiterInfo: builder.query({
+      query: () => ({
+        url: '/v1/recruiter',
+        headers: {
+          Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
+        },
+      }),
+      transformResponse: res => res.data,
+      providesTags: [{type: 'Recruiter', id: 'Info'}],
+    }),
+    updateRecruiterProfile: builder.mutation({
+      query: payload => ({
+        url: '/v1/recruiter',
+        method: 'PUT',
+        body: payload,
+        headers: {
+          Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
+        },
+      }),
+      invalidatesTags: [{type: 'Recruiter', id: 'Info'}],
     }),
   }),
 });

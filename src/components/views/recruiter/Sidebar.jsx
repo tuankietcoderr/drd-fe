@@ -8,7 +8,12 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import {BriefcaseBusiness, ChevronLeft, LayoutDashboard} from 'lucide-react';
+import {
+  BriefcaseBusiness,
+  Building2,
+  ChevronLeft,
+  LayoutDashboard,
+} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
@@ -25,11 +30,11 @@ const sidebarData = [
     url: '/nha-tuyen-dung/viec-lam',
     icon: BriefcaseBusiness,
   },
-  // {
-  //   title: 'Hồ sơ công ty',
-  //   url: '/nha-tuyen-dung/ho-so-cong-ty',
-  //   icon: Building2,
-  // },
+  {
+    title: 'Hồ sơ công ty',
+    url: '/nha-tuyen-dung/ho-so',
+    icon: Building2,
+  },
 ];
 
 const AppSidebar = () => {
@@ -61,16 +66,11 @@ const AppSidebar = () => {
                 <Image
                   src="/assets/logo/DRD_LOGO_FIT.svg"
                   alt="logo"
-                  width={40}
-                  height={40}
-                  className="size-8 rounded-full"
+                  width={80}
+                  height={60}
+                  className="h-8 w-12"
                 />
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="text-md font-semibold">
-                    vieclamnkt.top Recruiter
-                  </span>
-                  <span className="text-sm">Nhà tuyển dụng</span>
-                </div>
+                <p className="text-sm">Nhà tuyển dụng</p>
                 <div className="ml-auto">
                   <ChevronLeft className="size-5" />
                 </div>
