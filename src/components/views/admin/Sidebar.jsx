@@ -8,7 +8,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import {ChevronLeft, ClipboardList, LayoutDashboard, Users} from 'lucide-react';
+import {ChevronLeft, LayoutDashboard, MapPin, Puzzle} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
@@ -21,14 +21,14 @@ const sidebarData = [
     icon: LayoutDashboard,
   },
   {
-    title: 'Ngành nghề',
-    url: '/quan-tri/nganh-nghe',
-    icon: Users,
+    title: 'Địa điểm',
+    url: '/quan-tri/dia-diem',
+    icon: MapPin,
   },
   {
-    title: 'Địa chỉ',
-    url: '/quan-tri/dia-chi',
-    icon: ClipboardList,
+    title: 'Ngành nghề',
+    url: '/quan-tri/nganh-nghe',
+    icon: Puzzle,
   },
 ];
 
@@ -65,9 +65,7 @@ const AppSidebar = () => {
                   className="size-8 rounded-full"
                 />
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="text-md font-semibold">
-                    vieclamnkt.top Admin
-                  </span>
+                  <span className="text-md font-semibold">vieclamnkt.top</span>
                   <span className="text-sm">Quản trị viên</span>
                 </div>
                 <div className="ml-auto">
