@@ -14,7 +14,7 @@ const layout = ({children}) => {
           <p className="text-sm">
             Vui lòng gọi tới số{' '}
             <a href="tel:0383396764" className="font-medium text-primary">
-              (+84) 399 988 336
+              0383396764
             </a>{' '}
             (giờ hành chính).
           </p>

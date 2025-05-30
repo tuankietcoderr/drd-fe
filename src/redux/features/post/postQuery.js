@@ -7,10 +7,18 @@ const postApi = createApi({
   tagTypes: ['Post'],
   endpoints: builder => ({
     getPosts: builder.query({
-      query: payload => ({
-        url: '/v1/post',
-        params: payload,
-      }),
+      query: payload => {
+        const accessToken = AccessTokenUtils.getToken();
+        return {
+          url: '/v1/post',
+          params: payload,
+          headers: !!accessToken
+            ? {
+                Authorization: `Bearer ${accessToken}`,
+              }
+            : {},
+        };
+      },
       transformResponse: res => res.data,
       providesTags: [{type: 'Post', id: 'List'}],
     }),
@@ -54,10 +62,18 @@ const postApi = createApi({
       ],
     }),
     getRelatedPosts: builder.query({
-      query: payload => ({
-        url: `/v1/post/${payload.postId}/related`,
-        params: payload,
-      }),
+      query: payload => {
+        const accessToken = AccessTokenUtils.getToken();
+        return !!accessToken
+          ? {
+              url: `/v1/post/${payload.postId}/related`,
+              params: payload,
+              headers: {
+                Authorization: `Bearer ${accessToken}`,
+              },
+            }
+          : {};
+      },
       transformResponse: res => res.data,
     }),
     getSuitableJobs: builder.query({

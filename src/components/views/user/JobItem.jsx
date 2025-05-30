@@ -124,6 +124,18 @@ const JobItem = ({job, hideImage, showScore}) => {
             ))}
           </div>
         </div>
+        {showScore && (
+          <div className="flex flex-wrap gap-2">
+            {scores.map(({score, label}) => (
+              <p
+                className="inline-flex w-fit gap-1 rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary"
+                key={label}>
+                <Sparkles size={14} />
+                {renderScore(score, label)}
+              </p>
+            ))}
+          </div>
+        )}
         <div className="flex items-center justify-between gap-2 text-xs">
           <p>
             Đã đăng{' '}
@@ -153,18 +165,6 @@ const JobItem = ({job, hideImage, showScore}) => {
             <Check size={16} />
             Bạn đã ứng tuyển vị trí này.
           </p>
-        )}
-        {showScore && (
-          <div className="flex flex-wrap gap-2">
-            {scores.map(({score, label}) => (
-              <p
-                className="inline-flex w-fit gap-1 rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary"
-                key={label}>
-                <Sparkles size={14} />
-                {renderScore(score, label)}
-              </p>
-            ))}
-          </div>
         )}
       </div>
     </Link>
