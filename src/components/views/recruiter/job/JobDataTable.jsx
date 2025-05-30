@@ -5,7 +5,7 @@ import {
   getFilteredRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import {ChevronDown, Eye, Plus} from 'lucide-react';
+import {ChevronDown, Eye, Plus, Trash2} from 'lucide-react';
 
 import {Button} from '@/components/ui/button';
 import {
@@ -32,10 +32,13 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
+import {Popover, PopoverContent, PopoverTrigger} from '@/components/ui/popover';
 import postApi from '@/redux/features/post/postQuery';
 import Formatter from '@/utils/formatter';
+import {PopoverClose} from '@radix-ui/react-popover';
 import Link from 'next/link';
 import {useMemo, useState} from 'react';
+import {toast} from 'sonner';
 import {useDebounceValue} from 'usehooks-ts';
 
 export const columns = [
@@ -62,13 +65,56 @@ export const columns = [
   {
     id: 'actions',
     enableHiding: false,
-    cell: ({row}) => (
-      <Button asChild variant="ghost" size="icon">
-        <Link href={`/nha-tuyen-dung/viec-lam/${row.id}`}>
-          <Eye />
-        </Link>
-      </Button>
-    ),
+    cell: ({row}) => {
+      const [showConfirm, setShowConfirm] = useState(false);
+      const [deletePostMutation, {isLoading}] = postApi.useDeletePostMutation();
+      const onDelete = () => {
+        deletePostMutation({postId: row.original.id})
+          .unwrap()
+          .then(() => {
+            toast.success('Xóa việc làm thành công');
+            setShowConfirm(false);
+          })
+          .catch(err => {
+            console.error('Xóa việc làm thất bại', err);
+            toast.error('Xóa việc làm thất bại');
+          });
+      };
+      return (
+        <div className="flex items-center gap-2">
+          <Button asChild variant="ghost" size="icon">
+            <Link href={`/nha-tuyen-dung/viec-lam/${row.original.id}`}>
+              <Eye />
+            </Link>
+          </Button>
+          <Popover open={showConfirm} onOpenChange={setShowConfirm}>
+            <PopoverTrigger asChild>
+              <Button variant="ghost" size="icon">
+                <Trash2 className="text-destructive" />
+              </Button>
+            </PopoverTrigger>
+            <PopoverContent className="w-72">
+              <div className="space-y-2">
+                <p className="text-sm">
+                  Bạn có chắc chắn muốn xóa việc làm này không? Việc làm sẽ bị
+                  xóa vĩnh viễn và không thể khôi phục.
+                </p>
+                <div className="flex justify-end">
+                  <Button variant="destructive" size="sm" onClick={onDelete}>
+                    {isLoading ? 'Đang xóa...' : 'Xóa'}
+                  </Button>
+                  <PopoverClose asChild>
+                    <Button variant="outline" size="sm" className="ml-2">
+                      Huỷ
+                    </Button>
+                  </PopoverClose>
+                </div>
+              </div>
+            </PopoverContent>
+          </Popover>
+        </div>
+      );
+    },
   },
 ];
 

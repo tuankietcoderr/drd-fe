@@ -82,13 +82,12 @@ const ProfileForm = () => {
         return Promise.resolve(res);
       })
       .catch(() => {
-        return Promise.reject('Failed to update avatar');
+        return Promise.reject('Lỗi khi cập nhật ảnh đại diện');
       });
   };
 
   const onSubmit = async data => {
     uploadFile().then(uploaded => {
-      console.log('Uploaded file:', uploaded);
       const payload = {
         ...data,
         avatar: uploaded.url || null,
@@ -99,7 +98,6 @@ const ProfileForm = () => {
           toast.success('Cập nhật thông tin thành công');
         })
         .catch(err => {
-          console.error('Error updating profile:', err);
           toast.error('Cập nhật thông tin thất bại');
         });
     });
