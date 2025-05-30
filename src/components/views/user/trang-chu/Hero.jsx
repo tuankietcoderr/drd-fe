@@ -4,8 +4,6 @@ import MainLayout from '@/layout/MainLayout';
 import {Search} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {Autoplay, EffectFade} from 'swiper/modules';
-import {Swiper, SwiperSlide} from 'swiper/react';
 
 const heroImages = Array.from({length: 8}, (_, i) => ({
   id: `hero-${i}`,
@@ -15,7 +13,7 @@ const heroImages = Array.from({length: 8}, (_, i) => ({
 const Hero = () => {
   return (
     <div className="relative">
-      <Swiper
+      {/* <Swiper
         slidesPerView={1}
         autoplay={{delay: 5000}}
         fadeEffect={{crossFade: true}}
@@ -39,7 +37,16 @@ const Hero = () => {
             />
           </SwiperSlide>
         ))}
-      </Swiper>
+      </Swiper> */}
+      <Image
+        src="/assets/hero/hero.png"
+        alt="Hero Image"
+        width={1080}
+        height={720}
+        className="h-[70vh] w-full object-cover object-top"
+        quality={100}
+        priority
+      />
       <div className="absolute inset-0 z-10 flex items-end bg-gradient-to-t from-black/90 to-black/20 pb-8">
         <MainLayout className="w-full space-y-6">
           <h2 className="text-4xl font-bold text-white">

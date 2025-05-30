@@ -5,28 +5,30 @@ import Image from 'next/image';
 import Link from 'next/link';
 import {memo} from 'react';
 
-const JobItem = ({job}) => {
+const JobItem = ({job, hideImage}) => {
   return (
     <Link
       href={`/viec-lam/${job.id}`}
       className="group flex gap-3 rounded-lg border bg-background p-4 shadow-sm transition-colors hover:border-primary">
-      <div>
-        <Image
-          src={
-            job.recruiterAvatar ??
-            `https://ui-avatars.com/api/?name=${encodeURIComponent(job.recruiterName)}`
-          }
-          width={80}
-          height={80}
-          alt={job.recruiterName}
-          unoptimized
-          onError={e => {
-            e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(job.recruiterName)}`;
-            e.currentTarget.srcset = '';
-            e.currentTarget.onerror = null; // Prevent infinite loop
-          }}
-        />
-      </div>
+      {!hideImage && (
+        <div>
+          <Image
+            src={
+              job.recruiterAvatar ??
+              `https://ui-avatars.com/api/?name=${encodeURIComponent(job.recruiterName)}`
+            }
+            width={80}
+            height={80}
+            alt={job.recruiterName}
+            unoptimized
+            onError={e => {
+              e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(job.recruiterName)}`;
+              e.currentTarget.srcset = '';
+              e.currentTarget.onerror = null; // Prevent infinite loop
+            }}
+          />
+        </div>
+      )}
       <div className="flex flex-1 flex-col gap-3">
         <div className="flex-1 space-y-3">
           <div className="space-y-2">
@@ -96,10 +98,10 @@ const JobItem = ({job}) => {
   );
 };
 
-export const JobItemSkeleton = () => {
+export const JobItemSkeleton = ({hideImage}) => {
   return (
     <div className="flex gap-3 rounded-lg border bg-background p-4 shadow-sm">
-      <div className="size-20 animate-pulse bg-muted" />
+      {!hideImage && <div className="size-20 animate-pulse bg-muted" />}
       <div className="flex-1 space-y-3">
         <div className="space-y-2">
           <div className="h-4 w-1/2 animate-pulse rounded-full bg-muted" />

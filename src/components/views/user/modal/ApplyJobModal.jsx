@@ -107,9 +107,9 @@ const ApplyJobModal = ({job, visible, onClose}) => {
               được liên lạc đáng ngờ của nhà tuyển dụng, hãy báo cáo ngay cho
               TopCV qua email{' '}
               <a
-                href="mailto:info@vieclamnkt.top"
+                href="mailto:info@abcd.team"
                 className="font-medium text-primary hover:underline">
-                info@vieclamnkt.top
+                info@abcd.team
               </a>{' '}
               để được hỗ trợ kịp thời.
             </p>

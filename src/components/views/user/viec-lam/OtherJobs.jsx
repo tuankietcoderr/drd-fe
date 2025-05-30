@@ -22,7 +22,7 @@ const OtherJobs = ({recruiterId, recruiterName}) => {
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {isLoading ? (
           Array.from({length: 3}).map((_, index) => (
-            <JobItemSkeleton key={index} />
+            <JobItemSkeleton key={index} hideImage />
           ))
         ) : isError ? (
           <p className="col-span-full text-sm text-muted-foreground">
@@ -31,7 +31,7 @@ const OtherJobs = ({recruiterId, recruiterName}) => {
         ) : isSuccess && jobs.length === 0 ? (
           <p className="text-sm text-muted-foreground">Không có việc làm nào</p>
         ) : (
-          jobs.map(job => <JobItem key={job.id} job={job} />)
+          jobs.map(job => <JobItem key={job.id} job={job} hideImage />)
         )}
       </div>
     </div>

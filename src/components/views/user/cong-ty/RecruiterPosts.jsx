@@ -56,7 +56,9 @@ const RecruiterPosts = ({recruiterId}) => {
 
       <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
         {isLoading ? (
-          [...Array(10)].map((_, index) => <JobItemSkeleton key={index} />)
+          [...Array(10)].map((_, index) => (
+            <JobItemSkeleton key={index} hideImage />
+          ))
         ) : isError ? (
           <p className="col-span-full text-center text-muted-foreground">
             Có lỗi xảy ra trong quá trình tải việc làm
@@ -67,7 +69,7 @@ const RecruiterPosts = ({recruiterId}) => {
               Không có việc làm nào
             </p>
           ) : (
-            items.map(job => <JobItem key={job.id} job={job} />)
+            items.map(job => <JobItem hideImage key={job.id} job={job} />)
           )
         ) : null}
         {(hasMore || isLoading) && (

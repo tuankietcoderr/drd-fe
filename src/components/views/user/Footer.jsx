@@ -128,17 +128,17 @@ const Footer = () => {
               <li>
                 Điện thoại:{' '}
                 <a
-                  href="tel:0399988336"
+                  href="tel:0383396764"
                   className="font-medium hover:underline">
-                  (+84) 399 988 336
+                  (+84) 383 396 764
                 </a>
               </li>
               <li>
                 Email:{' '}
                 <a
-                  href="mailto:info@vieclamnkt.top"
+                  href="mailto:info@abcd.team"
                   className="font-medium hover:underline">
-                  info@vieclamnkt.top
+                  info@abcd.team
                 </a>
               </li>
             </ul>
@@ -177,7 +177,7 @@ const Footer = () => {
       </MainLayout>
       <Separator />
       <p className="bg-primary py-4 text-center text-sm font-medium text-primary-foreground">
-        © Bản quyền thuộc về vieclamnkt.top 2025. Tất cả quyền được bảo lưu.
+        © Bản quyền thuộc về ABCD Team 2025. Tất cả quyền được bảo lưu.
       </p>
     </footer>
   );

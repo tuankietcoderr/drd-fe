@@ -2,7 +2,7 @@
 import recruiterApi from '@/redux/features/recruiter/recruiterQuery';
 import {Building2, Mail, MapPin, Phone} from 'lucide-react';
 import Image from 'next/image';
-import Spinner from '../../Spinner';
+import {RecruiterItemSkeleton} from './RecruiterItem';
 
 const RecruiterDetail = ({recruiterId}) => {
   const {
@@ -14,7 +14,7 @@ const RecruiterDetail = ({recruiterId}) => {
     recruiterId,
   });
   return isLoading ? (
-    <Spinner isCentered />
+    <RecruiterItemSkeleton />
   ) : isError ? (
     <p className="text-center text-sm">
       Không thể tải thông tin công ty. Vui lòng thử lại sau.
@@ -26,7 +26,7 @@ const RecruiterDetail = ({recruiterId}) => {
           <div>
             <Image
               src={
-                recruiter.recruiterAvatar ??
+                recruiter.avatar ??
                 `https://ui-avatars.com/api/?name=${encodeURIComponent(recruiter.companyName)}`
               }
               width={100}

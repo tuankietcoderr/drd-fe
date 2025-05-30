@@ -66,7 +66,9 @@ export const columns = [
     id: 'actions',
     enableHiding: false,
     cell: ({row}) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const [showConfirm, setShowConfirm] = useState(false);
+      // eslint-disable-next-line react-hooks/rules-of-hooks
       const [deletePostMutation, {isLoading}] = postApi.useDeletePostMutation();
       const onDelete = () => {
         deletePostMutation({postId: row.original.id})

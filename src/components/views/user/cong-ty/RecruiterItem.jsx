@@ -10,7 +10,7 @@ const RecruiterItem = ({recruiter}) => {
       <div>
         <Image
           src={
-            recruiter.recruiterAvatar ??
+            recruiter.avatar ??
             `https://ui-avatars.com/api/?name=${encodeURIComponent(recruiter.companyName)}`
           }
           width={100}
@@ -64,7 +64,6 @@ export const RecruiterItemSkeleton = () => {
         <div className="h-6 w-full animate-pulse bg-gray-200" />
         <div className="h-4 w-full animate-pulse bg-gray-200" />
         <div className="flex flex-wrap gap-x-4 gap-y-2">
-          <div className="h-4 w-1/2 animate-pulse bg-gray-200" />
           <div className="h-4 w-1/2 animate-pulse bg-gray-200" />
         </div>
       </div>

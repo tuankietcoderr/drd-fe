@@ -13,7 +13,7 @@ const layout = ({children}) => {
           <p className="font-semibold">Bạn gặp khó khăn khi tạo tài khoản?</p>
           <p className="text-sm">
             Vui lòng gọi tới số{' '}
-            <a href="tel:0399988336" className="font-medium text-primary">
+            <a href="tel:0383396764" className="font-medium text-primary">
               (+84) 399 988 336
             </a>{' '}
             (giờ hành chính).
