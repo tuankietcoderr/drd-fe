@@ -2,8 +2,13 @@ import * as React from 'react';
 
 import {cn} from '@/lib/utils';
 
-const Table = React.forwardRef(({className, ...props}, ref) => (
+const Table = React.forwardRef(({className, isLoading, ...props}, ref) => (
   <div className="relative w-full overflow-auto">
+    {isLoading && (
+      <div className="absolute inset-0 flex items-center justify-center bg-background/50">
+        <div className="size-4 animate-spin rounded-full border-2 border-primary border-t-transparent" />
+      </div>
+    )}
     <table
       ref={ref}
       className={cn('w-full caption-bottom text-sm', className)}

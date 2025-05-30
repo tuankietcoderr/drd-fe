@@ -50,7 +50,7 @@ const SignupInfoForm = () => {
     <>
       <div className="space-y-2">
         <h3 className="text-xl font-semibold text-primary">
-          Chào mừng bạn đến với DrD
+          Chào mừng bạn đến với vieclamnkt.top
         </h3>
         <p className="text-sm opacity-50">
           Đăng tải công việc và tìm kiếm ứng viên lý tưởng

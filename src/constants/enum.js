@@ -52,6 +52,13 @@ export const PROFESSIONAL_LEVEL_LABEL = {
   [PROFESSIONAL_LEVEL.POSTGRADUATE]: 'Sau đại học',
 };
 
+export const PROFESSIONAL_LEVEL_ARRAY = Object.values(PROFESSIONAL_LEVEL).map(
+  level => ({
+    value: level,
+    label: PROFESSIONAL_LEVEL_LABEL[level],
+  }),
+);
+
 export const DISABILITY_TYPE = {
   KHUYET_TAT_TAY: 'KHUYET_TAT_TAY',
   KHUYET_TAT_CHAN: 'KHUYET_TAT_CHAN',
@@ -78,6 +85,26 @@ export const DISABILITY_TYPE_LABEL = {
   [DISABILITY_TYPE.CHAM_PHAT_TRIEN_TRI_TUE]: 'Chậm phát triển trí tuệ',
 };
 
+export const DISABILITY_TYPE_REVERSE = {
+  'Khuyết tật tay': DISABILITY_TYPE.KHUYET_TAT_TAY,
+  'Khuyết tật chân': DISABILITY_TYPE.KHUYET_TAT_CHAN,
+  'Khuyết tật toàn thân': DISABILITY_TYPE.KHUYET_TAT_TOAN_THAN,
+  'Khiếm thị': DISABILITY_TYPE.KHIEM_THI,
+  'Mù hoàn toàn': DISABILITY_TYPE.MU_HOAN_TOAN,
+  'Khiếm thính': DISABILITY_TYPE.KHIEM_THINH,
+  'Điếc hoàn toàn': DISABILITY_TYPE.DIEC_HOAN_TOAN,
+  'Khó giao tiếp': DISABILITY_TYPE.KHO_GIAO_TIEP,
+  Câm: DISABILITY_TYPE.CAM,
+  'Chậm phát triển trí tuệ': DISABILITY_TYPE.CHAM_PHAT_TRIEN_TRI_TUE,
+};
+
+export const DISABILITY_TYPE_ARRAY = Object.values(DISABILITY_TYPE).map(
+  type => ({
+    value: type,
+    label: DISABILITY_TYPE_LABEL[type],
+  }),
+);
+
 export const QUALIFICATION_REQUIREMENT = {
   NONE: 'NONE',
   BASIC: 'BASIC',
@@ -91,6 +118,13 @@ export const QUALIFICATION_REQUIREMENT_LABEL = {
   [QUALIFICATION_REQUIREMENT.INTERMEDIATE]: 'Trung bình',
   [QUALIFICATION_REQUIREMENT.ADVANCED]: 'Nâng cao',
 };
+
+export const QUALIFICATION_REQUIREMENT_ARRAY = Object.values(
+  QUALIFICATION_REQUIREMENT,
+).map(requirement => ({
+  value: requirement,
+  label: QUALIFICATION_REQUIREMENT_LABEL[requirement],
+}));
 
 export const DEGREE_CLASSIFICATION = {
   DISTINCTION: 'DISTINCTION',
@@ -107,3 +141,22 @@ export const DEGREE_CLASSIFICATION_LABEL = {
   [DEGREE_CLASSIFICATION.AVERAGE]: 'Trung bình',
   [DEGREE_CLASSIFICATION.FAIL]: 'Yếu',
 };
+
+export const JOB_TYPE = {
+  FULL_TIME: 'Toàn thời gian',
+  PART_TIME: 'Bán thời gian',
+  INTERNSHIP: 'Thực tập',
+  FREELANCE: 'Freelance',
+};
+
+export const JOB_TYPE_REVERSE = {
+  'Toàn thời gian': 'FULL_TIME',
+  'Bán thời gian': 'PART_TIME',
+  'Thực tập': 'INTERNSHIP',
+  Freelance: 'FREELANCE',
+};
+
+export const JOB_TYPE_ARRAY = Object.keys(JOB_TYPE).map(type => ({
+  value: type,
+  label: JOB_TYPE[type],
+}));

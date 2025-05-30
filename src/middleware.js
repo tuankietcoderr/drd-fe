@@ -79,8 +79,6 @@ export const middleware = async (request, response) => {
   const isAdmin = authorities.includes(ROLE.ADMIN);
   const isRecruiter = authorities.includes(ROLE.RECRUITER);
 
-  console.log({isUser, isAdmin, isRecruiter});
-
   if (isTokenExpired) {
     response.cookies.delete(STORAGE_KEY.AUTH_TOKEN.ACCESS_TOKEN);
     response.cookies.delete(STORAGE_KEY.AUTH_TOKEN.REFRESH_TOKEN);

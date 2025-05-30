@@ -8,10 +8,13 @@ import useAuthorizedAction from '@/hooks/useAuthorizedAction';
 import postApi from '@/redux/features/post/postQuery';
 import Formatter from '@/utils/formatter';
 import dynamic from 'next/dynamic';
+import Image from 'next/image';
+import Link from 'next/link';
 import {useCallback, useState} from 'react';
 import {toast} from 'sonner';
 import ScreenLoader from '../../ScreenLoader';
 import Spinner from '../../Spinner';
+import OtherJobs from './OtherJobs';
 import SimilarJobs from './SimilarJobs';
 
 const ApplyJobModal = dynamic(() => import('@views/user/modal/ApplyJobModal'), {
@@ -69,68 +72,56 @@ const JobDetail = ({jobId}) => {
     isSuccess && (
       <>
         <div className="space-y-8">
-          <div className="space-y-4 rounded-lg border bg-background p-4">
-            <div className="space-y-2">
-              <h2 className="text-sm font-semibold text-muted-foreground">
-                {job.recruiterName}
-              </h2>
-              <h3 className="text-lg font-semibold transition-colors group-hover:text-primary">
-                {job.title}
-              </h3>
-              <p className="line-clamp-2 text-sm">{job.description}</p>
+          <div className="flex gap-4 rounded-lg border bg-background p-4">
+            <div className="flex items-center justify-center">
+              <Image
+                src={
+                  job.recruiterAvatar ??
+                  `https://ui-avatars.com/api/?name=${encodeURIComponent(job.recruiterName)}`
+                }
+                width={200}
+                height={200}
+                alt={job.recruiterName}
+                unoptimized
+                onError={e => {
+                  e.currentTarget.src = `https://ui-avatars.com/api/?name=${encodeURIComponent(job.recruiterName)}`;
+                  e.currentTarget.srcset = '';
+                  e.currentTarget.onerror = null; // Prevent infinite loop
+                }}
+              />
             </div>
-            <div className="flex flex-1 flex-wrap items-start gap-2 text-sm">
-              <p className="w-fit rounded-full bg-muted px-4 py-2">
-                Mức lương:{' '}
-                {Formatter.currency(job.minSalary, {
-                  notation: 'compact',
-                  compactDisplay: 'long',
-                })}{' '}
-                -{' '}
-                {Formatter.currency(job.maxSalary, {
-                  notation: 'compact',
-                  compactDisplay: 'long',
-                })}
+            <div className="flex-1 space-y-4">
+              <div className="space-y-2">
+                <Link href={`/cong-ty/${job.recruiterId}`}>
+                  <h2 className="text-sm font-semibold text-muted-foreground">
+                    {job.recruiterName}
+                  </h2>
+                </Link>
+                <h3 className="text-lg font-semibold transition-colors group-hover:text-primary">
+                  {job.title}
+                </h3>
+              </div>
+              <p className="text-lg font-semibold text-primary">
+                {Formatter.currency(job.minSalary)} -{' '}
+                {Formatter.currency(job.maxSalary)}
               </p>
-              <p className="w-fit rounded-full bg-muted px-4 py-2">
-                Trình độ học vấn:{' '}
-                {PROFESSIONAL_LEVEL_LABEL[job.professionalLevel]}
+              <p className="text-sm text-muted-foreground">
+                {job.applicants === 0
+                  ? 'Chưa có ai ứng tuyển. Hãy trở thành người đầu tiên ứng tuyển để nhận được cơ hội tốt hơn.'
+                  : `Đã có ${job.applicants} người ứng tuyển`}
               </p>
-              <p className="w-fit rounded-full bg-muted px-4 py-2">
-                Trình độ chuyên môn:{' '}
-                {QUALIFICATION_REQUIREMENT_LABEL[job.qualificationRequirement]}
-              </p>
-              <p className="w-fit rounded-full bg-muted px-4 py-2">
-                Hình thức làm việc: {job.type}
-              </p>
-              <p className="w-fit rounded-full bg-muted px-4 py-2">
-                Thời gian làm việc: {job.workingTime}
-              </p>
-              {job.locations.map(location => (
-                <p
-                  key={location.id}
-                  className="w-fit rounded-full bg-muted px-4 py-2">
-                  {location.name}
-                </p>
-              ))}
-            </div>
-            <p className="text-sm text-muted-foreground">
-              {job.applicants === 0
-                ? 'Chưa có ai ứng tuyển. Hãy trở thành người đầu tiên ứng tuyển để nhận được cơ hội tốt hơn.'
-                : `Đã có ${job.applicants} người ứng tuyển`}
-            </p>
-            <div className="space-x-2">
-              <Button onClick={execute} disabled={job.applied}>
-                {job.applied ? 'Đã ứng tuyển' : 'Ứng tuyển ngay'}
-              </Button>
-              {job.applied && (
-                <Button onClick={onClickUnApplyJob} variant="outline">
-                  {isUnApplying ? 'Đang thu hồi...' : 'Thu hồi đơn ứng tuyển'}
+              <div className="space-x-2">
+                <Button onClick={execute} disabled={job.applied}>
+                  {job.applied ? 'Đã ứng tuyển' : 'Ứng tuyển ngay'}
                 </Button>
-              )}
+                {job.applied && (
+                  <Button onClick={onClickUnApplyJob} variant="outline">
+                    {isUnApplying ? 'Đang thu hồi...' : 'Thu hồi đơn ứng tuyển'}
+                  </Button>
+                )}
+              </div>
             </div>
           </div>
-
           <div className="space-y-4 overflow-hidden rounded-lg border bg-background p-4">
             <div className="space-y-4">
               <h3 className="w-fit rounded-br-lg border-l-[6px] border-primary pl-2 text-xl font-semibold">
@@ -140,19 +131,50 @@ const JobDetail = ({jobId}) => {
                 <h4 className="font-medium">Mô tả công việc</h4>
                 <p className="text-sm">{job.description}</p>
               </div>
-              <div className="space-y-2">
+              <div className="prose space-y-2">
                 <h4 className="font-medium">Yêu cầu ứng viên</h4>
-                <p className="text-sm">
-                  {job.disabilityRequirement.join(', ')}
-                </p>
+                <ul className="text-sm">
+                  <li>Phù hợp với: {job.disabilityRequirement.join(', ')}</li>
+                  <li>
+                    Trình độ học vấn:{' '}
+                    {PROFESSIONAL_LEVEL_LABEL[job.professionalLevel]}
+                  </li>
+                  <li>
+                    Trình độ chuyên môn:{' '}
+                    {
+                      QUALIFICATION_REQUIREMENT_LABEL[
+                        job.qualificationRequirement
+                      ]
+                    }
+                  </li>
+                  <li>{job.healthConditionRequirement}</li>
+                </ul>
               </div>
               <div className="space-y-2">
                 <h4 className="font-medium">Quyền lợi</h4>
                 <p className="text-sm">{job.benefit}</p>
               </div>
+              <div className="space-y-2">
+                <h4 className="font-medium">Thời gian làm việc</h4>
+                <p className="text-sm">{job.workingTime}</p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="font-medium">Hình thức làm việc</h4>
+                <p className="text-sm">{job.type}</p>
+              </div>
+              <div className="space-y-2">
+                <h4 className="font-medium">Địa điểm</h4>
+                <p className="text-sm">
+                  {job.locations.map(l => l.name).join(', ')}
+                </p>
+              </div>
             </div>
           </div>
           <SimilarJobs jobId={job.id} />
+          <OtherJobs
+            recruiterId={job.recruiterId}
+            recruiterName={job.recruiterName}
+          />
         </div>
         {showApplyJobModal && (
           <ApplyJobModal

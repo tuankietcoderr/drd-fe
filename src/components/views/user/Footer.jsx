@@ -7,7 +7,7 @@ import Logo from '../Logo';
 
 const SITEMAP = [
   {
-    title: 'Về DrD',
+    title: 'Về vieclamnkt.top',
     children: [
       {
         title: 'Giới thiệu',
@@ -118,7 +118,7 @@ const Footer = () => {
             <Logo className="h-40 w-fit" />
           </Link>
           <p>
-            DRD Việt Nam - Trung tâm Nghiên cứu và Phát triển Năng lực Người
+            vieclamnkt.top - Trung tâm Nghiên cứu và Phát triển Năng lực Người
             khuyết tật
           </p>
 
@@ -136,9 +136,9 @@ const Footer = () => {
               <li>
                 Email:{' '}
                 <a
-                  href="mailto:info@drdvietnam.org"
+                  href="mailto:info@vieclamnkt.top"
                   className="font-medium hover:underline">
-                  info@drdvietnam.org
+                  info@vieclamnkt.top
                 </a>
               </li>
             </ul>
@@ -177,7 +177,7 @@ const Footer = () => {
       </MainLayout>
       <Separator />
       <p className="bg-primary py-4 text-center text-sm font-medium text-primary-foreground">
-        © Bản quyền thuộc về DrD 2025. Tất cả quyền được bảo lưu.
+        © Bản quyền thuộc về vieclamnkt.top 2025. Tất cả quyền được bảo lưu.
       </p>
     </footer>
   );

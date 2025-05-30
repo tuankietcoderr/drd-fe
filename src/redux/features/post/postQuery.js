@@ -12,6 +12,7 @@ const postApi = createApi({
         params: payload,
       }),
       transformResponse: res => res.data,
+      providesTags: [{type: 'Post', id: 'List'}],
     }),
     getPostDetail: builder.query({
       query: payload => {
@@ -80,6 +81,56 @@ const postApi = createApi({
       }),
       transformResponse: res => res.data,
       providesTags: [{type: 'Post', id: 'AppliedPosts'}],
+    }),
+
+    createPost: builder.mutation({
+      query: payload => ({
+        url: '/v1/post',
+        method: 'POST',
+        body: payload,
+        headers: {
+          Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
+        },
+      }),
+      invalidatesTags: [{type: 'Post', id: 'List'}],
+    }),
+    updatePost: builder.mutation({
+      query: payload => ({
+        url: `/v1/post/${payload.postId}`,
+        method: 'PUT',
+        body: payload,
+        headers: {
+          Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
+        },
+      }),
+      invalidatesTags: (result, error, arg) => [
+        {type: 'Post', id: arg.postId},
+        {type: 'Post', id: 'List'},
+      ],
+    }),
+
+    getPostCandidates: builder.query({
+      query: payload => ({
+        url: `/v1/post/${payload.postId}/candidates`,
+        headers: {
+          Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
+        },
+      }),
+      transformResponse: res => res.data,
+    }),
+
+    deletePost: builder.mutation({
+      query: payload => ({
+        url: `/v1/post/${payload.postId}`,
+        method: 'DELETE',
+        headers: {
+          Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
+        },
+      }),
+      invalidatesTags: (result, error, arg) => [
+        {type: 'Post', id: 'List'},
+        {type: 'Post', id: arg.postId},
+      ],
     }),
   }),
 });

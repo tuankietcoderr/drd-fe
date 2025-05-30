@@ -3,6 +3,7 @@ import {Button} from '@/components/ui/button';
 import MainLayout from '@/layout/MainLayout';
 import {Search} from 'lucide-react';
 import Image from 'next/image';
+import Link from 'next/link';
 import {Autoplay, EffectFade} from 'swiper/modules';
 import {Swiper, SwiperSlide} from 'swiper/react';
 
@@ -42,7 +43,8 @@ const Hero = () => {
       <div className="absolute inset-0 z-10 flex items-end bg-gradient-to-t from-black/90 to-black/20 pb-8">
         <MainLayout className="w-full space-y-6">
           <h2 className="text-4xl font-bold text-white">
-            Chào mừng bạn đến với <span className="text-primary">DrD</span>
+            Chào mừng bạn đến với{' '}
+            <span className="text-primary">vieclamnkt.top</span>
             <br />
             Nền tảng tìm kiếm việc làm và tuyển dụng dành cho người khuyết tật
             Việt Nam
@@ -53,11 +55,18 @@ const Hero = () => {
             nghiệp.
           </p>
           <div className="flex items-center gap-4">
-            <Button>
-              <Search />
-              Tìm việc ngay
-            </Button>
-            <Button variant="outline">Đăng tuyển ngay</Button>
+            <Link href="/viec-lam">
+              <Button>
+                <Search />
+                Tìm việc ngay
+              </Button>
+            </Link>
+            <Link
+              href="/nha-tuyen-dung"
+              target="_blank"
+              rel="noopener noreferrer">
+              <Button variant="outline">Đăng tuyển ngay</Button>
+            </Link>
           </div>
         </MainLayout>
       </div>

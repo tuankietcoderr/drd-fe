@@ -13,6 +13,7 @@ import locationSlice from './location/locationSlice';
 import occupationApi from './occupation/occupationQuery';
 import occupationSlice from './occupation/occupationSlice';
 import postApi from './post/postQuery';
+import recruiterApi from './recruiter/recruiterQuery';
 import uploadApi from './upload/uploadQuery';
 import uploadSlice from './upload/uploadSlice';
 
@@ -26,6 +27,7 @@ export const allApis = [
   occupationApi,
   candidateApi,
   uploadApi,
+  recruiterApi,
 ];
 
 export const allSlices = [

@@ -9,7 +9,7 @@ const Logo = props => {
   return (
     <Image
       src="/assets/logo/DRD_LOGO_FIT.svg"
-      alt="DrD Logo"
+      alt="vieclamnkt.top Logo"
       width={200}
       height={60}
       priority

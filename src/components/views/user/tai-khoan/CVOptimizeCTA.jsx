@@ -5,8 +5,8 @@ const CVOptimizeCTA = () => {
     <div className="space-y-2 rounded-lg border bg-background p-4 shadow-sm">
       <h3 className="font-semibold text-primary">CV của bạn đã đủ tốt?</h3>
       <p className="text-sm text-muted-foreground">
-        Tối ưu hóa CV của bạn với các mẹo và hướng dẫn từ DrD để nổi bật hơn
-        trong mắt nhà tuyển dụng.
+        Tối ưu hóa CV của bạn với các mẹo và hướng dẫn từ vieclamnkt.top để nổi
+        bật hơn trong mắt nhà tuyển dụng.
       </p>
       <div className="flex gap-4">
         <div className="flex size-16 flex-col items-center justify-center gap-2 rounded-full bg-muted p-2 leading-none">

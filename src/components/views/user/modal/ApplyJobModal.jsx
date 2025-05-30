@@ -100,16 +100,16 @@ const ApplyJobModal = ({job, visible, onClose}) => {
               Lưu ý
             </p>
             <p className="text-sm text-muted-foreground">
-              DrD khuyên tất cả các bạn hãy luôn cẩn trọng trong quá trình tìm
-              việc và chủ động nghiên cứu về thông tin công ty, vị trí việc làm
-              trước khi ứng tuyển. Ứng viên cần có trách nhiệm với hành vi ứng
-              tuyển của mình. Nếu bạn gặp phải tin tuyển dụng hoặc nhận được
-              liên lạc đáng ngờ của nhà tuyển dụng, hãy báo cáo ngay cho TopCV
-              qua email{' '}
+              vieclamnkt.top khuyên tất cả các bạn hãy luôn cẩn trọng trong quá
+              trình tìm việc và chủ động nghiên cứu về thông tin công ty, vị trí
+              việc làm trước khi ứng tuyển. Ứng viên cần có trách nhiệm với hành
+              vi ứng tuyển của mình. Nếu bạn gặp phải tin tuyển dụng hoặc nhận
+              được liên lạc đáng ngờ của nhà tuyển dụng, hãy báo cáo ngay cho
+              TopCV qua email{' '}
               <a
-                href="mailto:info@drdvietnam.org"
+                href="mailto:info@vieclamnkt.top"
                 className="font-medium text-primary hover:underline">
-                info@drdvietnam.org
+                info@vieclamnkt.top
               </a>{' '}
               để được hỗ trợ kịp thời.
             </p>

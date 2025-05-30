@@ -59,7 +59,7 @@ const SignupForm = () => {
     <>
       <div className="space-y-2">
         <h3 className="text-xl font-semibold text-primary">
-          Chào mừng bạn đến với DrD
+          Chào mừng bạn đến với vieclamnkt.top
         </h3>
         <p className="text-sm opacity-50">
           Cùng xây dựng một hồ sơ nổi bật và nhận được các cơ hội sự nghiệp lý

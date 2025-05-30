@@ -48,7 +48,6 @@ const CVPreview = ({fileUrl}) => {
   const [pageNumber, setPageNumber] = useState(1);
   const isPdf =
     fileUrl?.endsWith?.('.pdf') || fileUrl?.type === 'application/pdf';
-  console.log('fileUrl', fileUrl);
 
   const nextPage = () => {
     if (numPages && pageNumber < numPages) setPageNumber(pageNumber + 1);

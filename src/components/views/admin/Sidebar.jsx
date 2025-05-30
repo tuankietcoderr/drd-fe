@@ -65,7 +65,9 @@ const AppSidebar = () => {
                   className="size-8 rounded-full"
                 />
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="text-md font-semibold">DrD Admin</span>
+                  <span className="text-md font-semibold">
+                    vieclamnkt.top Admin
+                  </span>
                   <span className="text-sm">Quản trị viên</span>
                 </div>
                 <div className="ml-auto">

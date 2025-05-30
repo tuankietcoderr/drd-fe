@@ -8,7 +8,7 @@ import {
   SidebarMenuItem,
   useSidebar,
 } from '@/components/ui/sidebar';
-import {ChevronLeft, ClipboardList, LayoutDashboard, Users} from 'lucide-react';
+import {BriefcaseBusiness, ChevronLeft, LayoutDashboard} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
@@ -23,18 +23,13 @@ const sidebarData = [
   {
     title: 'Việc làm',
     url: '/nha-tuyen-dung/viec-lam',
-    icon: Users,
+    icon: BriefcaseBusiness,
   },
-  {
-    title: 'Đơn ứng tuyển',
-    url: '/nha-tuyen-dung/don-ung-tuyen',
-    icon: ClipboardList,
-  },
-  {
-    title: 'Hồ sơ công ty',
-    url: '/nha-tuyen-dung/ho-so-cong-ty',
-    icon: ClipboardList,
-  },
+  // {
+  //   title: 'Hồ sơ công ty',
+  //   url: '/nha-tuyen-dung/ho-so-cong-ty',
+  //   icon: Building2,
+  // },
 ];
 
 const AppSidebar = () => {
@@ -71,7 +66,9 @@ const AppSidebar = () => {
                   className="size-8 rounded-full"
                 />
                 <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="text-md font-semibold">DrD Recruiter</span>
+                  <span className="text-md font-semibold">
+                    vieclamnkt.top Recruiter
+                  </span>
                   <span className="text-sm">Nhà tuyển dụng</span>
                 </div>
                 <div className="ml-auto">

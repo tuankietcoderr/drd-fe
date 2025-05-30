@@ -1,5 +1,6 @@
 'use client';
 
+import authSelector from '@/redux/features/auth/authSelector';
 import {authActions} from '@/redux/features/auth/authSlice';
 import candidateApi from '@/redux/features/candidate/candidateQuery';
 import {candidateActions} from '@/redux/features/candidate/candidateSlice';
@@ -7,20 +8,21 @@ import locationApi from '@/redux/features/location/locationQuery';
 import {locationActions} from '@/redux/features/location/locationSlice';
 import occupationApi from '@/redux/features/occupation/occupationQuery';
 import {occupationActions} from '@/redux/features/occupation/occupationSlice';
-import {useAppDispatch} from '@/redux/hooks';
+import {useAppDispatch, useAppSelector} from '@/redux/hooks';
 import {jwtDecode} from '@/utils/decoder';
 import {AccessTokenUtils} from '@/utils/token-utils';
 import {useEffect} from 'react';
 
 const UserFetchDataProviders = () => {
   const dispatch = useAppDispatch();
+  const user = useAppSelector(authSelector.selectUser);
   const {data: locationData, isSuccess: isSusccessLocation} =
     locationApi.useGetLocationsQuery();
   const {data: occupationData, isSuccess: isSuccessOccupation} =
     occupationApi.useGetOccupationsQuery();
   const {data: candidateCvData, isSuccess: isSuccessCandidateCv} =
     candidateApi.useGetCandidateCvQuery(undefined, {
-      skip: !AccessTokenUtils.getToken(),
+      skip: !AccessTokenUtils.getToken() || user?.authorities?.length !== 0,
     });
 
   useEffect(() => {
