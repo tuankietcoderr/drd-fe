@@ -1,11 +1,64 @@
 import {PROFESSIONAL_LEVEL_LABEL} from '@/constants/enum';
 import Formatter from '@/utils/formatter';
-import {Eye, NotepadTextDashed} from 'lucide-react';
+import {Check, Eye, NotepadTextDashed, Sparkles} from 'lucide-react';
 import Image from 'next/image';
 import Link from 'next/link';
-import {memo} from 'react';
+import {memo, useMemo} from 'react';
 
-const JobItem = ({job, hideImage}) => {
+const JobItem = ({job, hideImage, showScore}) => {
+  const renderScore = (score, label) => {
+    switch (true) {
+      case score >= 90:
+        return `Rất phù hợp với ${label} của bạn`;
+      case score >= 80:
+        return `Phù hợp với ${label} của bạn`;
+      case score >= 70:
+        return `Khá phù hợp với ${label} của bạn`;
+      case score >= 60:
+        return `Tương đối phù hợp với ${label} của bạn`;
+      case score >= 50:
+        return `Có thể phù hợp với ${label} của bạn`;
+      case score >= 40:
+        return `Ít phù hợp với ${label} của bạn`;
+      case score >= 30:
+        return `Không quá phù hợp với ${label} của bạn`;
+      case score >= 20:
+        return `Rất ít phù hợp với ${label} của bạn`;
+      case score >= 10:
+        return `Không phù hợp với ${label} của bạn`;
+      case score >= 0:
+        return `Hoàn toàn không phù hợp với ${label} của bạn`;
+      default:
+        return `Không có điểm số cho ${label}`;
+    }
+  };
+
+  const scores = useMemo(
+    () => [
+      {
+        score: job.locationScore,
+        label: 'địa điểm làm việc',
+      },
+      {
+        score: job.salaryScore,
+        label: 'mức lương mong muốn',
+      },
+      {
+        score: job.positionScore,
+        label: 'vị trí công việc',
+      },
+      {
+        score: job.educationScore,
+        label: 'cấp bậc chuyên môn',
+      },
+      {
+        score: job.disabilityScore,
+        label: 'tình trạng khuyết tật',
+      },
+    ],
+    [job],
+  );
+
   return (
     <Link
       href={`/viec-lam/${job.id}`}
@@ -57,9 +110,11 @@ const JobItem = ({job, hideImage}) => {
               {PROFESSIONAL_LEVEL_LABEL[job.professionalLevel]}
             </p>
             <p className="w-fit rounded-full bg-muted px-2 py-1">{job.type}</p>
-            <p className="w-fit rounded-full bg-muted px-2 py-1">
-              {job.disabilityRequirement.join(', ')}
-            </p>
+            {job.disabilityRequirement.length > 0 && (
+              <p className="w-fit rounded-full bg-muted px-2 py-1">
+                {job.disabilityRequirement.join(', ')}
+              </p>
+            )}
             {job.locations.map(location => (
               <p
                 key={location.id}
@@ -93,6 +148,24 @@ const JobItem = ({job, hideImage}) => {
             </p>
           </div>
         </div>
+        {job.applied && (
+          <p className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+            <Check size={16} />
+            Bạn đã ứng tuyển vị trí này.
+          </p>
+        )}
+        {showScore && (
+          <div className="flex flex-wrap gap-2">
+            {scores.map(({score, label}) => (
+              <p
+                className="inline-flex w-fit gap-1 rounded-full bg-primary/10 px-2 py-1 text-xs font-medium text-primary"
+                key={label}>
+                <Sparkles size={14} />
+                {renderScore(score, label)}
+              </p>
+            ))}
+          </div>
+        )}
       </div>
     </Link>
   );

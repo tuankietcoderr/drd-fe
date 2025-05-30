@@ -18,8 +18,6 @@ const SuitableJobs = () => {
     );
   const posts = data?.posts || [];
 
-  console.log(isError, data);
-
   return (
     <div
       className="space-y-4 overflow-hidden rounded-lg border bg-background p-4"
@@ -36,7 +34,7 @@ const SuitableJobs = () => {
         )}
         {isLoading ? (
           Array.from({length: 3}).map((_, index) => (
-            <JobItemSkeleton key={index} />
+            <JobItemSkeleton key={index} hideImage />
           ))
         ) : isError ? (
           <p className="col-span-full text-sm text-muted-foreground">
@@ -48,7 +46,9 @@ const SuitableJobs = () => {
               Không có việc làm nào
             </p>
           ) : (
-            posts.map(job => <JobItem key={job.id} job={job} />)
+            posts.map(job => (
+              <JobItem key={job.id} job={job} showScore hideImage />
+            ))
           )
         ) : null}
       </div>
