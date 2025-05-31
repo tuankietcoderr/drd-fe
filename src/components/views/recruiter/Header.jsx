@@ -30,8 +30,10 @@ const Header = () => {
         <DropdownMenu>
           <DropdownMenuTrigger>
             <Avatar className="cursor-pointer">
-              <AvatarImage src="https://github.com/shadcn.png" />
-              <AvatarFallback>AD</AvatarFallback>
+              <AvatarImage src="" />
+              <AvatarFallback>
+                {user?.name?.charAt(0).toUpperCase() || 'NTD'}
+              </AvatarFallback>
             </Avatar>
           </DropdownMenuTrigger>
           <DropdownMenuContent

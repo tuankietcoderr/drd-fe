@@ -152,7 +152,7 @@ const JobDataTable = () => {
     return q;
   }, [pageIndex, pageSize, debouncedKeyword]);
 
-  const jobQuery = postApi.useGetPostsQuery(query);
+  const jobQuery = postApi.useGetRecruiterPostsQuery(query);
   const jobs = useMemo(() => jobQuery.data?.posts ?? [], [jobQuery.data]);
 
   const totalPages = jobQuery.data?.totalPages ?? 1;

@@ -22,6 +22,17 @@ const postApi = createApi({
       transformResponse: res => res.data,
       providesTags: [{type: 'Post', id: 'List'}],
     }),
+    getRecruiterPosts: builder.query({
+      query: payload => ({
+        url: '/v1/post/my-posts',
+        params: payload,
+        headers: {
+          Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
+        },
+      }),
+      providesTags: [{type: 'Post', id: 'RecruiterPosts'}],
+      transformResponse: res => res.data,
+    }),
     getPostDetail: builder.query({
       query: payload => {
         const accessToken = AccessTokenUtils.getToken();
@@ -108,7 +119,7 @@ const postApi = createApi({
           Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
         },
       }),
-      invalidatesTags: [{type: 'Post', id: 'List'}],
+      invalidatesTags: [{type: 'Post', id: 'RecruiterPosts'}],
     }),
     updatePost: builder.mutation({
       query: payload => ({
@@ -121,7 +132,7 @@ const postApi = createApi({
       }),
       invalidatesTags: (result, error, arg) => [
         {type: 'Post', id: arg.postId},
-        {type: 'Post', id: 'List'},
+        {type: 'Post', id: 'RecruiterPosts'},
       ],
     }),
 
@@ -144,7 +155,7 @@ const postApi = createApi({
         },
       }),
       invalidatesTags: (result, error, arg) => [
-        {type: 'Post', id: 'List'},
+        {type: 'Post', id: 'RecruiterPosts'},
         {type: 'Post', id: arg.postId},
       ],
     }),
