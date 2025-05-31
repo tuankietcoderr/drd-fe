@@ -51,6 +51,7 @@ const JobSearch = () => {
           onChange={e => {
             setSearch(prev => ({...prev, title: e.target.value}));
           }}
+          onSubmit={handleSearch}
         />
         <Separator orientation="vertical" className="hidden h-8 lg:block" />
         <SearchLocation
@@ -78,13 +79,19 @@ const JobSearch = () => {
   );
 };
 
-const SearchInput = ({value, onChange}) => {
+const SearchInput = ({value, onChange, onSubmit}) => {
   return (
     <input
       placeholder="Vị trí tuyển dụng, tên công ty"
       className="flex-1 border-none text-sm font-medium leading-none outline-none"
       value={value}
       onChange={onChange}
+      onKeyDown={e => {
+        if (e.key === 'Enter') {
+          e.preventDefault();
+          onSubmit();
+        }
+      }}
     />
   );
 };
