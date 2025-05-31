@@ -5,6 +5,7 @@ import {memo, useCallback, useState} from 'react';
 import {Document, Page, pdfjs} from 'react-pdf';
 import 'react-pdf/dist/esm/Page/AnnotationLayer.css';
 import 'react-pdf/dist/esm/Page/TextLayer.css';
+import {useMediaQuery, useWindowSize} from 'usehooks-ts';
 import {Button} from './ui/button';
 import Spinner from './views/Spinner';
 
@@ -48,6 +49,8 @@ const CVPreview = ({fileUrl}) => {
   const [pageNumber, setPageNumber] = useState(1);
   const isPdf =
     fileUrl?.endsWith?.('.pdf') || fileUrl?.type === 'application/pdf';
+  const isMobile = useMediaQuery('(max-width: 768px)');
+  const windowSize = useWindowSize();
 
   const nextPage = () => {
     if (numPages && pageNumber < numPages) setPageNumber(pageNumber + 1);
@@ -88,6 +91,7 @@ const CVPreview = ({fileUrl}) => {
           loading={<LoadingPageSkeleton />}
           renderTextLayer={false}
           renderAnnotationLayer={false}
+          width={isMobile ? windowSize.width - 100 : 600}
         />
       </Document>
       <div className="mb-2 flex items-center gap-3">

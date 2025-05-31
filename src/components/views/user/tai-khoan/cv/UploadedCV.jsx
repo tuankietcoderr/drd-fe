@@ -12,7 +12,6 @@ const CVPreview = dynamic(() => import('@/components/CVPreview'), {ssr: false});
 
 const UploadedCV = () => {
   const cv = useAppSelector(candidateSelector.selectCv);
-  const [updateCvMutation, {isLoading}] = candidateApi.useUpdateCvMutation();
   const [deleteCvMutation, {isLoading: isDeleting}] =
     candidateApi.useDeleteCvMutation();
   const hasCv = !!cv?.url;
@@ -64,7 +63,7 @@ const UploadedCV = () => {
         {hasCv ? (
           <>
             <CVPreview fileUrl={cv.url} />
-            <div className="space-x-2">
+            <div className="flex flex-wrap items-center gap-2">
               <Button variant="outline" asChild>
                 <Link href={cv.url} target="_blank" rel="noopener noreferrer">
                   <Expand />

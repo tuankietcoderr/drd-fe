@@ -16,7 +16,7 @@ const UserProfileDetail = () => {
         </Avatar>
         <div className="flex flex-col gap-1">
           <p className="font-semibold">{user.name}</p>
-          <p className="text-sm text-muted-foreground">{user.email}</p>
+          <p className="text-sm text-muted-foreground">{user.sub}</p>
         </div>
       </div>
     )

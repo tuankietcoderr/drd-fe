@@ -34,7 +34,7 @@ const ChatbotWidget = () => {
     <ChatbotWidgetProvider>
       <Popover open={showWidget} onOpenChange={onOpenChange}>
         <PopoverTrigger asChild>
-          <button className="fixed bottom-8 right-8 z-50 rounded-full border bg-white p-2">
+          <button className="fixed bottom-8 right-4 z-[48] rounded-full border bg-white p-2 shadow-md md:right-8">
             <Image
               src={'/assets/logo/chatbot.png'}
               width={40}
@@ -44,13 +44,17 @@ const ChatbotWidget = () => {
             />
             {showAnimateBadge && (
               <p className="chatbot-animate absolute inset-y-1 right-full z-[51] mr-4 flex w-max items-center justify-center gap-2 rounded-full bg-primary/95 px-4 text-primary-foreground">
-                <span>Tôi có thể giúp gì cho bạn?</span>
+                <span className="text-sm md:text-base">
+                  Tôi có thể giúp gì cho bạn?
+                </span>
                 <ChevronRight className="rounded-full bg-white/20 p-1" />
               </p>
             )}
           </button>
         </PopoverTrigger>
-        <PopoverContent className="w-[40rem] p-0" align="end">
+        <PopoverContent
+          className="w-[calc(100vw-2rem)] p-0 md:w-[40rem]"
+          align="end">
           <ChatbotWidgetHeader />
           <ChatbotWidgetMessages />
           <ChatbotWidgetInput />

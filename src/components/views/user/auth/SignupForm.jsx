@@ -1,4 +1,5 @@
 'use client';
+import {Alert, AlertDescription, AlertTitle} from '@/components/ui/alert';
 import {Button} from '@/components/ui/button';
 import {
   Form,
@@ -12,6 +13,7 @@ import {Input} from '@/components/ui/input';
 import authApi from '@/redux/features/auth/authQuery';
 import {signupValidator} from '@/validator/auth';
 import {zodResolver} from '@hookform/resolvers/zod';
+import {AlertCircleIcon} from 'lucide-react';
 import Link from 'next/link';
 import {useSearchParams} from 'next/navigation';
 import {useForm} from 'react-hook-form';
@@ -28,7 +30,9 @@ const SignupForm = () => {
       email: '',
     },
   });
-  const [signUpMutation, {isLoading}] = authApi.useSignUpMutation();
+  const [signUpMutation, {isLoading, error, isError}] =
+    authApi.useSignUpMutation();
+  console.log(error);
   const searchParams = useSearchParams();
   const fallbackUrl = searchParams.get('fallbackUrl');
 
@@ -182,6 +186,18 @@ const SignupForm = () => {
               </FormItem>
             )}
           />
+
+          {isError && (
+            <Alert variant="destructive">
+              <AlertCircleIcon size={16} />
+              <AlertTitle>Đã xảy ra lỗi khi tạo tài khoản</AlertTitle>
+              <AlertDescription>
+                <p className="text-sm">
+                  {error.message?.replace('ERROR message: ', '')}
+                </p>
+              </AlertDescription>
+            </Alert>
+          )}
 
           <Button className="w-full" disabled={isLoading}>
             {isLoading ? 'Đang tạo tài khoản...' : 'Đăng ký'}

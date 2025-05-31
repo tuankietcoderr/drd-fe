@@ -49,10 +49,9 @@ export const columns = [
   },
   {
     accessorKey: 'applicants',
-    header: 'Đã ứng tuyển',
+    header: () => <p className="min-w-max">Đã ứng tuyển</p>,
     cell: ({row}) => row.getValue('applicants'),
   },
-
   {
     accessorKey: 'createdAt',
     header: 'Đã đăng lúc',
@@ -211,7 +210,11 @@ const JobDataTable = () => {
                         onCheckedChange={value =>
                           column.toggleVisibility(!!value)
                         }>
-                        {column.columnDef.header}
+                        {typeof column.columnDef.header === 'string' ? (
+                          column.columnDef.header
+                        ) : (
+                          <column.columnDef.header />
+                        )}
                       </DropdownMenuCheckboxItem>
                     );
                   })}

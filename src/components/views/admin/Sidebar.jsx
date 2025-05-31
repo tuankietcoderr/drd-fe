@@ -64,10 +64,7 @@ const AppSidebar = () => {
                   height={40}
                   className="size-8 rounded-full"
                 />
-                <div className="flex flex-col gap-0.5 leading-none">
-                  <span className="text-md font-semibold">vieclamnkt.top</span>
-                  <span className="text-sm">Quản trị viên</span>
-                </div>
+                <span className="text-sm">Quản trị viên</span>
                 <div className="ml-auto">
                   <ChevronLeft className="size-5" />
                 </div>

@@ -14,6 +14,7 @@ import {cn} from '@/lib/utils';
 import authSelector from '@/redux/features/auth/authSelector';
 import {authActions} from '@/redux/features/auth/authSlice';
 import {useAppDispatch, useAppSelector} from '@/redux/hooks';
+import {Menu} from 'lucide-react';
 import {useTheme} from 'next-themes';
 import Link from 'next/link';
 import {usePathname} from 'next/navigation';
@@ -64,7 +65,7 @@ const NavigationBar = () => {
 
   return (
     <MainLayout Elem="header">
-      <nav className="flex h-[80px] items-center justify-between">
+      <nav className="flex h-[80px] items-center justify-between gap-2">
         <ul className="flex items-center gap-2">
           <li>
             <Link href="/">
@@ -76,7 +77,7 @@ const NavigationBar = () => {
             const isActive = pathname === route.href;
 
             return (
-              <li key={route.href}>
+              <li key={route.href} className="hidden lg:block">
                 <Button asChild variant="ghost">
                   <Link
                     href={route.href}
@@ -92,14 +93,14 @@ const NavigationBar = () => {
         </ul>
         <ul className="flex items-center gap-2">
           {!isAuthenticated && (
-            <li>
+            <li className="hidden sm:block">
               <Button asChild variant="outline">
                 <Link href={url('/dang-nhap')}>Đăng nhập</Link>
               </Button>
             </li>
           )}
           {!isAuthenticated && (
-            <li>
+            <li className="hidden sm:block">
               <Button asChild>
                 <Link href={url('/dang-ky')}>Đăng ký</Link>
               </Button>
@@ -159,7 +160,56 @@ const NavigationBar = () => {
               </DropdownMenuContent>
             </DropdownMenu>
           )}
-          <li>
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button variant="outline" className="lg:hidden" size="icon">
+                <span className="sr-only">Menu</span>
+                <Menu />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              className="w-60"
+              align="end" // Aligns to the end (right) of the trigger
+              alignOffset={-5} // Shifts the menu left by 5px
+              sideOffset={5}>
+              {ROUTES.map(route => {
+                const isActive = pathname === route.href;
+
+                return (
+                  <DropdownMenuItem asChild key={route.href}>
+                    <Link
+                      href={route.href}
+                      className={cn({
+                        '!text-primary': isActive,
+                      })}>
+                      {route.name}
+                    </Link>
+                  </DropdownMenuItem>
+                );
+              })}
+              {!isAuthenticated && <DropdownMenuSeparator />}
+              {!isAuthenticated && (
+                <DropdownMenuItem asChild>
+                  <Link href={url('/dang-nhap')}>Đăng nhập</Link>
+                </DropdownMenuItem>
+              )}
+              {!isAuthenticated && (
+                <DropdownMenuItem asChild>
+                  <Link href={url('/dang-ky')}>Đăng ký</Link>
+                </DropdownMenuItem>
+              )}
+              <DropdownMenuSeparator />
+              <DropdownMenuItem asChild>
+                <Link
+                  href="/nha-tuyen-dung"
+                  target="_blank"
+                  rel="noopener noreferrer">
+                  Dành cho nhà tuyển dụng
+                </Link>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
+          <li className="hidden lg:block">
             <Button
               asChild
               variant="outline"
@@ -168,7 +218,7 @@ const NavigationBar = () => {
                 href="/nha-tuyen-dung"
                 target="_blank"
                 rel="noopener noreferrer">
-                Dành cho nhà tuyển dụng
+                Nhà tuyển dụng
               </Link>
             </Button>
           </li>

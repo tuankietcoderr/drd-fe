@@ -2,7 +2,8 @@ import {cn} from '@/lib/utils';
 
 const MainLayout = ({children, className, Elem = 'div'}) => {
   return (
-    <Elem className={cn('mx-[5%] max-w-screen-xl 2xl:mx-auto', className)}>
+    <Elem
+      className={cn('mx-6 max-w-screen-xl md:mx-[5%] 2xl:mx-auto', className)}>
       {children}
     </Elem>
   );

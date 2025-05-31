@@ -12,6 +12,7 @@ const authApi = createApi({
         url: '/v1/auth/signup',
       }),
       transformResponse: res => res.data,
+      transformErrorResponse: res => res.data,
     }),
     signIn: builder.mutation({
       query: payload => ({

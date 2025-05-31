@@ -6,7 +6,7 @@ import {useEffect} from 'react';
 const ReactScan = () => {
   useEffect(() => {
     scan({
-      enabled: true,
+      enabled: false,
     });
   }, []);
 

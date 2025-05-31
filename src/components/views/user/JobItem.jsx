@@ -64,7 +64,7 @@ const JobItem = ({job, hideImage, showScore}) => {
       href={`/viec-lam/${job.id}`}
       className="group flex gap-3 rounded-lg border bg-background p-4 shadow-sm transition-colors hover:border-primary">
       {!hideImage && (
-        <div>
+        <div className="hidden md:block">
           <Image
             src={
               job.recruiterAvatar ??
@@ -94,25 +94,25 @@ const JobItem = ({job, hideImage, showScore}) => {
             <p className="line-clamp-2 text-sm">{job.description}</p>
           </div>
 
-          <div className="flex flex-1 flex-wrap items-start gap-2 text-xs">
+          <p className="w-fit font-semibold text-primary">
+            {Formatter.currency(job.minSalary, {
+              notation: 'compact',
+              compactDisplay: 'long',
+            })}{' '}
+            -{' '}
+            {Formatter.currency(job.maxSalary, {
+              notation: 'compact',
+              compactDisplay: 'long',
+            })}
+          </p>
+          <div className="flex flex-1 flex-wrap items-start gap-2 overflow-auto text-xs">
             <p className="w-fit rounded-full bg-muted px-2 py-1">
-              {Formatter.currency(job.minSalary, {
-                notation: 'compact',
-                compactDisplay: 'long',
-              })}{' '}
-              -{' '}
-              {Formatter.currency(job.maxSalary, {
-                notation: 'compact',
-                compactDisplay: 'long',
-              })}
-            </p>
-            <p className="w-fit rounded-full bg-muted px-2 py-1">
-              {PROFESSIONAL_LEVEL_LABEL[job.professionalLevel]}
+              Học vấn {PROFESSIONAL_LEVEL_LABEL[job.professionalLevel]}
             </p>
             <p className="w-fit rounded-full bg-muted px-2 py-1">{job.type}</p>
             {job.disabilityRequirement.length > 0 && (
               <p className="w-fit rounded-full bg-muted px-2 py-1">
-                {job.disabilityRequirement.join(', ')}
+                Dành cho {job.disabilityRequirement.join(', ')}
               </p>
             )}
             {job.locations.map(location => (

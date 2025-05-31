@@ -34,7 +34,7 @@ const RecruiterPosts = ({recruiterId}) => {
   }, []);
 
   const hasMore = useMemo(() => {
-    return pagination.page < pagination.totalPages;
+    return pagination.page < pagination.totalPages - 1;
   }, [pagination]);
 
   const loadMoreItems = useCallback(() => {

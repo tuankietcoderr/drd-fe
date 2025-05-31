@@ -52,21 +52,21 @@ const JobSearch = () => {
             setSearch(prev => ({...prev, title: e.target.value}));
           }}
         />
-        <Separator orientation="vertical" className="h-8" />
+        <Separator orientation="vertical" className="hidden h-8 lg:block" />
         <SearchLocation
           value={search.location?.id}
           onChange={location => {
             setSearch(prev => ({...prev, location}));
           }}
         />
-        <Separator orientation="vertical" className="h-8" />
+        <Separator orientation="vertical" className="hidden h-8 lg:block" />
         <SearchSalary
           value={search.salary}
           onChange={salary => {
             setSearch(prev => ({...prev, salary}));
           }}
         />
-        <Separator orientation="vertical" className="h-8" />
+        <Separator orientation="vertical" className="hidden h-8 lg:block" />
         <Button
           className="h-auto rounded-full px-6 py-3"
           onClick={handleSearch}>
@@ -121,7 +121,7 @@ const SearchLocation = ({onChange, value}) => {
   });
 
   return (
-    <div className="relative" ref={elemRef}>
+    <div className="relative hidden lg:block" ref={elemRef}>
       <Button
         variant="ghost"
         className="h-auto min-w-60 rounded-full py-3 text-left"
@@ -174,7 +174,7 @@ const SearchSalary = ({onChange, value}) => {
   }, [value]);
 
   return (
-    <div className="relative" ref={elemRef}>
+    <div className="relative hidden lg:block" ref={elemRef}>
       <Button
         variant="ghost"
         className="h-auto min-w-60 rounded-full py-3 text-left"

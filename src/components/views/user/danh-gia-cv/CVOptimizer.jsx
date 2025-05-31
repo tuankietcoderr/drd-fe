@@ -63,6 +63,10 @@ const CVOptimizer = ({onClose}) => {
       return acc;
     }, {});
 
+    const loadingId = toast.loading('Đang tối ưu CV...', {
+      duration: 0,
+    });
+
     fixCVMutation({
       additional_text: optimizeContent,
       markdown_content: markdownContent,
@@ -71,8 +75,11 @@ const CVOptimizer = ({onClose}) => {
       .unwrap()
       .then(() => {
         setOptimizeContent('');
+        toast.dismiss(loadingId);
+        toast.success('Tối ưu CV thành công');
       })
       .catch(error => {
+        toast.dismiss(loadingId);
         toast.error('Có lỗi xảy ra trong quá trình tối ưu CV');
         console.log('CV optimization error:', error);
       });
@@ -138,7 +145,7 @@ const CVOptimizer = ({onClose}) => {
           </div>
         )}
 
-        <div className="flex items-center gap-2">
+        <div className="flex flex-wrap items-center gap-2">
           {isFixing ? (
             <Button disabled>Đang tối ưu CV....</Button>
           ) : isSuccess ? (
@@ -200,7 +207,7 @@ const OptimizerInput = ({onChange, item}) => {
       />
       <p className="inline-flex gap-2 text-sm font-medium text-primary">
         <Sparkles size={16} className="text-primary" />
-        <span className="inline-block">
+        <span className="inline-block flex-1">
           {item.rcm}
           <button onClick={() => startSpeech(item.rcm)} className="ml-2">
             <Volume2 size={16} />

@@ -10,7 +10,7 @@ import locationSelector from '@/redux/features/location/locationSelector';
 import occupationSelector from '@/redux/features/occupation/occupationSelector';
 import {useAppSelector} from '@/redux/hooks';
 import {createQueryString} from '@/utils/converter';
-import {Check} from 'lucide-react';
+import {Check, ListFilter, X} from 'lucide-react';
 import {useSearchParams} from 'next/navigation';
 import {useEffect, useState} from 'react';
 
@@ -23,6 +23,7 @@ const JobFilter = () => {
   const occupations = useAppSelector(occupationSelector.selectOccupations);
   const searchParams = useSearchParams();
   const [isClient, setIsClient] = useState(false);
+  const [showSearch, setShowSearch] = useState(false);
 
   useEffect(() => {
     setIsClient(true);
@@ -114,91 +115,121 @@ const JobFilter = () => {
   };
 
   return !isClient ? (
-    <div className="sticky top-4 h-[80vh] w-full max-w-sm space-y-4 self-start rounded-lg border p-4" />
+    <div className="top-4 hidden h-[80vh] w-full max-w-sm space-y-4 self-start rounded-lg border p-4 md:sticky" />
   ) : (
-    <div className="sticky top-4 w-full max-w-sm space-y-4 self-start rounded-lg border p-4">
-      <h3 className="text-2xl font-bold">Bộ lọc và tìm kiếm</h3>
-      <hr />
-      <div className="flex items-center gap-2">
-        <Input
-          placeholder="Tìm kiếm tên công ty, hoặc nhiều hơn..."
-          value={keyword}
-          onChange={e => setKeyword(e.target.value)}
-          onKeyDown={e => {
-            if (e.key === 'Enter') {
-              handleSearch();
-            }
-          }}
+    <>
+      {showSearch && (
+        <div
+          className="fixed inset-0 z-[49] bg-black/50 md:hidden"
+          onClick={() => setShowSearch(false)}
         />
-        <Button onClick={handleSearch}>Tìm kiếm</Button>
-      </div>
-      <hr />
-      <div className="space-y-4">
-        <div className="space-y-2">
-          <p className="font-semibold">Lọc theo ngành nghề</p>
-          <div className="max-h-64 overflow-y-auto rounded-md border bg-white scrollbar-thin">
-            {occupations.map(option => (
-              <Button
-                variant="ghost"
-                className="w-full justify-start rounded-none"
-                key={option.id}
-                onClick={() => handleOccupationChange(option.id)}>
-                <span className="flex-1 text-left">{option.name}</span>
-                <Check
-                  className={cn({
-                    invisible: Number(selectedOccupation) !== option.id,
-                  })}
-                />
-              </Button>
-            ))}
-          </div>
-        </div>
+      )}
 
-        <div className="space-y-2">
-          <p className="font-semibold">Lọc theo mức lương</p>
-          <RadioGroup
-            className="flex flex-col gap-3 rounded-lg border px-4 py-2"
-            onValueChange={handleSalaryChange}
-            value={selectedSalary}>
-            {SALARY_OPTIONS.map(option => (
-              <div className="flex items-center gap-2" key={option.key}>
-                <RadioGroupItem value={option.key} id={option.key} />
-                <Label htmlFor={option.key}>{option.label}</Label>
+      {!showSearch && (
+        <button
+          className="fixed bottom-28 right-4 z-20 rounded-full border bg-white p-4 shadow-md"
+          onClick={() => setShowSearch(true)}>
+          <ListFilter />
+        </button>
+      )}
+
+      {showSearch && (
+        <div className="fixed inset-x-8 top-4 z-50 max-h-[95vh] w-auto space-y-4 self-start overflow-auto rounded-lg border bg-background p-4 md:sticky md:max-h-none md:max-w-sm">
+          <div className="flex items-center justify-between">
+            <h3 className="text-2xl font-bold">Bộ lọc và tìm kiếm</h3>
+            <Button
+              variant="outline"
+              size="icon"
+              onClick={() => setShowSearch(false)}>
+              <X />
+            </Button>
+          </div>
+          <hr />
+          <div className="flex items-center gap-2">
+            <Input
+              placeholder="Tìm kiếm tên công ty, hoặc nhiều hơn..."
+              value={keyword}
+              onChange={e => setKeyword(e.target.value)}
+              onKeyDown={e => {
+                if (e.key === 'Enter') {
+                  handleSearch();
+                }
+              }}
+            />
+            <Button onClick={handleSearch}>Tìm kiếm</Button>
+          </div>
+          <hr />
+          <div className="space-y-4">
+            <div className="space-y-2">
+              <p className="font-semibold">Lọc theo ngành nghề</p>
+              <div className="max-h-64 overflow-y-auto rounded-md border bg-white scrollbar-thin">
+                {occupations.map(option => (
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start rounded-none"
+                    key={option.id}
+                    onClick={() => handleOccupationChange(option.id)}>
+                    <span className="flex-1 text-left">{option.name}</span>
+                    <Check
+                      className={cn({
+                        invisible: Number(selectedOccupation) !== option.id,
+                      })}
+                    />
+                  </Button>
+                ))}
               </div>
-            ))}
-          </RadioGroup>
-        </div>
+            </div>
 
-        <div className="space-y-2">
-          <p className="font-semibold">Lọc theo thành phố</p>
-          <div className="max-h-64 overflow-y-auto rounded-md border bg-white scrollbar-thin">
-            {locations.map(option => (
+            <div className="space-y-2">
+              <p className="font-semibold">Lọc theo mức lương</p>
+              <RadioGroup
+                className="flex flex-col gap-3 rounded-lg border px-4 py-2"
+                onValueChange={handleSalaryChange}
+                value={selectedSalary}>
+                {SALARY_OPTIONS.map(option => (
+                  <div className="flex items-center gap-2" key={option.key}>
+                    <RadioGroupItem value={option.key} id={option.key} />
+                    <Label htmlFor={option.key}>{option.label}</Label>
+                  </div>
+                ))}
+              </RadioGroup>
+            </div>
+
+            <div className="space-y-2">
+              <p className="font-semibold">Lọc theo thành phố</p>
+              <div className="max-h-64 overflow-y-auto rounded-md border bg-white scrollbar-thin">
+                {locations.map(option => (
+                  <Button
+                    variant="ghost"
+                    className="w-full justify-start rounded-none"
+                    key={option.id}
+                    onClick={() => handleCityChange(option.id)}>
+                    <span className="flex-1 text-left">{option.name}</span>
+                    <Check
+                      className={cn({
+                        invisible: Number(selectedCity) !== option.id,
+                      })}
+                    />
+                  </Button>
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center gap-2">
               <Button
-                variant="ghost"
-                className="w-full justify-start rounded-none"
-                key={option.id}
-                onClick={() => handleCityChange(option.id)}>
-                <span className="flex-1 text-left">{option.name}</span>
-                <Check
-                  className={cn({
-                    invisible: Number(selectedCity) !== option.id,
-                  })}
-                />
+                variant="outline"
+                className="w-full"
+                onClick={onResetFilter}>
+                Xóa bộ lọc
               </Button>
-            ))}
+              <Button className="w-full" onClick={handleFilter}>
+                Áp dụng
+              </Button>
+            </div>
           </div>
         </div>
-
-        <div className="flex items-center gap-2">
-          <Button variant="outline" className="w-full" onClick={onResetFilter}>
-            Xóa bộ lọc
-          </Button>
-          <Button className="w-full" onClick={handleFilter}>
-            Áp dụng
-          </Button>
-        </div>
-      </div>
-    </div>
+      )}
+    </>
   );
 };
 

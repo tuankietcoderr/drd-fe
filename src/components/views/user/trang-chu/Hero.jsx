@@ -49,14 +49,14 @@ const Hero = () => {
       />
       <div className="absolute inset-0 z-10 flex items-end bg-gradient-to-t from-black/90 to-black/20 pb-8">
         <MainLayout className="w-full space-y-6">
-          <h2 className="text-4xl font-bold text-white">
+          <h2 className="text-xl font-bold text-white md:text-4xl">
             Chào mừng bạn đến với{' '}
             <span className="text-primary">vieclamnkt.top</span>
             <br />
             Nền tảng tìm kiếm việc làm và tuyển dụng dành cho người khuyết tật
             Việt Nam
           </h2>
-          <p className="mt-4 text-lg text-white">
+          <p className="mt-4 text-white md:text-lg">
             Tìm kiếm việc làm dễ dàng, nhanh chóng và hiệu quả nhất cho người
             khuyết tật hoặc tuyển dụng nhân sự phù hợp với nhu cầu của doanh
             nghiệp.

@@ -72,7 +72,7 @@ const JobDetail = ({jobId}) => {
     isSuccess && (
       <>
         <div className="space-y-8">
-          <div className="flex gap-4 rounded-lg border bg-background p-4">
+          <div className="flex flex-col gap-4 rounded-lg border bg-background p-4 md:flex-row">
             <div className="flex items-center justify-center">
               <Image
                 src={

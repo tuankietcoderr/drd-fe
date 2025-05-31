@@ -6,7 +6,7 @@ const RecruiterItem = ({recruiter}) => {
   return (
     <Link
       href={`/cong-ty/${recruiter.id}`}
-      className="flex gap-4 rounded-lg border bg-background p-4 transition-colors hover:border-primary">
+      className="group flex gap-4 rounded-lg border bg-background p-4 transition-colors hover:border-primary">
       <div>
         <Image
           src={
@@ -26,7 +26,9 @@ const RecruiterItem = ({recruiter}) => {
       </div>
       <div className="flex-1 space-y-4">
         <div className="space-y-4">
-          <h2 className="text-lg font-semibold">{recruiter.companyName}</h2>
+          <h2 className="text-lg font-semibold transition-colors group-hover:text-primary">
+            {recruiter.companyName}
+          </h2>
           <p className="line-clamp-2 text-sm">
             {recruiter.description || 'Chưa có mô tả cho công ty này.'}
           </p>

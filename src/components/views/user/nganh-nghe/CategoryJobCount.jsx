@@ -2,13 +2,13 @@
 
 import occupationSelector from '@/redux/features/occupation/occupationSelector';
 import {useAppSelector} from '@/redux/hooks';
-import Link from 'next/link';
+import OccupationItem from '../OccupationItem';
 
 const CategoryJobCount = ({currentOccupation}) => {
   const occupations = useAppSelector(occupationSelector.selectOccupations);
 
   const occupationsFiltered = occupations.filter(
-    occupation => occupation.id !== currentOccupation?.id,
+    occupation => String(occupation.id) !== currentOccupation,
   );
 
   return (
@@ -28,18 +28,5 @@ const CategoryJobCount = ({currentOccupation}) => {
     </div>
   );
 };
-
-const OccupationItem = ({occupation}) => {
-  return (
-    <Link
-      href={`/nganh-nghe/${occupation.id}`}
-      className="text-sm font-medium transition-colors hover:text-primary hover:underline">
-      <span>{occupation.name}</span>{' '}
-      <span>({occupation.countPost} việc làm)</span>
-    </Link>
-  );
-};
-
-const OccupationItemSkeleton = () => {};
 
 export default CategoryJobCount;

@@ -41,7 +41,9 @@ export const columns = [
   {
     accessorKey: 'cadidate',
     header: 'Ứng viên',
-    cell: ({row}) => row.getValue('cadidate').name,
+    cell: ({row}) => (
+      <p className="min-w-max">{row.getValue('cadidate').name}</p>
+    ),
   },
   {
     accessorKey: 'email',
@@ -91,7 +93,7 @@ export const columns = [
   },
   {
     accessorKey: 'coverLetter',
-    header: 'Thư xin việc',
+    header: () => <p className="min-w-max">Thư xin việc</p>,
     cell: ({row}) => {
       return (
         <Dialog>
@@ -191,7 +193,11 @@ const AppliedCandidateDataTable = ({jobId}) => {
                         onCheckedChange={value =>
                           column.toggleVisibility(!!value)
                         }>
-                        {column.columnDef.header}
+                        {typeof column.columnDef.header === 'string' ? (
+                          column.columnDef.header
+                        ) : (
+                          <column.columnDef.header />
+                        )}
                       </DropdownMenuCheckboxItem>
                     );
                   })}
