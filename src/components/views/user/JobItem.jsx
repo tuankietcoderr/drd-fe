@@ -136,6 +136,12 @@ const JobItem = ({job, hideImage, showScore}) => {
             ))}
           </div>
         )}
+        {job.applied && (
+          <p className="inline-flex items-center gap-1 text-xs text-muted-foreground">
+            <Check size={16} />
+            Bạn đã ứng tuyển vị trí này.
+          </p>
+        )}
         <div className="flex items-center justify-between gap-2 text-xs">
           <p>
             Đã đăng{' '}
@@ -160,12 +166,6 @@ const JobItem = ({job, hideImage, showScore}) => {
             </p>
           </div>
         </div>
-        {job.applied && (
-          <p className="inline-flex items-center gap-1 text-xs text-muted-foreground">
-            <Check size={16} />
-            Bạn đã ứng tuyển vị trí này.
-          </p>
-        )}
       </div>
     </Link>
   );

@@ -9,6 +9,7 @@ import {
   FormMessage,
 } from '@/components/ui/form';
 import {Input} from '@/components/ui/input';
+import {ROLE} from '@/constants/enum';
 import authApi from '@/redux/features/auth/authQuery';
 import {signupValidator} from '@/validator/auth';
 import {zodResolver} from '@hookform/resolvers/zod';
@@ -36,7 +37,7 @@ const SignupForm = () => {
     delete data.confirmPassword;
     const payload = {
       ...data,
-      roles: [],
+      roles: [ROLE.RECRUITER],
     };
     delete payload.role;
     signUpMutation(payload)
