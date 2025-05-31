@@ -13,6 +13,7 @@ import {createQueryString} from '@/utils/converter';
 import {Check, ListFilter, X} from 'lucide-react';
 import {useSearchParams} from 'next/navigation';
 import {useEffect, useState} from 'react';
+import {useMediaQuery} from 'usehooks-ts';
 
 const JobFilter = () => {
   const [selectedCity, setSelectedCity] = useState(null);
@@ -23,7 +24,12 @@ const JobFilter = () => {
   const occupations = useAppSelector(occupationSelector.selectOccupations);
   const searchParams = useSearchParams();
   const [isClient, setIsClient] = useState(false);
-  const [showSearch, setShowSearch] = useState(false);
+  const [showSearch, setShowSearch] = useState(true);
+  const isNotMobile = useMediaQuery('(min-width: 768px)');
+
+  useEffect(() => {
+    setShowSearch(isNotMobile);
+  }, [isNotMobile]);
 
   useEffect(() => {
     setIsClient(true);
@@ -140,7 +146,8 @@ const JobFilter = () => {
             <Button
               variant="outline"
               size="icon"
-              onClick={() => setShowSearch(false)}>
+              onClick={() => setShowSearch(false)}
+              className="md:hidden">
               <X />
             </Button>
           </div>
