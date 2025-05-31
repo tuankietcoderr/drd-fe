@@ -1,25 +1,32 @@
 'use client';
 
-import {Avatar, AvatarFallback} from '@/components/ui/avatar';
-import authSelector from '@/redux/features/auth/authSelector';
+import candidateSelector from '@/redux/features/candidate/candidateSelector';
 import {useAppSelector} from '@/redux/hooks';
+import dynamic from 'next/dynamic';
+import {useState} from 'react';
+import Spinner from '../../Spinner';
+import CandidateProfileDetail from '../CandidateProfileDetail';
+
+const UpdateProfileForm = dynamic(() => import('./UpdateProfileForm'), {
+  ssr: false,
+  loading: () => <Spinner isCentered />,
+});
 
 const UserProfileDetail = () => {
-  const user = useAppSelector(authSelector.selectUser);
+  const [isEditMode, setIsEditMode] = useState(false);
+  const candidate = useAppSelector(candidateSelector.selectCandidate);
+  console.log('UserProfileDetail', candidate);
   return (
-    user && (
-      <div className="flex items-center gap-2 rounded-lg border bg-background p-4 shadow-sm">
-        <Avatar className="size-16">
-          <AvatarFallback className="text-xl font-bold">
-            {user.name.at(0)}
-          </AvatarFallback>
-        </Avatar>
-        <div className="flex flex-col gap-1">
-          <p className="font-semibold">{user.name}</p>
-          <p className="text-sm text-muted-foreground">{user.sub}</p>
-        </div>
-      </div>
-    )
+    candidate &&
+    (!isEditMode ? (
+      <CandidateProfileDetail
+        showEdit
+        candidate={candidate}
+        onOpenEdit={() => setIsEditMode(true)}
+      />
+    ) : (
+      <UpdateProfileForm onClose={() => setIsEditMode(false)} />
+    ))
   );
 };
 

@@ -42,6 +42,7 @@ import {ChevronsUpDown} from 'lucide-react';
 import {useEffect} from 'react';
 import {useForm} from 'react-hook-form';
 import {toast} from 'sonner';
+import Spinner from '../../Spinner';
 
 const CreateJobForm = ({jobId}) => {
   const isEditMode = Boolean(jobId);
@@ -126,6 +127,10 @@ const CreateJobForm = ({jobId}) => {
         );
       });
   };
+
+  if (isEditMode && getJobQuery.isLoading) {
+    return <Spinner isCentered />;
+  }
 
   if (isEditMode && getJobQuery.isError) {
     return (

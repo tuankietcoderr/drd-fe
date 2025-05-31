@@ -20,6 +20,10 @@ const UserFetchDataProviders = () => {
     locationApi.useGetLocationsQuery();
   const {data: occupationData, isSuccess: isSuccessOccupation} =
     occupationApi.useGetOccupationsQuery();
+  const {data: candidateData, isSuccess: isSuccessCandidate} =
+    candidateApi.useGetCandidateInfoQuery(undefined, {
+      skip: !AccessTokenUtils.getToken() || user?.authorities?.length !== 0,
+    });
   const {data: candidateCvData, isSuccess: isSuccessCandidateCv} =
     candidateApi.useGetCandidateCvQuery(undefined, {
       skip: !AccessTokenUtils.getToken() || user?.authorities?.length !== 0,
@@ -53,6 +57,12 @@ const UserFetchDataProviders = () => {
       dispatch(occupationActions.setOccupations(occupationData));
     }
   }, [dispatch, isSuccessOccupation, occupationData]);
+
+  useEffect(() => {
+    if (isSuccessCandidate) {
+      dispatch(candidateActions.setCandidate(candidateData));
+    }
+  }, [dispatch, isSuccessCandidate, candidateData]);
 
   useEffect(() => {
     if (isSuccessCandidateCv) {

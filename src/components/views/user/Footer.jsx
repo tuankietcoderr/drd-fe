@@ -151,7 +151,7 @@ const Footer = () => {
                 className="absolute left-0 top-0 size-full border-none"
                 loading="lazy"
                 allowFullScreen
-                src="https://maps.google.com/maps?q=311K8 KNOTĐC Thủ Thiêm, Đ. Số 7, An Phú, Thủ Đức, Hồ Chí Minh, Việt Nam&output=embed"
+                src="https://maps.google.com/maps?q=University of Information Technology - VNUHCM&amp;t=&amp;z=14&amp;ie=UTF8&amp;iwloc=B&amp;output=embed"
               />
             </div>
           </div>

@@ -73,7 +73,7 @@ const ProfileForm = () => {
 
   const uploadFile = async () => {
     if (!file) {
-      return Promise.resolve();
+      return Promise.resolve(null);
     }
 
     return uploadFileMutation({file})
@@ -90,8 +90,10 @@ const ProfileForm = () => {
     uploadFile().then(uploaded => {
       const payload = {
         ...data,
-        avatar: uploaded.url || null,
       };
+      if (uploaded) {
+        payload.avatar = uploaded.url;
+      }
       updateRecruiterProfileMutation(payload)
         .unwrap()
         .then(() => {

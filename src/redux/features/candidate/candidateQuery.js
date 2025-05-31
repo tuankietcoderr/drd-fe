@@ -6,6 +6,34 @@ const candidateApi = createApi({
   baseQuery: fetchBaseQuery({baseUrl: process.env.NEXT_PUBLIC_API_URL}),
   tagTypes: ['Candidate'],
   endpoints: builder => ({
+    getCandidateInfo: builder.query({
+      query: () => ({
+        url: '/v1/candidate',
+        headers: {
+          Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
+        },
+      }),
+      transformResponse: res => res.data,
+      providesTags: [{type: 'Candidate', id: 'Info'}],
+    }),
+    getCandidateInfoById: builder.query({
+      query: ({candidateId}) => ({
+        url: `/v1/candidate/profile/${candidateId}`,
+      }),
+      transformResponse: res => res.data,
+    }),
+    updateCandidateInfo: builder.mutation({
+      query: payload => ({
+        url: `/v1/candidate/${payload.candidateId}`,
+        method: 'PUT',
+        body: payload,
+        headers: {
+          Authorization: `Bearer ${AccessTokenUtils.getToken()}`,
+        },
+      }),
+      transformResponse: res => res.data,
+      invalidatesTags: [{type: 'Candidate', id: 'Info'}],
+    }),
     getCandidateCv: builder.query({
       query: () => ({
         url: '/v1/candidate/cv',

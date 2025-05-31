@@ -2,6 +2,7 @@ import {createSlice} from '@reduxjs/toolkit';
 
 const initialState = {
   cv: null,
+  candidate: null,
 };
 
 const candidateSlice = createSlice({
@@ -13,6 +14,12 @@ const candidateSlice = createSlice({
     },
     clearCV: state => {
       state.cv = null;
+    },
+    setCandidate: (state, action) => {
+      state.candidate = action.payload;
+    },
+    clearCandidate: state => {
+      state.candidate = null;
     },
     reset: () => initialState,
   },

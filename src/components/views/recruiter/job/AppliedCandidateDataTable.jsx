@@ -5,7 +5,7 @@ import {
   getFilteredRowModel,
   useReactTable,
 } from '@tanstack/react-table';
-import {ChevronDown, ExternalLink, Eye, Mail, Phone} from 'lucide-react';
+import {ChevronDown, ExternalLink, Eye, Info, Mail, Phone} from 'lucide-react';
 
 import {Button} from '@/components/ui/button';
 import {
@@ -24,6 +24,7 @@ import {
   TableRow,
 } from '@/components/ui/table';
 
+import {Avatar, AvatarFallback, AvatarImage} from '@/components/ui/avatar';
 import {
   Dialog,
   DialogClose,
@@ -33,17 +34,201 @@ import {
   DialogTitle,
   DialogTrigger,
 } from '@/components/ui/dialog';
+import candidateApi from '@/redux/features/candidate/candidateQuery';
 import postApi from '@/redux/features/post/postQuery';
+import Formatter from '@/utils/formatter';
 import {useMemo, useState} from 'react';
 import {useDebounceValue} from 'usehooks-ts';
+import Spinner from '../../Spinner';
 
 export const columns = [
   {
     accessorKey: 'cadidate',
     header: 'Ứng viên',
-    cell: ({row}) => (
-      <p className="min-w-max">{row.getValue('cadidate').name}</p>
-    ),
+    cell: ({row}) => {
+      // eslint-disable-next-line react-hooks/rules-of-hooks
+      const [showInfo, setShowInfo] = useState(false);
+      const {
+        isError,
+        isLoading,
+        isSuccess,
+        data: candidate,
+      } = candidateApi.useGetCandidateInfoByIdQuery(
+        {
+          candidateId: row.getValue('cadidate').id,
+        },
+        {
+          skip: !showInfo,
+        },
+      );
+      return (
+        <div className="flex items-center gap-2">
+          <p className="min-w-max">{row.getValue('cadidate').name}</p>
+          <Dialog open={showInfo} onOpenChange={setShowInfo}>
+            <DialogTrigger asChild>
+              <Button variant="outline" size="icon">
+                <Info />
+              </Button>
+            </DialogTrigger>
+            <DialogContent className="max-h-[90vh] overflow-y-auto">
+              <DialogHeader>
+                <DialogTitle>
+                  Thông tin ứng viên {row.getValue('cadidate').name}
+                </DialogTitle>
+              </DialogHeader>
+              {isLoading ? (
+                <Spinner isCentered />
+              ) : isError ? (
+                <p className="text-center text-destructive">
+                  Không thể tải thông tin công việc. Vui lòng thử lại sau.
+                </p>
+              ) : (
+                isSuccess && (
+                  <div className="space-y-4">
+                    <Avatar className="size-20 border">
+                      <AvatarImage
+                        src={candidate.avatar}
+                        alt={candidate.name}
+                      />
+                      <AvatarFallback className="text-xl font-bold">
+                        {candidate.name?.charAt(0).toUpperCase() || 'U'}
+                      </AvatarFallback>
+                    </Avatar>
+
+                    <p className="text-xs text-muted-foreground">
+                      Cập nhật lần cuối vào{' '}
+                      <span>
+                        {Formatter.date(candidate.updatedAt).format(
+                          'DD/MM/YYYY [lúc] HH:mm',
+                        )}
+                      </span>
+                    </p>
+                    <div className="space-y-4 text-sm">
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">Tên</p>
+                        <p className="font-medium">{candidate.name}</p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Giới tính
+                        </p>
+                        <p className="font-medium">
+                          {candidate.gender || 'Không có thông tin'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Trạng thái làm việc
+                        </p>
+                        <p className="font-medium">
+                          {candidate.currentJobStatus || 'Không có thông tin'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">Email</p>
+                        <p className="font-medium">{candidate.email}</p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Số điện thoại
+                        </p>
+                        <p className="font-medium">{candidate.phone}</p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Địa chỉ hiện tại
+                        </p>
+                        <p className="font-medium">
+                          {candidate.currentAddress || 'Không có thông tin'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Trình độ học vấn
+                        </p>
+                        <p className="font-medium">
+                          {candidate.professionalLevel || 'Không có thông tin'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Trình độ chuyên môn
+                        </p>
+                        <p className="font-medium">
+                          {candidate.qualificationLevel || 'Không có thông tin'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Tình trạng khuyết tật
+                        </p>
+                        <p className="font-medium">
+                          {candidate.disabilityStatus.join(', ') ||
+                            'Không có thông tin'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Lý do khuyết tật
+                        </p>
+                        <p className="font-medium">
+                          {candidate.disabilityCause || 'Không có thông tin'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Tình trạng sức khoẻ
+                        </p>
+                        <p className="font-medium">
+                          {candidate.healthStatus || 'Không có thông tin'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Mức lương mong muốn
+                        </p>
+                        <p className="font-medium">
+                          {candidate.expectedSalary || 'Không có thông tin'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Hoàn cảnh kinh tế
+                        </p>
+                        <p className="font-medium">
+                          {candidate.economicStatus || 'Không có thông tin'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Chuyên ngành
+                        </p>
+                        <p className="font-medium">
+                          {candidate.major || 'Không có thông tin'}
+                        </p>
+                      </div>
+                      <div className="space-y-1">
+                        <p className="text-xs text-muted-foreground">
+                          Sở thích
+                        </p>
+                        <p className="font-medium">
+                          {candidate.hobbies || 'Không có thông tin'}
+                        </p>
+                      </div>
+                    </div>
+                  </div>
+                )
+              )}
+              <DialogFooter>
+                <DialogClose asChild>
+                  <Button type="button">Đóng</Button>
+                </DialogClose>
+              </DialogFooter>
+            </DialogContent>
+          </Dialog>
+        </div>
+      );
+    },
   },
   {
     accessorKey: 'email',
