@@ -140,7 +140,7 @@ const JobFilter = () => {
       )}
 
       {showSearch && (
-        <div className="fixed inset-x-8 top-4 z-50 max-h-[95vh] w-auto space-y-4 self-start overflow-auto rounded-lg border bg-background p-4 md:sticky md:max-h-none md:max-w-sm">
+        <div className="fixed inset-x-8 top-4 z-50 max-h-[95vh] w-auto space-y-4 self-start overflow-auto rounded-lg border bg-background p-4 md:sticky md:max-h-[90vh] md:max-w-sm">
           <div className="flex items-center justify-between">
             <h3 className="text-2xl font-bold">Bộ lọc và tìm kiếm</h3>
             <Button
@@ -169,7 +169,7 @@ const JobFilter = () => {
           <div className="space-y-4">
             <div className="space-y-2">
               <p className="font-semibold">Lọc theo ngành nghề</p>
-              <div className="max-h-64 overflow-y-auto rounded-md border bg-white scrollbar-thin">
+              <div className="max-h-36 overflow-y-auto rounded-md border bg-white scrollbar-thin">
                 {occupations.map(option => (
                   <Button
                     variant="ghost"
@@ -204,7 +204,7 @@ const JobFilter = () => {
 
             <div className="space-y-2">
               <p className="font-semibold">Lọc theo thành phố</p>
-              <div className="max-h-64 overflow-y-auto rounded-md border bg-white scrollbar-thin">
+              <div className="max-h-36 overflow-y-auto rounded-md border bg-white scrollbar-thin">
                 {locations.map(option => (
                   <Button
                     variant="ghost"
