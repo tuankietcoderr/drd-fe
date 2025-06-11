@@ -75,15 +75,15 @@ const postApi = createApi({
     getRelatedPosts: builder.query({
       query: payload => {
         const accessToken = AccessTokenUtils.getToken();
-        return !!accessToken
-          ? {
-              url: `/v1/post/${payload.postId}/related`,
-              params: payload,
-              headers: {
+        return {
+          url: `/v1/post/${payload.postId}/related`,
+          params: payload,
+          headers: !!accessToken
+            ? {
                 Authorization: `Bearer ${accessToken}`,
-              },
-            }
-          : {};
+              }
+            : {},
+        };
       },
       transformResponse: res => res.data,
     }),
