@@ -105,7 +105,7 @@ const ApplyJobModal = ({job, visible, onClose}) => {
               việc làm trước khi ứng tuyển. Ứng viên cần có trách nhiệm với hành
               vi ứng tuyển của mình. Nếu bạn gặp phải tin tuyển dụng hoặc nhận
               được liên lạc đáng ngờ của nhà tuyển dụng, hãy báo cáo ngay cho
-              TopCV qua email{' '}
+              chúng tôi qua email{' '}
               <a
                 href="mailto:info@abcd.team"
                 className="font-medium text-primary hover:underline">

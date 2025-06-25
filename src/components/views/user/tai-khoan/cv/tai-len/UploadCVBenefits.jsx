@@ -7,7 +7,7 @@ const BENEFITS = [
   {
     title: 'Theo dõi số liệu, tối ưu CV',
     description:
-      'Theo dõi số lượt xem CV. Biết chính xác nhà tuyển dụng nào trên TopCV đang quan tâm đến CV của bạn.',
+      'Theo dõi số lượt xem CV. Biết chính xác nhà tuyển dụng nào đang quan tâm đến CV của bạn.',
   },
   {
     title: 'Chia sẻ CV bất cứ nơi đâu',
